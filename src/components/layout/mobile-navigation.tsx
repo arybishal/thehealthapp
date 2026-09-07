@@ -5,8 +5,8 @@ import { NavigationItem } from "./navigation-item";
 
 export function MobileNavigation() {
   return (
-    <nav className="lg:hidden fixed bottom-0 inset-x-0 z-40 border-t border-border bg-card">
-      <div className="grid grid-cols-4">
+    <nav className="print-hidden lg:hidden fixed bottom-0 inset-x-0 z-40 border-t border-border bg-card">
+      <div className="grid grid-cols-3">
         {MOBILE_BOTTOM_NAV.map((item) => (
           <NavigationItem key={item.href} item={item} variant="column" />
         ))}
