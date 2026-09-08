@@ -1,10 +1,11 @@
 import { prisma } from "@/lib/prisma";
 import { Card } from "@/components/ui/card";
+import { AUDIT_EVENTS } from "@/lib/audit";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminActivityPage() {
-  const [recentReports, recentMeasurements] = await Promise.all([
+  const [recentReports, recentMeasurements, recentAudit] = await Promise.all([
     prisma.report.findMany({
       orderBy: { createdAt: "desc" },
       take: 30,
@@ -21,6 +22,14 @@ export default async function AdminActivityPage() {
         user: { select: { name: true, email: true } },
       },
     }),
+    prisma.auditLogRoleAccess.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 100,
+      include: {
+        user: { select: { name: true, email: true } },
+        patient: { select: { name: true } },
+      },
+    }),
   ]);
 
   type ActivityItem = {
@@ -32,6 +41,13 @@ export default async function AdminActivityPage() {
   };
 
   const activity: ActivityItem[] = [
+    ...recentAudit.map((a) => ({
+      id: `a-${a.id}`,
+      kind: AUDIT_EVENTS[a.action] ?? a.action,
+      title: a.detail || a.patient?.name || "Event",
+      owner: a.user?.name || a.user?.email || "System",
+      date: a.createdAt,
+    })),
     ...recentReports.map((r) => ({
       id: `r-${r.id}`,
       kind: "Report uploaded",
@@ -46,7 +62,7 @@ export default async function AdminActivityPage() {
       owner: m.user?.name || m.user?.email || "Unknown",
       date: m.createdAt,
     })),
-  ].sort((a, b) => b.date.getTime() - a.date.getTime());
+  ].sort((a, b) => b.date.getTime() - a.date.getTime()).slice(0, 100);
 
   return (
     <div className="space-y-6">

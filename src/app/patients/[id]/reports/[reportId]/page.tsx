@@ -54,11 +54,32 @@ export default async function PatientReportDetailPage({
                   : "All results confirmed"
               }
             />
-            {report.reportType && (
-              <span className="text-xs px-2 py-0.5 rounded-md bg-muted text-muted-foreground border border-border capitalize">
-                {report.reportType}
-              </span>
-            )}
+{report.reportType && (
+            <span className="text-xs px-2 py-0.5 rounded-md bg-muted text-muted-foreground border border-border capitalize">
+              {report.reportType}
+            </span>
+          )}
+          {report.processingStatus === "manual" && (
+            <span className="text-xs px-2 py-0.5 rounded-md bg-info-light text-info border border-info/25 font-medium">
+              Manual entry
+            </span>
+          )}
+          {report.reportDate && report.pageCount ? (
+            <span className="text-xs px-2 py-0.5 rounded-md bg-muted text-muted-foreground border border-border">
+              {report.pageCount} page{report.pageCount > 1 ? "s" : ""}
+            </span>
+          ) : null}
+          {report.language && report.language !== "en" ? (
+            <span className="text-xs px-2 py-0.5 rounded-md bg-warning-light text-warning border border-warning/30 font-medium uppercase">
+              {report.language}
+            </span>
+          ) : null}
+          {report.processingStatus === "failed" && (
+            <span className="text-xs px-2 py-0.5 rounded-md bg-danger-light text-danger border border-danger/30 font-medium">
+              Processing failed
+              {report.processingError ? `: ${report.processingError}` : ""}
+            </span>
+          )}
           </div>
         </div>
         <div className="flex gap-2 items-center">
@@ -166,6 +187,27 @@ export default async function PatientReportDetailPage({
           )}
         </CardContent>
       </Card>
+
+      {report.parsedText && report.processingStatus !== "manual" && (
+        <details className="group">
+          <summary className="cursor-pointer list-none">
+            <Card className="p-4">
+              <div className="flex items-center justify-between">
+                <span className="font-semibold text-sm">Extracted Text (view only)</span>
+                <span className="text-xs text-muted-foreground group-open:hidden">Click to open</span>
+                <span className="text-xs text-muted-foreground hidden group-open:inline">Click to close</span>
+              </div>
+            </Card>
+          </summary>
+          <Card className="mt-2">
+            <CardContent>
+              <pre className="whitespace-pre-wrap text-xs font-mono text-muted-foreground max-h-96 overflow-y-auto leading-relaxed">
+                {report.parsedText}
+              </pre>
+            </CardContent>
+          </Card>
+        </details>
+      )}
 
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">

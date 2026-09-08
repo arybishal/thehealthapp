@@ -78,6 +78,28 @@ export function RemindersPanel({
     router.refresh();
   }
 
+  async function completeReminder(reminder: Reminder) {
+    await updateStatus(reminder.id, "completed");
+    if (reminder.recurrence !== "none") {
+      const nextDate = new Date(reminder.date);
+      if (reminder.recurrence === "3-months") nextDate.setMonth(nextDate.getMonth() + 3);
+      else if (reminder.recurrence === "6-months") nextDate.setMonth(nextDate.getMonth() + 6);
+      else if (reminder.recurrence === "yearly") nextDate.setFullYear(nextDate.getFullYear() + 1);
+      await fetch("/api/reminders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          patientId,
+          testName: reminder.testName,
+          date: nextDate.toISOString().split("T")[0],
+          recurrence: reminder.recurrence,
+          notes: reminder.notes,
+        }),
+      });
+    }
+    router.refresh();
+  }
+
   const active = initialReminders.filter((r) => r.status === "active");
   const past = initialReminders.filter((r) => r.status !== "active");
 
@@ -164,7 +186,7 @@ export function RemindersPanel({
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <Button size="sm" variant="outline" onClick={() => updateStatus(r.id, "completed")}>
+                <Button size="sm" variant="outline" onClick={() => completeReminder(r)}>
                   Done
                 </Button>
                 <Button size="sm" variant="ghost" onClick={() => updateStatus(r.id, "cancelled")}>

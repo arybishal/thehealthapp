@@ -2,7 +2,7 @@
 
 import { useRef, useState, useTransition, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { AlertTriangle, FileUp, Loader2, Pen } from "lucide-react";
+import { AlertTriangle, FileUp, Loader2, Pen, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -155,6 +155,25 @@ export function UploadReportForm({
 
   function removeResult(i: number) {
     setResults((prev) => prev.filter((_, idx) => idx !== i));
+  }
+
+  function addResult() {
+    setResults((prev) => [
+      ...prev,
+      {
+        originalTestName: "",
+        canonicalName: "",
+        originalValue: "",
+        originalUnit: null,
+        normalizedValue: null,
+        normalizedUnit: null,
+        referenceLow: null,
+        referenceHigh: null,
+        originalRefRange: null,
+        flag: null,
+        confidence: "low",
+      },
+    ]);
   }
 
   function handleSave(force = false) {
@@ -377,27 +396,27 @@ export function UploadReportForm({
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                  <div>
-                    <p className="text-muted-foreground">Laboratory</p>
-                    <p className="font-medium">
-                      {extraction.laboratoryName || (
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => setExtraction({ ...extraction, laboratoryName: "Unknown" })}
-                        >
-                          Not detected
-                        </Button>
-                      )}
-                    </p>
+                  <div className="space-y-1.5">
+                    <Label className="text-xs text-muted-foreground">Laboratory</Label>
+                    <Input
+                      className="h-8"
+                      placeholder="e.g. City Diagnostics"
+                      value={extraction.laboratoryName || ""}
+                      onChange={(e) => setExtraction({ ...extraction, laboratoryName: e.target.value })}
+                    />
                   </div>
-                  <div>
-                    <p className="text-muted-foreground">Report Date</p>
-                    <p className="font-medium">{extraction.reportDate || "Not detected"}</p>
-                  </div>
-                  <div>
-                    <p className="text-muted-foreground">Patient</p>
-                    <p className="font-medium">{patientName}</p>
+                  <div className="space-y-1.5">
+                    <Label className="text-xs text-muted-foreground">Report Date</Label>
+                    <Input
+                      className="h-8"
+                      type="date"
+                      value={extraction.reportDate || ""}
+                      onChange={(e) => setExtraction({ ...extraction, reportDate: e.target.value })}
+                    />
+</div>
+                  <div className="space-y-1.5">
+                    <Label className="text-xs text-muted-foreground">Patient</Label>
+                    <p className="font-medium pt-1">{patientName}</p>
                   </div>
                 </div>
               </div>
@@ -410,26 +429,34 @@ export function UploadReportForm({
                   </span>
                 </div>
                 <div className="divide-y">
+                  {results.length === 0 && (
+                    <p className="px-4 py-6 text-sm text-muted-foreground">
+                      No results yet. Use &quot;Add Result&quot; below to enter them manually.
+                    </p>
+                  )}
                   {results.map((r, i) => (
-                    <div key={i} className="px-4 py-3 grid grid-cols-1 md:grid-cols-[1fr_auto_auto_auto_auto] gap-2 items-center">
-                      <div className="min-w-0">
-                        <p className="font-medium text-sm">{r.originalTestName}</p>
-                        <p className="text-xs text-muted-foreground">
-                          {r.canonicalName !== r.originalTestName ? r.canonicalName : ""}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-1">
+                    <div key={i} className="px-4 py-3 grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_auto_auto_auto_auto] gap-2 items-center">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 min-w-0">
                         <Input
-                          className="w-20 h-8 text-sm"
-                          value={r.originalValue}
-                          onChange={(e) => updateResult(i, { originalValue: e.target.value })}
+                          className="h-8 text-sm"
+                          placeholder="Test name"
+                          value={r.originalTestName}
+                          onChange={(e) => updateResult(i, { originalTestName: e.target.value, canonicalName: e.target.value || r.canonicalName })}
                         />
-                        <Input
-                          className="w-20 h-8 text-sm"
-                          value={r.originalUnit || ""}
-                          placeholder="unit"
-                          onChange={(e) => updateResult(i, { originalUnit: e.target.value })}
-                        />
+                        <div className="flex items-center gap-1">
+                          <Input
+                            className="w-20 h-8 text-sm"
+                            placeholder="value"
+                            value={r.originalValue}
+                            onChange={(e) => updateResult(i, { originalValue: e.target.value })}
+                          />
+                          <Input
+                            className="w-20 h-8 text-sm"
+                            value={r.originalUnit || ""}
+                            placeholder="unit"
+                            onChange={(e) => updateResult(i, { originalUnit: e.target.value })}
+                          />
+                        </div>
                       </div>
                       <Input
                         className="w-28 h-8 text-sm"
@@ -457,6 +484,14 @@ export function UploadReportForm({
                       </Button>
                     </div>
                   ))}
+                </div>
+                <div className="border-t border-border px-4 py-3 flex gap-2">
+                  <Button variant="outline" size="sm" type="button" onClick={addResult}>
+                    <Plus className="h-4 w-4" /> Add Result
+                  </Button>
+                  <p className="text-xs text-muted-foreground self-center">
+                    {reportTitle ? reportTitle : "Enter the marker, value, unit and reference range from the report."}
+                  </p>
                 </div>
               </div>
 
