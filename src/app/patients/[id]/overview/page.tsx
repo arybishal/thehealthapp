@@ -118,35 +118,38 @@ function flagIndicator(
   return null;
 }
 
+const statGradients = {
+  blue: "bg-gradient-to-br from-stat-blue to-stat-blue-deep",
+  amber: "bg-gradient-to-br from-stat-amber to-stat-amber-deep",
+  green: "bg-gradient-to-br from-stat-green to-stat-green-deep",
+} as const;
+
 function StatCard({
   icon: Icon,
   value,
   label,
   sub,
-  boxClass,
+  grad,
 }: {
   icon: ComponentType<{ className?: string }>;
   value: number;
   label: string;
   sub: string;
-  boxClass: string;
+  grad: keyof typeof statGradients;
 }) {
   return (
-    <Card className="p-5 transition-shadow hover:shadow-md relative overflow-hidden" size="sm">
-      <div className="h-1 w-full bg-gradient-to-r from-primary/60 to-transparent absolute top-0 left-0" />
-      <div className="flex items-center gap-4">
-        <div
-          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${boxClass}`}
-        >
-          <Icon className="h-5 w-5" />
-        </div>
-        <div>
-          <p className="text-3xl font-bold tracking-tight">{value}</p>
-          <p className="text-sm font-medium mt-0.5">{label}</p>
-        </div>
+    <div
+      className={`rounded-md ${statGradients[grad]} p-5 text-white shadow-card transition-all duration-base hover:shadow-elevated`}
+    >
+      <div className="mb-3 flex items-center gap-2 text-sm font-medium opacity-90">
+        <Icon className="h-4 w-4" />
+        <span>{label}</span>
       </div>
-      <p className="mt-3 text-xs text-muted-foreground">{sub}</p>
-    </Card>
+      <div className="flex items-baseline gap-1">
+        <span className="text-3xl font-bold tabular-nums">{value}</span>
+      </div>
+      <p className="mt-2 text-xs opacity-70">{sub}</p>
+    </div>
   );
 }
 
@@ -226,7 +229,7 @@ export default async function PatientOverviewPage({
             value={totalReports}
             label="Medical Reports"
             sub="Uploaded lab reports in this patient's history"
-            boxClass="bg-primary-light text-primary"
+            grad="blue"
           />
         </Link>
         <Link href={`/patients/${id}/results`}>
@@ -235,7 +238,7 @@ export default async function PatientOverviewPage({
             value={totalResults}
             label="Tracked Results"
             sub="Individual lab results extracted from reports"
-            boxClass="bg-secondary/15 text-secondary"
+            grad="green"
           />
         </Link>
         <Link href={`/patients/${id}/trends`}>
@@ -244,7 +247,7 @@ export default async function PatientOverviewPage({
             value={uniqueBiomarkers.length}
             label="Tracked Biomarkers"
             sub="Distinct biomarkers monitored over time"
-            boxClass="bg-info-light text-info"
+            grad="amber"
           />
         </Link>
       </div>

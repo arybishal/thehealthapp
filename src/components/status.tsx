@@ -3,19 +3,16 @@ import { cn } from "cn";
 export type StatusTone = "normal" | "attention" | "danger" | "unknown";
 
 const toneStyles: Record<StatusTone, string> = {
-  normal:
-    "bg-success-light text-success border-success/20",
-  attention:
-    "bg-warning-light text-warning border-warning/30",
-  danger:
-    "bg-danger-light text-danger border-danger/25",
-  unknown: "bg-muted text-muted-foreground border-border",
+  normal: "bg-status-good-bg text-status-good-text",
+  attention: "bg-status-warning-bg text-status-warning-text",
+  danger: "bg-status-critical-bg text-status-critical-text",
+  unknown: "bg-muted text-muted-foreground",
 };
 
 const dotStyles: Record<StatusTone, string> = {
-  normal: "bg-success",
-  attention: "bg-warning",
-  danger: "bg-danger",
+  normal: "bg-status-good-text",
+  attention: "bg-status-warning-text",
+  danger: "bg-status-critical-text",
   unknown: "bg-muted-foreground/40",
 };
 
@@ -38,7 +35,7 @@ export function StatusBadge({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-md border px-2 py-0.5 text-xs font-medium",
+        "inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-xs font-medium",
         toneStyles[tone],
         className
       )}

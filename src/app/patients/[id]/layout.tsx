@@ -42,7 +42,7 @@ export default async function PatientLayout({
   return (
     <div className="space-y-6">
       {/* Identity header */}
-      <div className="rounded-xl border border-border bg-card">
+      <div className="rounded-md border border-border bg-card shadow-card">
         <div className="flex flex-wrap items-center justify-between gap-4 p-5">
           <div className="flex min-w-0 items-center gap-4">
             <PatientAvatar name={patient.name} size="lg" />
@@ -55,7 +55,7 @@ export default async function PatientLayout({
                   {meta.length > 0 ? meta.join(" · ") : "No details yet"}
                 </span>
                 {patient.bloodGroup ? (
-                  <span className="inline-flex h-5 items-center rounded-md bg-primary-light px-1.5 text-xs font-semibold text-primary">
+                  <span className="inline-flex h-5 items-center rounded-pill bg-primary-light px-1.5 text-xs font-semibold text-primary">
                     {patient.bloodGroup}
                   </span>
                 ) : null}
@@ -85,7 +85,9 @@ export default async function PatientLayout({
 
       <PatientNav patientId={patient.id} variant="horizontal" />
 
-      <div>{children}</div>
+      <div key={id} className="animate-panel-swap">
+        {children}
+      </div>
     </div>
   );
 }

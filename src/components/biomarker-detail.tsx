@@ -9,10 +9,11 @@ import {
   Tooltip,
   ResponsiveContainer,
   ReferenceArea,
+  Area,
 } from "recharts";
 import Link from "next/link";
 import { StatusBadge } from "@/components/status";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { buildResultInsight } from "@/lib/insights";
 import type { InsightResultInput, InsightSeriesInput } from "@/lib/insights";
 import { Card, CardContent } from "@/components/ui/card";
@@ -110,6 +111,7 @@ export function BiomarkerDetail({
   const success = useTokenColor("--success", "oklch(0.55 0.13 160)");
   const danger = useTokenColor("--danger", "oklch(0.6 0.19 20)");
   const border = useTokenColor("--border", "oklch(0.92 0.012 225)");
+  const gradId = useId().replace(/[^a-zA-Z0-9]/g, "");
 
   return (
     <div className="space-y-6">
@@ -152,16 +154,23 @@ export function BiomarkerDetail({
         </Card>
       )}
 
-      <div className="bg-card border border-border rounded-xl p-5 shadow-[0_1px_3px_rgba(24,39,75,0.04)]">
+      <div className="bg-card border border-border rounded-md p-5 shadow-card">
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={sorted}>
-              <CartesianGrid strokeDasharray="3 3" stroke="oklch(0.93 0.005 260)" />
+                <defs>
+                    <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#2C9AD1" stopOpacity="0.3" />
+                      <stop offset="100%" stopColor="#2C9AD1" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+              <CartesianGrid stroke="rgba(13,27,42,0.05)" strokeDasharray="3 3" />
               <XAxis
                 dataKey="displayDate"
                 tick={{ fontSize: 11 }}
                 tickLine={false}
                 axisLine={false}
+                stroke="#9AA5B1"
               />
               <YAxis
                 tick={{ fontSize: 11 }}
@@ -169,8 +178,20 @@ export function BiomarkerDetail({
                 axisLine={false}
                 domain={["auto", "auto"]}
                 width={50}
+                stroke="#9AA5B1"
               />
               <Tooltip
+                wrapperStyle={{ outline: "none" }}
+                contentStyle={{
+                  borderRadius: 12,
+                  background: "#122436",
+                  border: "none",
+                  color: "#fff",
+                  boxShadow: "0 12px 32px rgba(13,27,42,0.10)",
+                  fontWeight: 500,
+                }}
+                itemStyle={{ color: "#fff" }}
+                labelStyle={{ color: "rgba(255,255,255,0.7)", fontSize: 11 }}
                 formatter={(value) => [`${Number(value)} ${unit}`, ""]}
                 labelFormatter={(label) => `${label}`}
               />
@@ -214,13 +235,21 @@ export function BiomarkerDetail({
                   />
                 </>
               )}
+              <Area
+                type="monotone"
+                dataKey="value"
+                stroke="none"
+                fill={`url(#${gradId})`}
+                animationDuration={700}
+              />
               <Line
                 type="monotone"
                 dataKey="value"
-                stroke="#0d7c8a"
-                strokeWidth={2}
+                stroke="#2C9AD1"
+                strokeWidth={2.5}
                 dot={false}
-                activeDot={{ r: 5, fill: "#0d7c8a", stroke: "#fff", strokeWidth: 2 }}
+                animationDuration={700}
+                activeDot={{ r: 5, fill: "#2C9AD1", stroke: "#fff", strokeWidth: 2 }}
               />
             </LineChart>
           </ResponsiveContainer>

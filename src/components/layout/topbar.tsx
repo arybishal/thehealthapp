@@ -33,7 +33,7 @@ export function Topbar({
   const isPatientPage = pathname.startsWith("/patients/");
 
   return (
-    <header className="h-14 shrink-0 border-b border-border bg-card flex items-center gap-4 px-6 print-hidden">
+    <header className="print-hidden mx-6 mt-4 flex items-center gap-4 rounded-pill border border-white/40 bg-white/65 px-6 py-3 shadow-nav backdrop-blur-nav">
       <div className="flex-1 min-w-0 flex items-center gap-2 text-[13px] font-medium">
         {breadcrumbs.map((crumb, i) => (
           <span key={i} className="flex items-center gap-2">
@@ -67,7 +67,7 @@ export function Topbar({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search..."
-            className="h-9 w-full rounded-lg border border-border bg-background pl-8 pr-3 text-sm placeholder:text-text-muted focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors"
+            className="h-9 w-full rounded-pill border border-border bg-bg pl-8 pr-3 text-sm placeholder:text-text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-dark/30 focus-visible:ring-offset-2 transition-colors"
           />
         </div>
       </form>

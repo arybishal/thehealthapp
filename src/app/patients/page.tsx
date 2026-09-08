@@ -97,7 +97,7 @@ export default async function PatientsListPage() {
             const age = calcAge(p.dob);
             return (
               <Link key={p.id} href={`/patients/${p.id}/overview`}>
-                <Card className="p-5 transition-all hover:shadow-md hover:border-primary/30 h-full">
+                <Card className="p-5 transition-all hover:shadow-elevated hover:border-primary/30 h-full">
                   <div className="flex items-start gap-4">
                     <span className="w-11 h-11 rounded-full bg-primary-light text-primary flex items-center justify-center font-bold text-sm shrink-0">
                       {initials}

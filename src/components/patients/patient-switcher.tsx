@@ -73,7 +73,7 @@ export function PatientSwitcher({
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="group flex items-center gap-2.5 w-full rounded-lg border border-border bg-card px-2.5 py-2 text-sm font-medium hover:bg-muted hover:text-foreground hover:border-primary/30 transition-colors min-w-0 max-w-full shadow-[0_1px_2px_rgba(24,39,75,0.04)]">
+      <DropdownMenuTrigger className="group flex items-center gap-2.5 w-full rounded-pill border border-border bg-card px-2.5 py-2 text-sm font-medium hover:bg-muted hover:text-foreground hover:border-primary/30 transition-colors min-w-0 max-w-full shadow-flat">
         <PatientAvatar name={current?.name ?? "All patients"} />
         <span className="truncate flex-1 text-left">
           {current ? current.name : "All patients"}
