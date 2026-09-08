@@ -30,7 +30,7 @@ export function MobileHeader({
 
   return (
     <>
-      <header className="lg:hidden h-14 flex items-center justify-between px-4 border-b border-border bg-card shrink-0 print-hidden">
+      <header className="lg:hidden sticky top-0 z-40 h-14 flex items-center justify-between px-4 border-b border-white/50 bg-white/70 backdrop-blur-2xl shrink-0 print-hidden dark:bg-[#16212e]/70 dark:border-white/10">
         <Link href="/patients" className="text-lg font-bold text-foreground">
           TheBloodTracker
         </Link>
@@ -55,7 +55,7 @@ export function MobileHeader({
             onClick={() => setDrawerOpen(false)}
           />
 
-          <div className="absolute left-0 top-0 bottom-0 w-72 bg-card shadow-xl flex flex-col">
+          <div className="absolute left-0 top-0 bottom-0 w-72 bg-white/85 backdrop-blur-2xl shadow-xl flex flex-col dark:bg-[#16212e]/85">
             <div className="h-14 flex items-center justify-between px-5 border-b border-border shrink-0">
               <Link
                 href="/patients"

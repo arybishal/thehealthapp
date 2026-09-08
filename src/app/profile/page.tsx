@@ -7,7 +7,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { saveProfile } from "@/lib/profileActions";
-import { DemoNotice } from "@/components/demo/demo-provider";
+import { ChangePasswordForm } from "@/components/profile/change-password-form";
+import { DemoNotice, DemoGate } from "@/components/demo/demo-provider";
 
 export default async function ProfilePage() {
   const session = await getServerSession(authOptions);
@@ -118,6 +119,19 @@ export default async function ProfilePage() {
           </CardContent>
           </Card>
         </DemoNotice>
+      </div>
+
+      <div className="max-w-2xl">
+        <DemoGate>
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg font-semibold">Change Password</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ChangePasswordForm />
+            </CardContent>
+          </Card>
+        </DemoGate>
       </div>
     </div>
   );

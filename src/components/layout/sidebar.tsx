@@ -19,7 +19,7 @@ export function Sidebar({
   const isAdmin = user?.role === "master_admin";
 
   return (
-    <aside className="w-64 shrink-0 h-full border-r border-border bg-card flex flex-col print-hidden">
+    <aside className="w-64 shrink-0 h-full border-r border-white/50 bg-white/70 backdrop-blur-2xl flex flex-col print-hidden dark:bg-[#16212e]/70 dark:border-white/10">
       <div className="h-14 flex items-center gap-2.5 px-5 border-b border-border shrink-0">
         <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-[0_2px_6px_-2px_rgba(37,41,161,0.4)]">
           <Icon name="patients" className="w-4 h-4" />

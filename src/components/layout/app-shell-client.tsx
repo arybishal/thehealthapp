@@ -43,7 +43,7 @@ export function AppShellClient({
 
   return (
     <DemoProvider user={user}>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-bg [background:radial-gradient(900px_500px_at_85%_-10%,rgba(44,154,209,0.10),transparent),radial-gradient(700px_400px_at_-10%_20%,rgba(18,36,54,0.05),transparent)]">
         {/* Desktop: sidebar + main */}
         <div className="hidden lg:flex h-screen">
           <Sidebar user={user} patients={patients} />
