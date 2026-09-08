@@ -17,6 +17,9 @@ import {
   Scale,
   Droplets,
   Thermometer,
+  CalendarDays,
+  Link as LinkIcon,
+  Ruler,
 } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -181,7 +184,7 @@ export default async function PatientOverviewPage({
   });
   if (!patient) notFound();
 
-  const [totalReports, totalResults, uniqueBiomarkers, latestResults, recent] =
+  const [totalReports, totalResults, uniqueBiomarkers, latestResults, recent, upcomingReminders] =
     await Promise.all([
       prisma.report.count({ where: { patientId: id } }),
       prisma.labResult.count({ where: { report: { patientId: id } } }),
@@ -195,6 +198,11 @@ export default async function PatientOverviewPage({
         orderBy: { createdAt: "desc" },
         take: 4,
         include: { results: true },
+      }),
+      prisma.reminder.findMany({
+        where: { patientId: id, userId: session.user.id, status: "active" },
+        orderBy: { date: "asc" },
+        take: 3,
       }),
     ]);
 
@@ -461,6 +469,57 @@ export default async function PatientOverviewPage({
             )}
           </CardContent>
         </Card>
+      </div>
+
+      {/* Quick Actions + Upcoming Reminders */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div>
+          <h2 className="text-base font-semibold mb-3">Quick Actions</h2>
+          <div className="space-y-2">
+            <Link href={`/patients/${id}/ranges`} className="flex items-center gap-3 p-3 rounded-lg border bg-card hover:shadow-sm transition-shadow text-sm">
+              <Ruler className="h-4 w-4 text-primary" /> Reference Ranges
+            </Link>
+            <Link href={`/patients/${id}/reminders`} className="flex items-center gap-3 p-3 rounded-lg border bg-card hover:shadow-sm transition-shadow text-sm">
+              <CalendarDays className="h-4 w-4 text-primary" /> Reminders
+            </Link>
+            <Link href={`/patients/${id}/reports/upload`} className="flex items-center gap-3 p-3 rounded-lg border bg-card hover:shadow-sm transition-shadow text-sm">
+              <Plus className="h-4 w-4 text-primary" /> Upload Report
+            </Link>
+          </div>
+        </div>
+
+        <div className="md:col-span-2">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between">
+              <CardTitle className="text-base">Upcoming Reminders</CardTitle>
+              <Link href={`/patients/${id}/reminders`} className="text-sm text-primary hover:underline">View All</Link>
+            </CardHeader>
+            <CardContent>
+              {upcomingReminders.length === 0 ? (
+                <p className="text-sm text-muted-foreground py-4">
+                  No upcoming reminders. Schedule a follow-up test to stay on track.
+                </p>
+              ) : (
+                <div className="space-y-2">
+                  {upcomingReminders.map((r) => (
+                    <div key={r.id} className="flex items-center justify-between p-3 rounded-lg border bg-card text-sm">
+                      <div className="flex items-center gap-3">
+                        <CalendarDays className="h-4 w-4 text-primary" />
+                        <div>
+                          <p className="font-medium">{r.testName}</p>
+                          <p className="text-xs text-muted-foreground">
+                            Due {new Date(r.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
+                            {r.notes && ` — ${r.notes}`}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </div>
       </div>
 
       {/* Recent Reports */}

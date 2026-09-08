@@ -53,6 +53,10 @@ export type ReportMinAggregateOutputType = {
   fileType: string | null
   fileSize: number | null
   pageCount: number | null
+  language: string | null
+  parsedText: string | null
+  processingStatus: string | null
+  processingError: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -74,6 +78,10 @@ export type ReportMaxAggregateOutputType = {
   fileType: string | null
   fileSize: number | null
   pageCount: number | null
+  language: string | null
+  parsedText: string | null
+  processingStatus: string | null
+  processingError: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -95,6 +103,10 @@ export type ReportCountAggregateOutputType = {
   fileType: number
   fileSize: number
   pageCount: number
+  language: number
+  parsedText: number
+  processingStatus: number
+  processingError: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -128,6 +140,10 @@ export type ReportMinAggregateInputType = {
   fileType?: true
   fileSize?: true
   pageCount?: true
+  language?: true
+  parsedText?: true
+  processingStatus?: true
+  processingError?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -149,6 +165,10 @@ export type ReportMaxAggregateInputType = {
   fileType?: true
   fileSize?: true
   pageCount?: true
+  language?: true
+  parsedText?: true
+  processingStatus?: true
+  processingError?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -170,6 +190,10 @@ export type ReportCountAggregateInputType = {
   fileType?: true
   fileSize?: true
   pageCount?: true
+  language?: true
+  parsedText?: true
+  processingStatus?: true
+  processingError?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -278,6 +302,10 @@ export type ReportGroupByOutputType = {
   fileType: string
   fileSize: number
   pageCount: number | null
+  language: string
+  parsedText: string | null
+  processingStatus: string
+  processingError: string | null
   createdAt: Date
   updatedAt: Date
   _count: ReportCountAggregateOutputType | null
@@ -322,11 +350,16 @@ export type ReportWhereInput = {
   fileType?: Prisma.StringFilter<"Report"> | string
   fileSize?: Prisma.IntFilter<"Report"> | number
   pageCount?: Prisma.IntNullableFilter<"Report"> | number | null
+  language?: Prisma.StringFilter<"Report"> | string
+  parsedText?: Prisma.StringNullableFilter<"Report"> | string | null
+  processingStatus?: Prisma.StringFilter<"Report"> | string
+  processingError?: Prisma.StringNullableFilter<"Report"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Report"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Report"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   patient?: Prisma.XOR<Prisma.PatientScalarRelationFilter, Prisma.PatientWhereInput>
   results?: Prisma.LabResultListRelationFilter
+  auditLogs?: Prisma.AuditLogRoleAccessListRelationFilter
 }
 
 export type ReportOrderByWithRelationInput = {
@@ -346,11 +379,16 @@ export type ReportOrderByWithRelationInput = {
   fileType?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
   pageCount?: Prisma.SortOrderInput | Prisma.SortOrder
+  language?: Prisma.SortOrder
+  parsedText?: Prisma.SortOrderInput | Prisma.SortOrder
+  processingStatus?: Prisma.SortOrder
+  processingError?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   patient?: Prisma.PatientOrderByWithRelationInput
   results?: Prisma.LabResultOrderByRelationAggregateInput
+  auditLogs?: Prisma.AuditLogRoleAccessOrderByRelationAggregateInput
 }
 
 export type ReportWhereUniqueInput = Prisma.AtLeast<{
@@ -373,11 +411,16 @@ export type ReportWhereUniqueInput = Prisma.AtLeast<{
   fileType?: Prisma.StringFilter<"Report"> | string
   fileSize?: Prisma.IntFilter<"Report"> | number
   pageCount?: Prisma.IntNullableFilter<"Report"> | number | null
+  language?: Prisma.StringFilter<"Report"> | string
+  parsedText?: Prisma.StringNullableFilter<"Report"> | string | null
+  processingStatus?: Prisma.StringFilter<"Report"> | string
+  processingError?: Prisma.StringNullableFilter<"Report"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Report"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Report"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   patient?: Prisma.XOR<Prisma.PatientScalarRelationFilter, Prisma.PatientWhereInput>
   results?: Prisma.LabResultListRelationFilter
+  auditLogs?: Prisma.AuditLogRoleAccessListRelationFilter
 }, "id">
 
 export type ReportOrderByWithAggregationInput = {
@@ -397,6 +440,10 @@ export type ReportOrderByWithAggregationInput = {
   fileType?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
   pageCount?: Prisma.SortOrderInput | Prisma.SortOrder
+  language?: Prisma.SortOrder
+  parsedText?: Prisma.SortOrderInput | Prisma.SortOrder
+  processingStatus?: Prisma.SortOrder
+  processingError?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ReportCountOrderByAggregateInput
@@ -426,6 +473,10 @@ export type ReportScalarWhereWithAggregatesInput = {
   fileType?: Prisma.StringWithAggregatesFilter<"Report"> | string
   fileSize?: Prisma.IntWithAggregatesFilter<"Report"> | number
   pageCount?: Prisma.IntNullableWithAggregatesFilter<"Report"> | number | null
+  language?: Prisma.StringWithAggregatesFilter<"Report"> | string
+  parsedText?: Prisma.StringNullableWithAggregatesFilter<"Report"> | string | null
+  processingStatus?: Prisma.StringWithAggregatesFilter<"Report"> | string
+  processingError?: Prisma.StringNullableWithAggregatesFilter<"Report"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Report"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Report"> | Date | string
 }
@@ -445,11 +496,16 @@ export type ReportCreateInput = {
   fileType: string
   fileSize: number
   pageCount?: number | null
+  language?: string
+  parsedText?: string | null
+  processingStatus?: string
+  processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutReportsInput
   patient: Prisma.PatientCreateNestedOneWithoutReportsInput
   results?: Prisma.LabResultCreateNestedManyWithoutReportInput
+  auditLogs?: Prisma.AuditLogRoleAccessCreateNestedManyWithoutReportInput
 }
 
 export type ReportUncheckedCreateInput = {
@@ -469,9 +525,14 @@ export type ReportUncheckedCreateInput = {
   fileType: string
   fileSize: number
   pageCount?: number | null
+  language?: string
+  parsedText?: string | null
+  processingStatus?: string
+  processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   results?: Prisma.LabResultUncheckedCreateNestedManyWithoutReportInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedCreateNestedManyWithoutReportInput
 }
 
 export type ReportUpdateInput = {
@@ -489,11 +550,16 @@ export type ReportUpdateInput = {
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  parsedText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutReportsNestedInput
   patient?: Prisma.PatientUpdateOneRequiredWithoutReportsNestedInput
   results?: Prisma.LabResultUpdateManyWithoutReportNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUpdateManyWithoutReportNestedInput
 }
 
 export type ReportUncheckedUpdateInput = {
@@ -513,9 +579,14 @@ export type ReportUncheckedUpdateInput = {
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  parsedText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   results?: Prisma.LabResultUncheckedUpdateManyWithoutReportNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedUpdateManyWithoutReportNestedInput
 }
 
 export type ReportCreateManyInput = {
@@ -535,6 +606,10 @@ export type ReportCreateManyInput = {
   fileType: string
   fileSize: number
   pageCount?: number | null
+  language?: string
+  parsedText?: string | null
+  processingStatus?: string
+  processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -554,6 +629,10 @@ export type ReportUpdateManyMutationInput = {
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  parsedText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -575,6 +654,10 @@ export type ReportUncheckedUpdateManyInput = {
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  parsedText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -606,6 +689,10 @@ export type ReportCountOrderByAggregateInput = {
   fileType?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
   pageCount?: Prisma.SortOrder
+  language?: Prisma.SortOrder
+  parsedText?: Prisma.SortOrder
+  processingStatus?: Prisma.SortOrder
+  processingError?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -632,6 +719,10 @@ export type ReportMaxOrderByAggregateInput = {
   fileType?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
   pageCount?: Prisma.SortOrder
+  language?: Prisma.SortOrder
+  parsedText?: Prisma.SortOrder
+  processingStatus?: Prisma.SortOrder
+  processingError?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -653,6 +744,10 @@ export type ReportMinOrderByAggregateInput = {
   fileType?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
   pageCount?: Prisma.SortOrder
+  language?: Prisma.SortOrder
+  parsedText?: Prisma.SortOrder
+  processingStatus?: Prisma.SortOrder
+  processingError?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -665,6 +760,11 @@ export type ReportSumOrderByAggregateInput = {
 export type ReportScalarRelationFilter = {
   is?: Prisma.ReportWhereInput
   isNot?: Prisma.ReportWhereInput
+}
+
+export type ReportNullableScalarRelationFilter = {
+  is?: Prisma.ReportWhereInput | null
+  isNot?: Prisma.ReportWhereInput | null
 }
 
 export type ReportCreateNestedManyWithoutUserInput = {
@@ -781,6 +881,22 @@ export type ReportUpdateOneRequiredWithoutResultsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ReportUpdateToOneWithWhereWithoutResultsInput, Prisma.ReportUpdateWithoutResultsInput>, Prisma.ReportUncheckedUpdateWithoutResultsInput>
 }
 
+export type ReportCreateNestedOneWithoutAuditLogsInput = {
+  create?: Prisma.XOR<Prisma.ReportCreateWithoutAuditLogsInput, Prisma.ReportUncheckedCreateWithoutAuditLogsInput>
+  connectOrCreate?: Prisma.ReportCreateOrConnectWithoutAuditLogsInput
+  connect?: Prisma.ReportWhereUniqueInput
+}
+
+export type ReportUpdateOneWithoutAuditLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.ReportCreateWithoutAuditLogsInput, Prisma.ReportUncheckedCreateWithoutAuditLogsInput>
+  connectOrCreate?: Prisma.ReportCreateOrConnectWithoutAuditLogsInput
+  upsert?: Prisma.ReportUpsertWithoutAuditLogsInput
+  disconnect?: Prisma.ReportWhereInput | boolean
+  delete?: Prisma.ReportWhereInput | boolean
+  connect?: Prisma.ReportWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ReportUpdateToOneWithWhereWithoutAuditLogsInput, Prisma.ReportUpdateWithoutAuditLogsInput>, Prisma.ReportUncheckedUpdateWithoutAuditLogsInput>
+}
+
 export type ReportCreateWithoutUserInput = {
   id?: string
   title: string
@@ -796,10 +912,15 @@ export type ReportCreateWithoutUserInput = {
   fileType: string
   fileSize: number
   pageCount?: number | null
+  language?: string
+  parsedText?: string | null
+  processingStatus?: string
+  processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   patient: Prisma.PatientCreateNestedOneWithoutReportsInput
   results?: Prisma.LabResultCreateNestedManyWithoutReportInput
+  auditLogs?: Prisma.AuditLogRoleAccessCreateNestedManyWithoutReportInput
 }
 
 export type ReportUncheckedCreateWithoutUserInput = {
@@ -818,9 +939,14 @@ export type ReportUncheckedCreateWithoutUserInput = {
   fileType: string
   fileSize: number
   pageCount?: number | null
+  language?: string
+  parsedText?: string | null
+  processingStatus?: string
+  processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   results?: Prisma.LabResultUncheckedCreateNestedManyWithoutReportInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedCreateNestedManyWithoutReportInput
 }
 
 export type ReportCreateOrConnectWithoutUserInput = {
@@ -869,6 +995,10 @@ export type ReportScalarWhereInput = {
   fileType?: Prisma.StringFilter<"Report"> | string
   fileSize?: Prisma.IntFilter<"Report"> | number
   pageCount?: Prisma.IntNullableFilter<"Report"> | number | null
+  language?: Prisma.StringFilter<"Report"> | string
+  parsedText?: Prisma.StringNullableFilter<"Report"> | string | null
+  processingStatus?: Prisma.StringFilter<"Report"> | string
+  processingError?: Prisma.StringNullableFilter<"Report"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Report"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Report"> | Date | string
 }
@@ -888,10 +1018,15 @@ export type ReportCreateWithoutPatientInput = {
   fileType: string
   fileSize: number
   pageCount?: number | null
+  language?: string
+  parsedText?: string | null
+  processingStatus?: string
+  processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutReportsInput
   results?: Prisma.LabResultCreateNestedManyWithoutReportInput
+  auditLogs?: Prisma.AuditLogRoleAccessCreateNestedManyWithoutReportInput
 }
 
 export type ReportUncheckedCreateWithoutPatientInput = {
@@ -910,9 +1045,14 @@ export type ReportUncheckedCreateWithoutPatientInput = {
   fileType: string
   fileSize: number
   pageCount?: number | null
+  language?: string
+  parsedText?: string | null
+  processingStatus?: string
+  processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   results?: Prisma.LabResultUncheckedCreateNestedManyWithoutReportInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedCreateNestedManyWithoutReportInput
 }
 
 export type ReportCreateOrConnectWithoutPatientInput = {
@@ -956,10 +1096,15 @@ export type ReportCreateWithoutResultsInput = {
   fileType: string
   fileSize: number
   pageCount?: number | null
+  language?: string
+  parsedText?: string | null
+  processingStatus?: string
+  processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutReportsInput
   patient: Prisma.PatientCreateNestedOneWithoutReportsInput
+  auditLogs?: Prisma.AuditLogRoleAccessCreateNestedManyWithoutReportInput
 }
 
 export type ReportUncheckedCreateWithoutResultsInput = {
@@ -979,8 +1124,13 @@ export type ReportUncheckedCreateWithoutResultsInput = {
   fileType: string
   fileSize: number
   pageCount?: number | null
+  language?: string
+  parsedText?: string | null
+  processingStatus?: string
+  processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedCreateNestedManyWithoutReportInput
 }
 
 export type ReportCreateOrConnectWithoutResultsInput = {
@@ -1014,10 +1164,15 @@ export type ReportUpdateWithoutResultsInput = {
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  parsedText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutReportsNestedInput
   patient?: Prisma.PatientUpdateOneRequiredWithoutReportsNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUpdateManyWithoutReportNestedInput
 }
 
 export type ReportUncheckedUpdateWithoutResultsInput = {
@@ -1037,8 +1192,133 @@ export type ReportUncheckedUpdateWithoutResultsInput = {
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  parsedText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedUpdateManyWithoutReportNestedInput
+}
+
+export type ReportCreateWithoutAuditLogsInput = {
+  id?: string
+  title: string
+  reportType?: string | null
+  laboratoryName?: string | null
+  labLocation?: string | null
+  doctorName?: string | null
+  reportDate?: Date | string | null
+  patientName?: string | null
+  reportNumber?: string | null
+  fileName: string
+  filePath: string
+  fileType: string
+  fileSize: number
+  pageCount?: number | null
+  language?: string
+  parsedText?: string | null
+  processingStatus?: string
+  processingError?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutReportsInput
+  patient: Prisma.PatientCreateNestedOneWithoutReportsInput
+  results?: Prisma.LabResultCreateNestedManyWithoutReportInput
+}
+
+export type ReportUncheckedCreateWithoutAuditLogsInput = {
+  id?: string
+  userId: string
+  patientId: string
+  title: string
+  reportType?: string | null
+  laboratoryName?: string | null
+  labLocation?: string | null
+  doctorName?: string | null
+  reportDate?: Date | string | null
+  patientName?: string | null
+  reportNumber?: string | null
+  fileName: string
+  filePath: string
+  fileType: string
+  fileSize: number
+  pageCount?: number | null
+  language?: string
+  parsedText?: string | null
+  processingStatus?: string
+  processingError?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  results?: Prisma.LabResultUncheckedCreateNestedManyWithoutReportInput
+}
+
+export type ReportCreateOrConnectWithoutAuditLogsInput = {
+  where: Prisma.ReportWhereUniqueInput
+  create: Prisma.XOR<Prisma.ReportCreateWithoutAuditLogsInput, Prisma.ReportUncheckedCreateWithoutAuditLogsInput>
+}
+
+export type ReportUpsertWithoutAuditLogsInput = {
+  update: Prisma.XOR<Prisma.ReportUpdateWithoutAuditLogsInput, Prisma.ReportUncheckedUpdateWithoutAuditLogsInput>
+  create: Prisma.XOR<Prisma.ReportCreateWithoutAuditLogsInput, Prisma.ReportUncheckedCreateWithoutAuditLogsInput>
+  where?: Prisma.ReportWhereInput
+}
+
+export type ReportUpdateToOneWithWhereWithoutAuditLogsInput = {
+  where?: Prisma.ReportWhereInput
+  data: Prisma.XOR<Prisma.ReportUpdateWithoutAuditLogsInput, Prisma.ReportUncheckedUpdateWithoutAuditLogsInput>
+}
+
+export type ReportUpdateWithoutAuditLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  reportType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  laboratoryName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  labLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  doctorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reportDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  patientName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
+  filePath?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.StringFieldUpdateOperationsInput | string
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  parsedText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutReportsNestedInput
+  patient?: Prisma.PatientUpdateOneRequiredWithoutReportsNestedInput
+  results?: Prisma.LabResultUpdateManyWithoutReportNestedInput
+}
+
+export type ReportUncheckedUpdateWithoutAuditLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  patientId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  reportType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  laboratoryName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  labLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  doctorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reportDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  patientName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
+  filePath?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.StringFieldUpdateOperationsInput | string
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  parsedText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  results?: Prisma.LabResultUncheckedUpdateManyWithoutReportNestedInput
 }
 
 export type ReportCreateManyUserInput = {
@@ -1057,6 +1337,10 @@ export type ReportCreateManyUserInput = {
   fileType: string
   fileSize: number
   pageCount?: number | null
+  language?: string
+  parsedText?: string | null
+  processingStatus?: string
+  processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1076,10 +1360,15 @@ export type ReportUpdateWithoutUserInput = {
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  parsedText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   patient?: Prisma.PatientUpdateOneRequiredWithoutReportsNestedInput
   results?: Prisma.LabResultUpdateManyWithoutReportNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUpdateManyWithoutReportNestedInput
 }
 
 export type ReportUncheckedUpdateWithoutUserInput = {
@@ -1098,9 +1387,14 @@ export type ReportUncheckedUpdateWithoutUserInput = {
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  parsedText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   results?: Prisma.LabResultUncheckedUpdateManyWithoutReportNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedUpdateManyWithoutReportNestedInput
 }
 
 export type ReportUncheckedUpdateManyWithoutUserInput = {
@@ -1119,6 +1413,10 @@ export type ReportUncheckedUpdateManyWithoutUserInput = {
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  parsedText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1139,6 +1437,10 @@ export type ReportCreateManyPatientInput = {
   fileType: string
   fileSize: number
   pageCount?: number | null
+  language?: string
+  parsedText?: string | null
+  processingStatus?: string
+  processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1158,10 +1460,15 @@ export type ReportUpdateWithoutPatientInput = {
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  parsedText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutReportsNestedInput
   results?: Prisma.LabResultUpdateManyWithoutReportNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUpdateManyWithoutReportNestedInput
 }
 
 export type ReportUncheckedUpdateWithoutPatientInput = {
@@ -1180,9 +1487,14 @@ export type ReportUncheckedUpdateWithoutPatientInput = {
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  parsedText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   results?: Prisma.LabResultUncheckedUpdateManyWithoutReportNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedUpdateManyWithoutReportNestedInput
 }
 
 export type ReportUncheckedUpdateManyWithoutPatientInput = {
@@ -1201,6 +1513,10 @@ export type ReportUncheckedUpdateManyWithoutPatientInput = {
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  parsedText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1212,10 +1528,12 @@ export type ReportUncheckedUpdateManyWithoutPatientInput = {
 
 export type ReportCountOutputType = {
   results: number
+  auditLogs: number
 }
 
 export type ReportCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   results?: boolean | ReportCountOutputTypeCountResultsArgs
+  auditLogs?: boolean | ReportCountOutputTypeCountAuditLogsArgs
 }
 
 /**
@@ -1233,6 +1551,13 @@ export type ReportCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
  */
 export type ReportCountOutputTypeCountResultsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LabResultWhereInput
+}
+
+/**
+ * ReportCountOutputType without action
+ */
+export type ReportCountOutputTypeCountAuditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AuditLogRoleAccessWhereInput
 }
 
 
@@ -1253,11 +1578,16 @@ export type ReportSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   fileType?: boolean
   fileSize?: boolean
   pageCount?: boolean
+  language?: boolean
+  parsedText?: boolean
+  processingStatus?: boolean
+  processingError?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   patient?: boolean | Prisma.PatientDefaultArgs<ExtArgs>
   results?: boolean | Prisma.Report$resultsArgs<ExtArgs>
+  auditLogs?: boolean | Prisma.Report$auditLogsArgs<ExtArgs>
   _count?: boolean | Prisma.ReportCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["report"]>
 
@@ -1278,6 +1608,10 @@ export type ReportSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   fileType?: boolean
   fileSize?: boolean
   pageCount?: boolean
+  language?: boolean
+  parsedText?: boolean
+  processingStatus?: boolean
+  processingError?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1301,6 +1635,10 @@ export type ReportSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   fileType?: boolean
   fileSize?: boolean
   pageCount?: boolean
+  language?: boolean
+  parsedText?: boolean
+  processingStatus?: boolean
+  processingError?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1324,15 +1662,20 @@ export type ReportSelectScalar = {
   fileType?: boolean
   fileSize?: boolean
   pageCount?: boolean
+  language?: boolean
+  parsedText?: boolean
+  processingStatus?: boolean
+  processingError?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ReportOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "patientId" | "title" | "reportType" | "laboratoryName" | "labLocation" | "doctorName" | "reportDate" | "patientName" | "reportNumber" | "fileName" | "filePath" | "fileType" | "fileSize" | "pageCount" | "createdAt" | "updatedAt", ExtArgs["result"]["report"]>
+export type ReportOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "patientId" | "title" | "reportType" | "laboratoryName" | "labLocation" | "doctorName" | "reportDate" | "patientName" | "reportNumber" | "fileName" | "filePath" | "fileType" | "fileSize" | "pageCount" | "language" | "parsedText" | "processingStatus" | "processingError" | "createdAt" | "updatedAt", ExtArgs["result"]["report"]>
 export type ReportInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   patient?: boolean | Prisma.PatientDefaultArgs<ExtArgs>
   results?: boolean | Prisma.Report$resultsArgs<ExtArgs>
+  auditLogs?: boolean | Prisma.Report$auditLogsArgs<ExtArgs>
   _count?: boolean | Prisma.ReportCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ReportIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1350,6 +1693,7 @@ export type $ReportPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     user: Prisma.$UserPayload<ExtArgs>
     patient: Prisma.$PatientPayload<ExtArgs>
     results: Prisma.$LabResultPayload<ExtArgs>[]
+    auditLogs: Prisma.$AuditLogRoleAccessPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1368,6 +1712,10 @@ export type $ReportPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     fileType: string
     fileSize: number
     pageCount: number | null
+    language: string
+    parsedText: string | null
+    processingStatus: string
+    processingError: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["report"]>
@@ -1767,6 +2115,7 @@ export interface Prisma__ReportClient<T, Null = never, ExtArgs extends runtime.T
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   patient<T extends Prisma.PatientDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PatientDefaultArgs<ExtArgs>>): Prisma.Prisma__PatientClient<runtime.Types.Result.GetResult<Prisma.$PatientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   results<T extends Prisma.Report$resultsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Report$resultsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LabResultPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  auditLogs<T extends Prisma.Report$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Report$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogRoleAccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1812,6 +2161,10 @@ export interface ReportFieldRefs {
   readonly fileType: Prisma.FieldRef<"Report", 'String'>
   readonly fileSize: Prisma.FieldRef<"Report", 'Int'>
   readonly pageCount: Prisma.FieldRef<"Report", 'Int'>
+  readonly language: Prisma.FieldRef<"Report", 'String'>
+  readonly parsedText: Prisma.FieldRef<"Report", 'String'>
+  readonly processingStatus: Prisma.FieldRef<"Report", 'String'>
+  readonly processingError: Prisma.FieldRef<"Report", 'String'>
   readonly createdAt: Prisma.FieldRef<"Report", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Report", 'DateTime'>
 }
@@ -2236,6 +2589,30 @@ export type Report$resultsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.LabResultScalarFieldEnum | Prisma.LabResultScalarFieldEnum[]
+}
+
+/**
+ * Report.auditLogs
+ */
+export type Report$auditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AuditLogRoleAccess
+   */
+  select?: Prisma.AuditLogRoleAccessSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AuditLogRoleAccess
+   */
+  omit?: Prisma.AuditLogRoleAccessOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AuditLogRoleAccessInclude<ExtArgs> | null
+  where?: Prisma.AuditLogRoleAccessWhereInput
+  orderBy?: Prisma.AuditLogRoleAccessOrderByWithRelationInput | Prisma.AuditLogRoleAccessOrderByWithRelationInput[]
+  cursor?: Prisma.AuditLogRoleAccessWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AuditLogRoleAccessScalarFieldEnum | Prisma.AuditLogRoleAccessScalarFieldEnum[]
 }
 
 /**

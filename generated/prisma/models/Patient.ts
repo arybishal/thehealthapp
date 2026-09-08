@@ -351,6 +351,11 @@ export type PatientWhereInput = {
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   reports?: Prisma.ReportListRelationFilter
   measurements?: Prisma.HealthMeasurementListRelationFilter
+  referenceRanges?: Prisma.ReferenceRangeListRelationFilter
+  reminders?: Prisma.ReminderListRelationFilter
+  shareLinks?: Prisma.ShareLinkListRelationFilter
+  exports?: Prisma.ExportLogListRelationFilter
+  auditLogs?: Prisma.AuditLogRoleAccessListRelationFilter
 }
 
 export type PatientOrderByWithRelationInput = {
@@ -378,6 +383,11 @@ export type PatientOrderByWithRelationInput = {
   user?: Prisma.UserOrderByWithRelationInput
   reports?: Prisma.ReportOrderByRelationAggregateInput
   measurements?: Prisma.HealthMeasurementOrderByRelationAggregateInput
+  referenceRanges?: Prisma.ReferenceRangeOrderByRelationAggregateInput
+  reminders?: Prisma.ReminderOrderByRelationAggregateInput
+  shareLinks?: Prisma.ShareLinkOrderByRelationAggregateInput
+  exports?: Prisma.ExportLogOrderByRelationAggregateInput
+  auditLogs?: Prisma.AuditLogRoleAccessOrderByRelationAggregateInput
 }
 
 export type PatientWhereUniqueInput = Prisma.AtLeast<{
@@ -408,6 +418,11 @@ export type PatientWhereUniqueInput = Prisma.AtLeast<{
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   reports?: Prisma.ReportListRelationFilter
   measurements?: Prisma.HealthMeasurementListRelationFilter
+  referenceRanges?: Prisma.ReferenceRangeListRelationFilter
+  reminders?: Prisma.ReminderListRelationFilter
+  shareLinks?: Prisma.ShareLinkListRelationFilter
+  exports?: Prisma.ExportLogListRelationFilter
+  auditLogs?: Prisma.AuditLogRoleAccessListRelationFilter
 }, "id">
 
 export type PatientOrderByWithAggregationInput = {
@@ -490,6 +505,11 @@ export type PatientCreateInput = {
   user: Prisma.UserCreateNestedOneWithoutPatientsInput
   reports?: Prisma.ReportCreateNestedManyWithoutPatientInput
   measurements?: Prisma.HealthMeasurementCreateNestedManyWithoutPatientInput
+  referenceRanges?: Prisma.ReferenceRangeCreateNestedManyWithoutPatientInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutPatientInput
+  shareLinks?: Prisma.ShareLinkCreateNestedManyWithoutPatientInput
+  exports?: Prisma.ExportLogCreateNestedManyWithoutPatientInput
+  auditLogs?: Prisma.AuditLogRoleAccessCreateNestedManyWithoutPatientInput
 }
 
 export type PatientUncheckedCreateInput = {
@@ -516,6 +536,11 @@ export type PatientUncheckedCreateInput = {
   updatedAt?: Date | string
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutPatientInput
   measurements?: Prisma.HealthMeasurementUncheckedCreateNestedManyWithoutPatientInput
+  referenceRanges?: Prisma.ReferenceRangeUncheckedCreateNestedManyWithoutPatientInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutPatientInput
+  shareLinks?: Prisma.ShareLinkUncheckedCreateNestedManyWithoutPatientInput
+  exports?: Prisma.ExportLogUncheckedCreateNestedManyWithoutPatientInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedCreateNestedManyWithoutPatientInput
 }
 
 export type PatientUpdateInput = {
@@ -542,6 +567,11 @@ export type PatientUpdateInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutPatientsNestedInput
   reports?: Prisma.ReportUpdateManyWithoutPatientNestedInput
   measurements?: Prisma.HealthMeasurementUpdateManyWithoutPatientNestedInput
+  referenceRanges?: Prisma.ReferenceRangeUpdateManyWithoutPatientNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutPatientNestedInput
+  shareLinks?: Prisma.ShareLinkUpdateManyWithoutPatientNestedInput
+  exports?: Prisma.ExportLogUpdateManyWithoutPatientNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUpdateManyWithoutPatientNestedInput
 }
 
 export type PatientUncheckedUpdateInput = {
@@ -568,6 +598,11 @@ export type PatientUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reports?: Prisma.ReportUncheckedUpdateManyWithoutPatientNestedInput
   measurements?: Prisma.HealthMeasurementUncheckedUpdateManyWithoutPatientNestedInput
+  referenceRanges?: Prisma.ReferenceRangeUncheckedUpdateManyWithoutPatientNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutPatientNestedInput
+  shareLinks?: Prisma.ShareLinkUncheckedUpdateManyWithoutPatientNestedInput
+  exports?: Prisma.ExportLogUncheckedUpdateManyWithoutPatientNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedUpdateManyWithoutPatientNestedInput
 }
 
 export type PatientCreateManyInput = {
@@ -738,6 +773,11 @@ export type PatientScalarRelationFilter = {
   isNot?: Prisma.PatientWhereInput
 }
 
+export type PatientNullableScalarRelationFilter = {
+  is?: Prisma.PatientWhereInput | null
+  isNot?: Prisma.PatientWhereInput | null
+}
+
 export type PatientCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.PatientCreateWithoutUserInput, Prisma.PatientUncheckedCreateWithoutUserInput> | Prisma.PatientCreateWithoutUserInput[] | Prisma.PatientUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.PatientCreateOrConnectWithoutUserInput | Prisma.PatientCreateOrConnectWithoutUserInput[]
@@ -808,6 +848,78 @@ export type PatientUpdateOneRequiredWithoutMeasurementsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PatientUpdateToOneWithWhereWithoutMeasurementsInput, Prisma.PatientUpdateWithoutMeasurementsInput>, Prisma.PatientUncheckedUpdateWithoutMeasurementsInput>
 }
 
+export type PatientCreateNestedOneWithoutReferenceRangesInput = {
+  create?: Prisma.XOR<Prisma.PatientCreateWithoutReferenceRangesInput, Prisma.PatientUncheckedCreateWithoutReferenceRangesInput>
+  connectOrCreate?: Prisma.PatientCreateOrConnectWithoutReferenceRangesInput
+  connect?: Prisma.PatientWhereUniqueInput
+}
+
+export type PatientUpdateOneRequiredWithoutReferenceRangesNestedInput = {
+  create?: Prisma.XOR<Prisma.PatientCreateWithoutReferenceRangesInput, Prisma.PatientUncheckedCreateWithoutReferenceRangesInput>
+  connectOrCreate?: Prisma.PatientCreateOrConnectWithoutReferenceRangesInput
+  upsert?: Prisma.PatientUpsertWithoutReferenceRangesInput
+  connect?: Prisma.PatientWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PatientUpdateToOneWithWhereWithoutReferenceRangesInput, Prisma.PatientUpdateWithoutReferenceRangesInput>, Prisma.PatientUncheckedUpdateWithoutReferenceRangesInput>
+}
+
+export type PatientCreateNestedOneWithoutRemindersInput = {
+  create?: Prisma.XOR<Prisma.PatientCreateWithoutRemindersInput, Prisma.PatientUncheckedCreateWithoutRemindersInput>
+  connectOrCreate?: Prisma.PatientCreateOrConnectWithoutRemindersInput
+  connect?: Prisma.PatientWhereUniqueInput
+}
+
+export type PatientUpdateOneRequiredWithoutRemindersNestedInput = {
+  create?: Prisma.XOR<Prisma.PatientCreateWithoutRemindersInput, Prisma.PatientUncheckedCreateWithoutRemindersInput>
+  connectOrCreate?: Prisma.PatientCreateOrConnectWithoutRemindersInput
+  upsert?: Prisma.PatientUpsertWithoutRemindersInput
+  connect?: Prisma.PatientWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PatientUpdateToOneWithWhereWithoutRemindersInput, Prisma.PatientUpdateWithoutRemindersInput>, Prisma.PatientUncheckedUpdateWithoutRemindersInput>
+}
+
+export type PatientCreateNestedOneWithoutShareLinksInput = {
+  create?: Prisma.XOR<Prisma.PatientCreateWithoutShareLinksInput, Prisma.PatientUncheckedCreateWithoutShareLinksInput>
+  connectOrCreate?: Prisma.PatientCreateOrConnectWithoutShareLinksInput
+  connect?: Prisma.PatientWhereUniqueInput
+}
+
+export type PatientUpdateOneRequiredWithoutShareLinksNestedInput = {
+  create?: Prisma.XOR<Prisma.PatientCreateWithoutShareLinksInput, Prisma.PatientUncheckedCreateWithoutShareLinksInput>
+  connectOrCreate?: Prisma.PatientCreateOrConnectWithoutShareLinksInput
+  upsert?: Prisma.PatientUpsertWithoutShareLinksInput
+  connect?: Prisma.PatientWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PatientUpdateToOneWithWhereWithoutShareLinksInput, Prisma.PatientUpdateWithoutShareLinksInput>, Prisma.PatientUncheckedUpdateWithoutShareLinksInput>
+}
+
+export type PatientCreateNestedOneWithoutExportsInput = {
+  create?: Prisma.XOR<Prisma.PatientCreateWithoutExportsInput, Prisma.PatientUncheckedCreateWithoutExportsInput>
+  connectOrCreate?: Prisma.PatientCreateOrConnectWithoutExportsInput
+  connect?: Prisma.PatientWhereUniqueInput
+}
+
+export type PatientUpdateOneRequiredWithoutExportsNestedInput = {
+  create?: Prisma.XOR<Prisma.PatientCreateWithoutExportsInput, Prisma.PatientUncheckedCreateWithoutExportsInput>
+  connectOrCreate?: Prisma.PatientCreateOrConnectWithoutExportsInput
+  upsert?: Prisma.PatientUpsertWithoutExportsInput
+  connect?: Prisma.PatientWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PatientUpdateToOneWithWhereWithoutExportsInput, Prisma.PatientUpdateWithoutExportsInput>, Prisma.PatientUncheckedUpdateWithoutExportsInput>
+}
+
+export type PatientCreateNestedOneWithoutAuditLogsInput = {
+  create?: Prisma.XOR<Prisma.PatientCreateWithoutAuditLogsInput, Prisma.PatientUncheckedCreateWithoutAuditLogsInput>
+  connectOrCreate?: Prisma.PatientCreateOrConnectWithoutAuditLogsInput
+  connect?: Prisma.PatientWhereUniqueInput
+}
+
+export type PatientUpdateOneWithoutAuditLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.PatientCreateWithoutAuditLogsInput, Prisma.PatientUncheckedCreateWithoutAuditLogsInput>
+  connectOrCreate?: Prisma.PatientCreateOrConnectWithoutAuditLogsInput
+  upsert?: Prisma.PatientUpsertWithoutAuditLogsInput
+  disconnect?: Prisma.PatientWhereInput | boolean
+  delete?: Prisma.PatientWhereInput | boolean
+  connect?: Prisma.PatientWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PatientUpdateToOneWithWhereWithoutAuditLogsInput, Prisma.PatientUpdateWithoutAuditLogsInput>, Prisma.PatientUncheckedUpdateWithoutAuditLogsInput>
+}
+
 export type PatientCreateWithoutUserInput = {
   id?: string
   name: string
@@ -831,6 +943,11 @@ export type PatientCreateWithoutUserInput = {
   updatedAt?: Date | string
   reports?: Prisma.ReportCreateNestedManyWithoutPatientInput
   measurements?: Prisma.HealthMeasurementCreateNestedManyWithoutPatientInput
+  referenceRanges?: Prisma.ReferenceRangeCreateNestedManyWithoutPatientInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutPatientInput
+  shareLinks?: Prisma.ShareLinkCreateNestedManyWithoutPatientInput
+  exports?: Prisma.ExportLogCreateNestedManyWithoutPatientInput
+  auditLogs?: Prisma.AuditLogRoleAccessCreateNestedManyWithoutPatientInput
 }
 
 export type PatientUncheckedCreateWithoutUserInput = {
@@ -856,6 +973,11 @@ export type PatientUncheckedCreateWithoutUserInput = {
   updatedAt?: Date | string
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutPatientInput
   measurements?: Prisma.HealthMeasurementUncheckedCreateNestedManyWithoutPatientInput
+  referenceRanges?: Prisma.ReferenceRangeUncheckedCreateNestedManyWithoutPatientInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutPatientInput
+  shareLinks?: Prisma.ShareLinkUncheckedCreateNestedManyWithoutPatientInput
+  exports?: Prisma.ExportLogUncheckedCreateNestedManyWithoutPatientInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedCreateNestedManyWithoutPatientInput
 }
 
 export type PatientCreateOrConnectWithoutUserInput = {
@@ -934,6 +1056,11 @@ export type PatientCreateWithoutReportsInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutPatientsInput
   measurements?: Prisma.HealthMeasurementCreateNestedManyWithoutPatientInput
+  referenceRanges?: Prisma.ReferenceRangeCreateNestedManyWithoutPatientInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutPatientInput
+  shareLinks?: Prisma.ShareLinkCreateNestedManyWithoutPatientInput
+  exports?: Prisma.ExportLogCreateNestedManyWithoutPatientInput
+  auditLogs?: Prisma.AuditLogRoleAccessCreateNestedManyWithoutPatientInput
 }
 
 export type PatientUncheckedCreateWithoutReportsInput = {
@@ -959,6 +1086,11 @@ export type PatientUncheckedCreateWithoutReportsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   measurements?: Prisma.HealthMeasurementUncheckedCreateNestedManyWithoutPatientInput
+  referenceRanges?: Prisma.ReferenceRangeUncheckedCreateNestedManyWithoutPatientInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutPatientInput
+  shareLinks?: Prisma.ShareLinkUncheckedCreateNestedManyWithoutPatientInput
+  exports?: Prisma.ExportLogUncheckedCreateNestedManyWithoutPatientInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedCreateNestedManyWithoutPatientInput
 }
 
 export type PatientCreateOrConnectWithoutReportsInput = {
@@ -1000,6 +1132,11 @@ export type PatientUpdateWithoutReportsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutPatientsNestedInput
   measurements?: Prisma.HealthMeasurementUpdateManyWithoutPatientNestedInput
+  referenceRanges?: Prisma.ReferenceRangeUpdateManyWithoutPatientNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutPatientNestedInput
+  shareLinks?: Prisma.ShareLinkUpdateManyWithoutPatientNestedInput
+  exports?: Prisma.ExportLogUpdateManyWithoutPatientNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUpdateManyWithoutPatientNestedInput
 }
 
 export type PatientUncheckedUpdateWithoutReportsInput = {
@@ -1025,6 +1162,11 @@ export type PatientUncheckedUpdateWithoutReportsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   measurements?: Prisma.HealthMeasurementUncheckedUpdateManyWithoutPatientNestedInput
+  referenceRanges?: Prisma.ReferenceRangeUncheckedUpdateManyWithoutPatientNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutPatientNestedInput
+  shareLinks?: Prisma.ShareLinkUncheckedUpdateManyWithoutPatientNestedInput
+  exports?: Prisma.ExportLogUncheckedUpdateManyWithoutPatientNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedUpdateManyWithoutPatientNestedInput
 }
 
 export type PatientCreateWithoutMeasurementsInput = {
@@ -1050,6 +1192,11 @@ export type PatientCreateWithoutMeasurementsInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutPatientsInput
   reports?: Prisma.ReportCreateNestedManyWithoutPatientInput
+  referenceRanges?: Prisma.ReferenceRangeCreateNestedManyWithoutPatientInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutPatientInput
+  shareLinks?: Prisma.ShareLinkCreateNestedManyWithoutPatientInput
+  exports?: Prisma.ExportLogCreateNestedManyWithoutPatientInput
+  auditLogs?: Prisma.AuditLogRoleAccessCreateNestedManyWithoutPatientInput
 }
 
 export type PatientUncheckedCreateWithoutMeasurementsInput = {
@@ -1075,6 +1222,11 @@ export type PatientUncheckedCreateWithoutMeasurementsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutPatientInput
+  referenceRanges?: Prisma.ReferenceRangeUncheckedCreateNestedManyWithoutPatientInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutPatientInput
+  shareLinks?: Prisma.ShareLinkUncheckedCreateNestedManyWithoutPatientInput
+  exports?: Prisma.ExportLogUncheckedCreateNestedManyWithoutPatientInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedCreateNestedManyWithoutPatientInput
 }
 
 export type PatientCreateOrConnectWithoutMeasurementsInput = {
@@ -1116,6 +1268,11 @@ export type PatientUpdateWithoutMeasurementsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutPatientsNestedInput
   reports?: Prisma.ReportUpdateManyWithoutPatientNestedInput
+  referenceRanges?: Prisma.ReferenceRangeUpdateManyWithoutPatientNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutPatientNestedInput
+  shareLinks?: Prisma.ShareLinkUpdateManyWithoutPatientNestedInput
+  exports?: Prisma.ExportLogUpdateManyWithoutPatientNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUpdateManyWithoutPatientNestedInput
 }
 
 export type PatientUncheckedUpdateWithoutMeasurementsInput = {
@@ -1141,6 +1298,691 @@ export type PatientUncheckedUpdateWithoutMeasurementsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reports?: Prisma.ReportUncheckedUpdateManyWithoutPatientNestedInput
+  referenceRanges?: Prisma.ReferenceRangeUncheckedUpdateManyWithoutPatientNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutPatientNestedInput
+  shareLinks?: Prisma.ShareLinkUncheckedUpdateManyWithoutPatientNestedInput
+  exports?: Prisma.ExportLogUncheckedUpdateManyWithoutPatientNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedUpdateManyWithoutPatientNestedInput
+}
+
+export type PatientCreateWithoutReferenceRangesInput = {
+  id?: string
+  name: string
+  dob?: Date | string | null
+  gender?: string | null
+  bloodGroup?: string | null
+  photoUrl?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  emergencyContact?: string | null
+  height?: number | null
+  weight?: number | null
+  allergies?: string | null
+  conditions?: string | null
+  medications?: string | null
+  surgeries?: string | null
+  familyHistory?: string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutPatientsInput
+  reports?: Prisma.ReportCreateNestedManyWithoutPatientInput
+  measurements?: Prisma.HealthMeasurementCreateNestedManyWithoutPatientInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutPatientInput
+  shareLinks?: Prisma.ShareLinkCreateNestedManyWithoutPatientInput
+  exports?: Prisma.ExportLogCreateNestedManyWithoutPatientInput
+  auditLogs?: Prisma.AuditLogRoleAccessCreateNestedManyWithoutPatientInput
+}
+
+export type PatientUncheckedCreateWithoutReferenceRangesInput = {
+  id?: string
+  userId: string
+  name: string
+  dob?: Date | string | null
+  gender?: string | null
+  bloodGroup?: string | null
+  photoUrl?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  emergencyContact?: string | null
+  height?: number | null
+  weight?: number | null
+  allergies?: string | null
+  conditions?: string | null
+  medications?: string | null
+  surgeries?: string | null
+  familyHistory?: string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutPatientInput
+  measurements?: Prisma.HealthMeasurementUncheckedCreateNestedManyWithoutPatientInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutPatientInput
+  shareLinks?: Prisma.ShareLinkUncheckedCreateNestedManyWithoutPatientInput
+  exports?: Prisma.ExportLogUncheckedCreateNestedManyWithoutPatientInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedCreateNestedManyWithoutPatientInput
+}
+
+export type PatientCreateOrConnectWithoutReferenceRangesInput = {
+  where: Prisma.PatientWhereUniqueInput
+  create: Prisma.XOR<Prisma.PatientCreateWithoutReferenceRangesInput, Prisma.PatientUncheckedCreateWithoutReferenceRangesInput>
+}
+
+export type PatientUpsertWithoutReferenceRangesInput = {
+  update: Prisma.XOR<Prisma.PatientUpdateWithoutReferenceRangesInput, Prisma.PatientUncheckedUpdateWithoutReferenceRangesInput>
+  create: Prisma.XOR<Prisma.PatientCreateWithoutReferenceRangesInput, Prisma.PatientUncheckedCreateWithoutReferenceRangesInput>
+  where?: Prisma.PatientWhereInput
+}
+
+export type PatientUpdateToOneWithWhereWithoutReferenceRangesInput = {
+  where?: Prisma.PatientWhereInput
+  data: Prisma.XOR<Prisma.PatientUpdateWithoutReferenceRangesInput, Prisma.PatientUncheckedUpdateWithoutReferenceRangesInput>
+}
+
+export type PatientUpdateWithoutReferenceRangesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  allergies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  conditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  medications?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surgeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  familyHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutPatientsNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutPatientNestedInput
+  measurements?: Prisma.HealthMeasurementUpdateManyWithoutPatientNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutPatientNestedInput
+  shareLinks?: Prisma.ShareLinkUpdateManyWithoutPatientNestedInput
+  exports?: Prisma.ExportLogUpdateManyWithoutPatientNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUpdateManyWithoutPatientNestedInput
+}
+
+export type PatientUncheckedUpdateWithoutReferenceRangesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  allergies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  conditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  medications?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surgeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  familyHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutPatientNestedInput
+  measurements?: Prisma.HealthMeasurementUncheckedUpdateManyWithoutPatientNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutPatientNestedInput
+  shareLinks?: Prisma.ShareLinkUncheckedUpdateManyWithoutPatientNestedInput
+  exports?: Prisma.ExportLogUncheckedUpdateManyWithoutPatientNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedUpdateManyWithoutPatientNestedInput
+}
+
+export type PatientCreateWithoutRemindersInput = {
+  id?: string
+  name: string
+  dob?: Date | string | null
+  gender?: string | null
+  bloodGroup?: string | null
+  photoUrl?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  emergencyContact?: string | null
+  height?: number | null
+  weight?: number | null
+  allergies?: string | null
+  conditions?: string | null
+  medications?: string | null
+  surgeries?: string | null
+  familyHistory?: string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutPatientsInput
+  reports?: Prisma.ReportCreateNestedManyWithoutPatientInput
+  measurements?: Prisma.HealthMeasurementCreateNestedManyWithoutPatientInput
+  referenceRanges?: Prisma.ReferenceRangeCreateNestedManyWithoutPatientInput
+  shareLinks?: Prisma.ShareLinkCreateNestedManyWithoutPatientInput
+  exports?: Prisma.ExportLogCreateNestedManyWithoutPatientInput
+  auditLogs?: Prisma.AuditLogRoleAccessCreateNestedManyWithoutPatientInput
+}
+
+export type PatientUncheckedCreateWithoutRemindersInput = {
+  id?: string
+  userId: string
+  name: string
+  dob?: Date | string | null
+  gender?: string | null
+  bloodGroup?: string | null
+  photoUrl?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  emergencyContact?: string | null
+  height?: number | null
+  weight?: number | null
+  allergies?: string | null
+  conditions?: string | null
+  medications?: string | null
+  surgeries?: string | null
+  familyHistory?: string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutPatientInput
+  measurements?: Prisma.HealthMeasurementUncheckedCreateNestedManyWithoutPatientInput
+  referenceRanges?: Prisma.ReferenceRangeUncheckedCreateNestedManyWithoutPatientInput
+  shareLinks?: Prisma.ShareLinkUncheckedCreateNestedManyWithoutPatientInput
+  exports?: Prisma.ExportLogUncheckedCreateNestedManyWithoutPatientInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedCreateNestedManyWithoutPatientInput
+}
+
+export type PatientCreateOrConnectWithoutRemindersInput = {
+  where: Prisma.PatientWhereUniqueInput
+  create: Prisma.XOR<Prisma.PatientCreateWithoutRemindersInput, Prisma.PatientUncheckedCreateWithoutRemindersInput>
+}
+
+export type PatientUpsertWithoutRemindersInput = {
+  update: Prisma.XOR<Prisma.PatientUpdateWithoutRemindersInput, Prisma.PatientUncheckedUpdateWithoutRemindersInput>
+  create: Prisma.XOR<Prisma.PatientCreateWithoutRemindersInput, Prisma.PatientUncheckedCreateWithoutRemindersInput>
+  where?: Prisma.PatientWhereInput
+}
+
+export type PatientUpdateToOneWithWhereWithoutRemindersInput = {
+  where?: Prisma.PatientWhereInput
+  data: Prisma.XOR<Prisma.PatientUpdateWithoutRemindersInput, Prisma.PatientUncheckedUpdateWithoutRemindersInput>
+}
+
+export type PatientUpdateWithoutRemindersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  allergies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  conditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  medications?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surgeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  familyHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutPatientsNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutPatientNestedInput
+  measurements?: Prisma.HealthMeasurementUpdateManyWithoutPatientNestedInput
+  referenceRanges?: Prisma.ReferenceRangeUpdateManyWithoutPatientNestedInput
+  shareLinks?: Prisma.ShareLinkUpdateManyWithoutPatientNestedInput
+  exports?: Prisma.ExportLogUpdateManyWithoutPatientNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUpdateManyWithoutPatientNestedInput
+}
+
+export type PatientUncheckedUpdateWithoutRemindersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  allergies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  conditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  medications?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surgeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  familyHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutPatientNestedInput
+  measurements?: Prisma.HealthMeasurementUncheckedUpdateManyWithoutPatientNestedInput
+  referenceRanges?: Prisma.ReferenceRangeUncheckedUpdateManyWithoutPatientNestedInput
+  shareLinks?: Prisma.ShareLinkUncheckedUpdateManyWithoutPatientNestedInput
+  exports?: Prisma.ExportLogUncheckedUpdateManyWithoutPatientNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedUpdateManyWithoutPatientNestedInput
+}
+
+export type PatientCreateWithoutShareLinksInput = {
+  id?: string
+  name: string
+  dob?: Date | string | null
+  gender?: string | null
+  bloodGroup?: string | null
+  photoUrl?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  emergencyContact?: string | null
+  height?: number | null
+  weight?: number | null
+  allergies?: string | null
+  conditions?: string | null
+  medications?: string | null
+  surgeries?: string | null
+  familyHistory?: string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutPatientsInput
+  reports?: Prisma.ReportCreateNestedManyWithoutPatientInput
+  measurements?: Prisma.HealthMeasurementCreateNestedManyWithoutPatientInput
+  referenceRanges?: Prisma.ReferenceRangeCreateNestedManyWithoutPatientInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutPatientInput
+  exports?: Prisma.ExportLogCreateNestedManyWithoutPatientInput
+  auditLogs?: Prisma.AuditLogRoleAccessCreateNestedManyWithoutPatientInput
+}
+
+export type PatientUncheckedCreateWithoutShareLinksInput = {
+  id?: string
+  userId: string
+  name: string
+  dob?: Date | string | null
+  gender?: string | null
+  bloodGroup?: string | null
+  photoUrl?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  emergencyContact?: string | null
+  height?: number | null
+  weight?: number | null
+  allergies?: string | null
+  conditions?: string | null
+  medications?: string | null
+  surgeries?: string | null
+  familyHistory?: string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutPatientInput
+  measurements?: Prisma.HealthMeasurementUncheckedCreateNestedManyWithoutPatientInput
+  referenceRanges?: Prisma.ReferenceRangeUncheckedCreateNestedManyWithoutPatientInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutPatientInput
+  exports?: Prisma.ExportLogUncheckedCreateNestedManyWithoutPatientInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedCreateNestedManyWithoutPatientInput
+}
+
+export type PatientCreateOrConnectWithoutShareLinksInput = {
+  where: Prisma.PatientWhereUniqueInput
+  create: Prisma.XOR<Prisma.PatientCreateWithoutShareLinksInput, Prisma.PatientUncheckedCreateWithoutShareLinksInput>
+}
+
+export type PatientUpsertWithoutShareLinksInput = {
+  update: Prisma.XOR<Prisma.PatientUpdateWithoutShareLinksInput, Prisma.PatientUncheckedUpdateWithoutShareLinksInput>
+  create: Prisma.XOR<Prisma.PatientCreateWithoutShareLinksInput, Prisma.PatientUncheckedCreateWithoutShareLinksInput>
+  where?: Prisma.PatientWhereInput
+}
+
+export type PatientUpdateToOneWithWhereWithoutShareLinksInput = {
+  where?: Prisma.PatientWhereInput
+  data: Prisma.XOR<Prisma.PatientUpdateWithoutShareLinksInput, Prisma.PatientUncheckedUpdateWithoutShareLinksInput>
+}
+
+export type PatientUpdateWithoutShareLinksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  allergies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  conditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  medications?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surgeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  familyHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutPatientsNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutPatientNestedInput
+  measurements?: Prisma.HealthMeasurementUpdateManyWithoutPatientNestedInput
+  referenceRanges?: Prisma.ReferenceRangeUpdateManyWithoutPatientNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutPatientNestedInput
+  exports?: Prisma.ExportLogUpdateManyWithoutPatientNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUpdateManyWithoutPatientNestedInput
+}
+
+export type PatientUncheckedUpdateWithoutShareLinksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  allergies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  conditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  medications?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surgeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  familyHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutPatientNestedInput
+  measurements?: Prisma.HealthMeasurementUncheckedUpdateManyWithoutPatientNestedInput
+  referenceRanges?: Prisma.ReferenceRangeUncheckedUpdateManyWithoutPatientNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutPatientNestedInput
+  exports?: Prisma.ExportLogUncheckedUpdateManyWithoutPatientNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedUpdateManyWithoutPatientNestedInput
+}
+
+export type PatientCreateWithoutExportsInput = {
+  id?: string
+  name: string
+  dob?: Date | string | null
+  gender?: string | null
+  bloodGroup?: string | null
+  photoUrl?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  emergencyContact?: string | null
+  height?: number | null
+  weight?: number | null
+  allergies?: string | null
+  conditions?: string | null
+  medications?: string | null
+  surgeries?: string | null
+  familyHistory?: string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutPatientsInput
+  reports?: Prisma.ReportCreateNestedManyWithoutPatientInput
+  measurements?: Prisma.HealthMeasurementCreateNestedManyWithoutPatientInput
+  referenceRanges?: Prisma.ReferenceRangeCreateNestedManyWithoutPatientInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutPatientInput
+  shareLinks?: Prisma.ShareLinkCreateNestedManyWithoutPatientInput
+  auditLogs?: Prisma.AuditLogRoleAccessCreateNestedManyWithoutPatientInput
+}
+
+export type PatientUncheckedCreateWithoutExportsInput = {
+  id?: string
+  userId: string
+  name: string
+  dob?: Date | string | null
+  gender?: string | null
+  bloodGroup?: string | null
+  photoUrl?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  emergencyContact?: string | null
+  height?: number | null
+  weight?: number | null
+  allergies?: string | null
+  conditions?: string | null
+  medications?: string | null
+  surgeries?: string | null
+  familyHistory?: string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutPatientInput
+  measurements?: Prisma.HealthMeasurementUncheckedCreateNestedManyWithoutPatientInput
+  referenceRanges?: Prisma.ReferenceRangeUncheckedCreateNestedManyWithoutPatientInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutPatientInput
+  shareLinks?: Prisma.ShareLinkUncheckedCreateNestedManyWithoutPatientInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedCreateNestedManyWithoutPatientInput
+}
+
+export type PatientCreateOrConnectWithoutExportsInput = {
+  where: Prisma.PatientWhereUniqueInput
+  create: Prisma.XOR<Prisma.PatientCreateWithoutExportsInput, Prisma.PatientUncheckedCreateWithoutExportsInput>
+}
+
+export type PatientUpsertWithoutExportsInput = {
+  update: Prisma.XOR<Prisma.PatientUpdateWithoutExportsInput, Prisma.PatientUncheckedUpdateWithoutExportsInput>
+  create: Prisma.XOR<Prisma.PatientCreateWithoutExportsInput, Prisma.PatientUncheckedCreateWithoutExportsInput>
+  where?: Prisma.PatientWhereInput
+}
+
+export type PatientUpdateToOneWithWhereWithoutExportsInput = {
+  where?: Prisma.PatientWhereInput
+  data: Prisma.XOR<Prisma.PatientUpdateWithoutExportsInput, Prisma.PatientUncheckedUpdateWithoutExportsInput>
+}
+
+export type PatientUpdateWithoutExportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  allergies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  conditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  medications?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surgeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  familyHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutPatientsNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutPatientNestedInput
+  measurements?: Prisma.HealthMeasurementUpdateManyWithoutPatientNestedInput
+  referenceRanges?: Prisma.ReferenceRangeUpdateManyWithoutPatientNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutPatientNestedInput
+  shareLinks?: Prisma.ShareLinkUpdateManyWithoutPatientNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUpdateManyWithoutPatientNestedInput
+}
+
+export type PatientUncheckedUpdateWithoutExportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  allergies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  conditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  medications?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surgeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  familyHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutPatientNestedInput
+  measurements?: Prisma.HealthMeasurementUncheckedUpdateManyWithoutPatientNestedInput
+  referenceRanges?: Prisma.ReferenceRangeUncheckedUpdateManyWithoutPatientNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutPatientNestedInput
+  shareLinks?: Prisma.ShareLinkUncheckedUpdateManyWithoutPatientNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedUpdateManyWithoutPatientNestedInput
+}
+
+export type PatientCreateWithoutAuditLogsInput = {
+  id?: string
+  name: string
+  dob?: Date | string | null
+  gender?: string | null
+  bloodGroup?: string | null
+  photoUrl?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  emergencyContact?: string | null
+  height?: number | null
+  weight?: number | null
+  allergies?: string | null
+  conditions?: string | null
+  medications?: string | null
+  surgeries?: string | null
+  familyHistory?: string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutPatientsInput
+  reports?: Prisma.ReportCreateNestedManyWithoutPatientInput
+  measurements?: Prisma.HealthMeasurementCreateNestedManyWithoutPatientInput
+  referenceRanges?: Prisma.ReferenceRangeCreateNestedManyWithoutPatientInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutPatientInput
+  shareLinks?: Prisma.ShareLinkCreateNestedManyWithoutPatientInput
+  exports?: Prisma.ExportLogCreateNestedManyWithoutPatientInput
+}
+
+export type PatientUncheckedCreateWithoutAuditLogsInput = {
+  id?: string
+  userId: string
+  name: string
+  dob?: Date | string | null
+  gender?: string | null
+  bloodGroup?: string | null
+  photoUrl?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  emergencyContact?: string | null
+  height?: number | null
+  weight?: number | null
+  allergies?: string | null
+  conditions?: string | null
+  medications?: string | null
+  surgeries?: string | null
+  familyHistory?: string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutPatientInput
+  measurements?: Prisma.HealthMeasurementUncheckedCreateNestedManyWithoutPatientInput
+  referenceRanges?: Prisma.ReferenceRangeUncheckedCreateNestedManyWithoutPatientInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutPatientInput
+  shareLinks?: Prisma.ShareLinkUncheckedCreateNestedManyWithoutPatientInput
+  exports?: Prisma.ExportLogUncheckedCreateNestedManyWithoutPatientInput
+}
+
+export type PatientCreateOrConnectWithoutAuditLogsInput = {
+  where: Prisma.PatientWhereUniqueInput
+  create: Prisma.XOR<Prisma.PatientCreateWithoutAuditLogsInput, Prisma.PatientUncheckedCreateWithoutAuditLogsInput>
+}
+
+export type PatientUpsertWithoutAuditLogsInput = {
+  update: Prisma.XOR<Prisma.PatientUpdateWithoutAuditLogsInput, Prisma.PatientUncheckedUpdateWithoutAuditLogsInput>
+  create: Prisma.XOR<Prisma.PatientCreateWithoutAuditLogsInput, Prisma.PatientUncheckedCreateWithoutAuditLogsInput>
+  where?: Prisma.PatientWhereInput
+}
+
+export type PatientUpdateToOneWithWhereWithoutAuditLogsInput = {
+  where?: Prisma.PatientWhereInput
+  data: Prisma.XOR<Prisma.PatientUpdateWithoutAuditLogsInput, Prisma.PatientUncheckedUpdateWithoutAuditLogsInput>
+}
+
+export type PatientUpdateWithoutAuditLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  allergies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  conditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  medications?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surgeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  familyHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutPatientsNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutPatientNestedInput
+  measurements?: Prisma.HealthMeasurementUpdateManyWithoutPatientNestedInput
+  referenceRanges?: Prisma.ReferenceRangeUpdateManyWithoutPatientNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutPatientNestedInput
+  shareLinks?: Prisma.ShareLinkUpdateManyWithoutPatientNestedInput
+  exports?: Prisma.ExportLogUpdateManyWithoutPatientNestedInput
+}
+
+export type PatientUncheckedUpdateWithoutAuditLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  allergies?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  conditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  medications?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surgeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  familyHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutPatientNestedInput
+  measurements?: Prisma.HealthMeasurementUncheckedUpdateManyWithoutPatientNestedInput
+  referenceRanges?: Prisma.ReferenceRangeUncheckedUpdateManyWithoutPatientNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutPatientNestedInput
+  shareLinks?: Prisma.ShareLinkUncheckedUpdateManyWithoutPatientNestedInput
+  exports?: Prisma.ExportLogUncheckedUpdateManyWithoutPatientNestedInput
 }
 
 export type PatientCreateManyUserInput = {
@@ -1189,6 +2031,11 @@ export type PatientUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reports?: Prisma.ReportUpdateManyWithoutPatientNestedInput
   measurements?: Prisma.HealthMeasurementUpdateManyWithoutPatientNestedInput
+  referenceRanges?: Prisma.ReferenceRangeUpdateManyWithoutPatientNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutPatientNestedInput
+  shareLinks?: Prisma.ShareLinkUpdateManyWithoutPatientNestedInput
+  exports?: Prisma.ExportLogUpdateManyWithoutPatientNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUpdateManyWithoutPatientNestedInput
 }
 
 export type PatientUncheckedUpdateWithoutUserInput = {
@@ -1214,6 +2061,11 @@ export type PatientUncheckedUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reports?: Prisma.ReportUncheckedUpdateManyWithoutPatientNestedInput
   measurements?: Prisma.HealthMeasurementUncheckedUpdateManyWithoutPatientNestedInput
+  referenceRanges?: Prisma.ReferenceRangeUncheckedUpdateManyWithoutPatientNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutPatientNestedInput
+  shareLinks?: Prisma.ShareLinkUncheckedUpdateManyWithoutPatientNestedInput
+  exports?: Prisma.ExportLogUncheckedUpdateManyWithoutPatientNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedUpdateManyWithoutPatientNestedInput
 }
 
 export type PatientUncheckedUpdateManyWithoutUserInput = {
@@ -1247,11 +2099,21 @@ export type PatientUncheckedUpdateManyWithoutUserInput = {
 export type PatientCountOutputType = {
   reports: number
   measurements: number
+  referenceRanges: number
+  reminders: number
+  shareLinks: number
+  exports: number
+  auditLogs: number
 }
 
 export type PatientCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   reports?: boolean | PatientCountOutputTypeCountReportsArgs
   measurements?: boolean | PatientCountOutputTypeCountMeasurementsArgs
+  referenceRanges?: boolean | PatientCountOutputTypeCountReferenceRangesArgs
+  reminders?: boolean | PatientCountOutputTypeCountRemindersArgs
+  shareLinks?: boolean | PatientCountOutputTypeCountShareLinksArgs
+  exports?: boolean | PatientCountOutputTypeCountExportsArgs
+  auditLogs?: boolean | PatientCountOutputTypeCountAuditLogsArgs
 }
 
 /**
@@ -1276,6 +2138,41 @@ export type PatientCountOutputTypeCountReportsArgs<ExtArgs extends runtime.Types
  */
 export type PatientCountOutputTypeCountMeasurementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.HealthMeasurementWhereInput
+}
+
+/**
+ * PatientCountOutputType without action
+ */
+export type PatientCountOutputTypeCountReferenceRangesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReferenceRangeWhereInput
+}
+
+/**
+ * PatientCountOutputType without action
+ */
+export type PatientCountOutputTypeCountRemindersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReminderWhereInput
+}
+
+/**
+ * PatientCountOutputType without action
+ */
+export type PatientCountOutputTypeCountShareLinksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ShareLinkWhereInput
+}
+
+/**
+ * PatientCountOutputType without action
+ */
+export type PatientCountOutputTypeCountExportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExportLogWhereInput
+}
+
+/**
+ * PatientCountOutputType without action
+ */
+export type PatientCountOutputTypeCountAuditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AuditLogRoleAccessWhereInput
 }
 
 
@@ -1304,6 +2201,11 @@ export type PatientSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reports?: boolean | Prisma.Patient$reportsArgs<ExtArgs>
   measurements?: boolean | Prisma.Patient$measurementsArgs<ExtArgs>
+  referenceRanges?: boolean | Prisma.Patient$referenceRangesArgs<ExtArgs>
+  reminders?: boolean | Prisma.Patient$remindersArgs<ExtArgs>
+  shareLinks?: boolean | Prisma.Patient$shareLinksArgs<ExtArgs>
+  exports?: boolean | Prisma.Patient$exportsArgs<ExtArgs>
+  auditLogs?: boolean | Prisma.Patient$auditLogsArgs<ExtArgs>
   _count?: boolean | Prisma.PatientCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["patient"]>
 
@@ -1386,6 +2288,11 @@ export type PatientInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reports?: boolean | Prisma.Patient$reportsArgs<ExtArgs>
   measurements?: boolean | Prisma.Patient$measurementsArgs<ExtArgs>
+  referenceRanges?: boolean | Prisma.Patient$referenceRangesArgs<ExtArgs>
+  reminders?: boolean | Prisma.Patient$remindersArgs<ExtArgs>
+  shareLinks?: boolean | Prisma.Patient$shareLinksArgs<ExtArgs>
+  exports?: boolean | Prisma.Patient$exportsArgs<ExtArgs>
+  auditLogs?: boolean | Prisma.Patient$auditLogsArgs<ExtArgs>
   _count?: boolean | Prisma.PatientCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PatientIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1401,6 +2308,11 @@ export type $PatientPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     user: Prisma.$UserPayload<ExtArgs>
     reports: Prisma.$ReportPayload<ExtArgs>[]
     measurements: Prisma.$HealthMeasurementPayload<ExtArgs>[]
+    referenceRanges: Prisma.$ReferenceRangePayload<ExtArgs>[]
+    reminders: Prisma.$ReminderPayload<ExtArgs>[]
+    shareLinks: Prisma.$ShareLinkPayload<ExtArgs>[]
+    exports: Prisma.$ExportLogPayload<ExtArgs>[]
+    auditLogs: Prisma.$AuditLogRoleAccessPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1821,6 +2733,11 @@ export interface Prisma__PatientClient<T, Null = never, ExtArgs extends runtime.
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   reports<T extends Prisma.Patient$reportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Patient$reportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   measurements<T extends Prisma.Patient$measurementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Patient$measurementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HealthMeasurementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  referenceRanges<T extends Prisma.Patient$referenceRangesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Patient$referenceRangesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReferenceRangePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reminders<T extends Prisma.Patient$remindersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Patient$remindersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  shareLinks<T extends Prisma.Patient$shareLinksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Patient$shareLinksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShareLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  exports<T extends Prisma.Patient$exportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Patient$exportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExportLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  auditLogs<T extends Prisma.Patient$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Patient$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogRoleAccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2317,6 +3234,126 @@ export type Patient$measurementsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.HealthMeasurementScalarFieldEnum | Prisma.HealthMeasurementScalarFieldEnum[]
+}
+
+/**
+ * Patient.referenceRanges
+ */
+export type Patient$referenceRangesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ReferenceRange
+   */
+  select?: Prisma.ReferenceRangeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ReferenceRange
+   */
+  omit?: Prisma.ReferenceRangeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReferenceRangeInclude<ExtArgs> | null
+  where?: Prisma.ReferenceRangeWhereInput
+  orderBy?: Prisma.ReferenceRangeOrderByWithRelationInput | Prisma.ReferenceRangeOrderByWithRelationInput[]
+  cursor?: Prisma.ReferenceRangeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReferenceRangeScalarFieldEnum | Prisma.ReferenceRangeScalarFieldEnum[]
+}
+
+/**
+ * Patient.reminders
+ */
+export type Patient$remindersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Reminder
+   */
+  select?: Prisma.ReminderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Reminder
+   */
+  omit?: Prisma.ReminderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReminderInclude<ExtArgs> | null
+  where?: Prisma.ReminderWhereInput
+  orderBy?: Prisma.ReminderOrderByWithRelationInput | Prisma.ReminderOrderByWithRelationInput[]
+  cursor?: Prisma.ReminderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReminderScalarFieldEnum | Prisma.ReminderScalarFieldEnum[]
+}
+
+/**
+ * Patient.shareLinks
+ */
+export type Patient$shareLinksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ShareLink
+   */
+  select?: Prisma.ShareLinkSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ShareLink
+   */
+  omit?: Prisma.ShareLinkOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ShareLinkInclude<ExtArgs> | null
+  where?: Prisma.ShareLinkWhereInput
+  orderBy?: Prisma.ShareLinkOrderByWithRelationInput | Prisma.ShareLinkOrderByWithRelationInput[]
+  cursor?: Prisma.ShareLinkWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ShareLinkScalarFieldEnum | Prisma.ShareLinkScalarFieldEnum[]
+}
+
+/**
+ * Patient.exports
+ */
+export type Patient$exportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ExportLog
+   */
+  select?: Prisma.ExportLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ExportLog
+   */
+  omit?: Prisma.ExportLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExportLogInclude<ExtArgs> | null
+  where?: Prisma.ExportLogWhereInput
+  orderBy?: Prisma.ExportLogOrderByWithRelationInput | Prisma.ExportLogOrderByWithRelationInput[]
+  cursor?: Prisma.ExportLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExportLogScalarFieldEnum | Prisma.ExportLogScalarFieldEnum[]
+}
+
+/**
+ * Patient.auditLogs
+ */
+export type Patient$auditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AuditLogRoleAccess
+   */
+  select?: Prisma.AuditLogRoleAccessSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AuditLogRoleAccess
+   */
+  omit?: Prisma.AuditLogRoleAccessOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AuditLogRoleAccessInclude<ExtArgs> | null
+  where?: Prisma.AuditLogRoleAccessWhereInput
+  orderBy?: Prisma.AuditLogRoleAccessOrderByWithRelationInput | Prisma.AuditLogRoleAccessOrderByWithRelationInput[]
+  cursor?: Prisma.AuditLogRoleAccessWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AuditLogRoleAccessScalarFieldEnum | Prisma.AuditLogRoleAccessScalarFieldEnum[]
 }
 
 /**

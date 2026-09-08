@@ -329,6 +329,7 @@ export type LabResultWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"LabResult"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"LabResult"> | Date | string
   report?: Prisma.XOR<Prisma.ReportScalarRelationFilter, Prisma.ReportWhereInput>
+  auditLogs?: Prisma.AuditLogRoleAccessListRelationFilter
 }
 
 export type LabResultOrderByWithRelationInput = {
@@ -351,6 +352,7 @@ export type LabResultOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   report?: Prisma.ReportOrderByWithRelationInput
+  auditLogs?: Prisma.AuditLogRoleAccessOrderByRelationAggregateInput
 }
 
 export type LabResultWhereUniqueInput = Prisma.AtLeast<{
@@ -376,6 +378,7 @@ export type LabResultWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"LabResult"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"LabResult"> | Date | string
   report?: Prisma.XOR<Prisma.ReportScalarRelationFilter, Prisma.ReportWhereInput>
+  auditLogs?: Prisma.AuditLogRoleAccessListRelationFilter
 }, "id">
 
 export type LabResultOrderByWithAggregationInput = {
@@ -447,6 +450,7 @@ export type LabResultCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   report: Prisma.ReportCreateNestedOneWithoutResultsInput
+  auditLogs?: Prisma.AuditLogRoleAccessCreateNestedManyWithoutResultInput
 }
 
 export type LabResultUncheckedCreateInput = {
@@ -468,6 +472,7 @@ export type LabResultUncheckedCreateInput = {
   confirmedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedCreateNestedManyWithoutResultInput
 }
 
 export type LabResultUpdateInput = {
@@ -489,6 +494,7 @@ export type LabResultUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   report?: Prisma.ReportUpdateOneRequiredWithoutResultsNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUpdateManyWithoutResultNestedInput
 }
 
 export type LabResultUncheckedUpdateInput = {
@@ -510,6 +516,7 @@ export type LabResultUncheckedUpdateInput = {
   confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedUpdateManyWithoutResultNestedInput
 }
 
 export type LabResultCreateManyInput = {
@@ -659,6 +666,11 @@ export type LabResultSumOrderByAggregateInput = {
   referenceHigh?: Prisma.SortOrder
 }
 
+export type LabResultNullableScalarRelationFilter = {
+  is?: Prisma.LabResultWhereInput | null
+  isNot?: Prisma.LabResultWhereInput | null
+}
+
 export type LabResultCreateNestedManyWithoutReportInput = {
   create?: Prisma.XOR<Prisma.LabResultCreateWithoutReportInput, Prisma.LabResultUncheckedCreateWithoutReportInput> | Prisma.LabResultCreateWithoutReportInput[] | Prisma.LabResultUncheckedCreateWithoutReportInput[]
   connectOrCreate?: Prisma.LabResultCreateOrConnectWithoutReportInput | Prisma.LabResultCreateOrConnectWithoutReportInput[]
@@ -705,6 +717,22 @@ export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
 
+export type LabResultCreateNestedOneWithoutAuditLogsInput = {
+  create?: Prisma.XOR<Prisma.LabResultCreateWithoutAuditLogsInput, Prisma.LabResultUncheckedCreateWithoutAuditLogsInput>
+  connectOrCreate?: Prisma.LabResultCreateOrConnectWithoutAuditLogsInput
+  connect?: Prisma.LabResultWhereUniqueInput
+}
+
+export type LabResultUpdateOneWithoutAuditLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.LabResultCreateWithoutAuditLogsInput, Prisma.LabResultUncheckedCreateWithoutAuditLogsInput>
+  connectOrCreate?: Prisma.LabResultCreateOrConnectWithoutAuditLogsInput
+  upsert?: Prisma.LabResultUpsertWithoutAuditLogsInput
+  disconnect?: Prisma.LabResultWhereInput | boolean
+  delete?: Prisma.LabResultWhereInput | boolean
+  connect?: Prisma.LabResultWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LabResultUpdateToOneWithWhereWithoutAuditLogsInput, Prisma.LabResultUpdateWithoutAuditLogsInput>, Prisma.LabResultUncheckedUpdateWithoutAuditLogsInput>
+}
+
 export type LabResultCreateWithoutReportInput = {
   id?: string
   canonicalName: string
@@ -723,6 +751,7 @@ export type LabResultCreateWithoutReportInput = {
   confirmedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  auditLogs?: Prisma.AuditLogRoleAccessCreateNestedManyWithoutResultInput
 }
 
 export type LabResultUncheckedCreateWithoutReportInput = {
@@ -743,6 +772,7 @@ export type LabResultUncheckedCreateWithoutReportInput = {
   confirmedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedCreateNestedManyWithoutResultInput
 }
 
 export type LabResultCreateOrConnectWithoutReportInput = {
@@ -795,6 +825,106 @@ export type LabResultScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"LabResult"> | Date | string
 }
 
+export type LabResultCreateWithoutAuditLogsInput = {
+  id?: string
+  canonicalName: string
+  originalTestName: string
+  originalValue: string
+  originalUnit?: string | null
+  normalizedValue?: number | null
+  normalizedUnit?: string | null
+  referenceLow?: number | null
+  referenceHigh?: number | null
+  originalRefRange?: string | null
+  flag?: string | null
+  resultDate?: Date | string | null
+  confidence?: string
+  confirmed?: boolean
+  confirmedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  report: Prisma.ReportCreateNestedOneWithoutResultsInput
+}
+
+export type LabResultUncheckedCreateWithoutAuditLogsInput = {
+  id?: string
+  reportId: string
+  canonicalName: string
+  originalTestName: string
+  originalValue: string
+  originalUnit?: string | null
+  normalizedValue?: number | null
+  normalizedUnit?: string | null
+  referenceLow?: number | null
+  referenceHigh?: number | null
+  originalRefRange?: string | null
+  flag?: string | null
+  resultDate?: Date | string | null
+  confidence?: string
+  confirmed?: boolean
+  confirmedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type LabResultCreateOrConnectWithoutAuditLogsInput = {
+  where: Prisma.LabResultWhereUniqueInput
+  create: Prisma.XOR<Prisma.LabResultCreateWithoutAuditLogsInput, Prisma.LabResultUncheckedCreateWithoutAuditLogsInput>
+}
+
+export type LabResultUpsertWithoutAuditLogsInput = {
+  update: Prisma.XOR<Prisma.LabResultUpdateWithoutAuditLogsInput, Prisma.LabResultUncheckedUpdateWithoutAuditLogsInput>
+  create: Prisma.XOR<Prisma.LabResultCreateWithoutAuditLogsInput, Prisma.LabResultUncheckedCreateWithoutAuditLogsInput>
+  where?: Prisma.LabResultWhereInput
+}
+
+export type LabResultUpdateToOneWithWhereWithoutAuditLogsInput = {
+  where?: Prisma.LabResultWhereInput
+  data: Prisma.XOR<Prisma.LabResultUpdateWithoutAuditLogsInput, Prisma.LabResultUncheckedUpdateWithoutAuditLogsInput>
+}
+
+export type LabResultUpdateWithoutAuditLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  canonicalName?: Prisma.StringFieldUpdateOperationsInput | string
+  originalTestName?: Prisma.StringFieldUpdateOperationsInput | string
+  originalValue?: Prisma.StringFieldUpdateOperationsInput | string
+  originalUnit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  normalizedValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  normalizedUnit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referenceLow?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  referenceHigh?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  originalRefRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flag?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resultDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  confidence?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  report?: Prisma.ReportUpdateOneRequiredWithoutResultsNestedInput
+}
+
+export type LabResultUncheckedUpdateWithoutAuditLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reportId?: Prisma.StringFieldUpdateOperationsInput | string
+  canonicalName?: Prisma.StringFieldUpdateOperationsInput | string
+  originalTestName?: Prisma.StringFieldUpdateOperationsInput | string
+  originalValue?: Prisma.StringFieldUpdateOperationsInput | string
+  originalUnit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  normalizedValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  normalizedUnit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referenceLow?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  referenceHigh?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  originalRefRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flag?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resultDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  confidence?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type LabResultCreateManyReportInput = {
   id?: string
   canonicalName: string
@@ -833,6 +963,7 @@ export type LabResultUpdateWithoutReportInput = {
   confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  auditLogs?: Prisma.AuditLogRoleAccessUpdateManyWithoutResultNestedInput
 }
 
 export type LabResultUncheckedUpdateWithoutReportInput = {
@@ -853,6 +984,7 @@ export type LabResultUncheckedUpdateWithoutReportInput = {
   confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedUpdateManyWithoutResultNestedInput
 }
 
 export type LabResultUncheckedUpdateManyWithoutReportInput = {
@@ -876,6 +1008,35 @@ export type LabResultUncheckedUpdateManyWithoutReportInput = {
 }
 
 
+/**
+ * Count Type LabResultCountOutputType
+ */
+
+export type LabResultCountOutputType = {
+  auditLogs: number
+}
+
+export type LabResultCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  auditLogs?: boolean | LabResultCountOutputTypeCountAuditLogsArgs
+}
+
+/**
+ * LabResultCountOutputType without action
+ */
+export type LabResultCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LabResultCountOutputType
+   */
+  select?: Prisma.LabResultCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * LabResultCountOutputType without action
+ */
+export type LabResultCountOutputTypeCountAuditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AuditLogRoleAccessWhereInput
+}
+
 
 export type LabResultSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -897,6 +1058,8 @@ export type LabResultSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   createdAt?: boolean
   updatedAt?: boolean
   report?: boolean | Prisma.ReportDefaultArgs<ExtArgs>
+  auditLogs?: boolean | Prisma.LabResult$auditLogsArgs<ExtArgs>
+  _count?: boolean | Prisma.LabResultCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["labResult"]>
 
 export type LabResultSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -967,6 +1130,8 @@ export type LabResultSelectScalar = {
 export type LabResultOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reportId" | "canonicalName" | "originalTestName" | "originalValue" | "originalUnit" | "normalizedValue" | "normalizedUnit" | "referenceLow" | "referenceHigh" | "originalRefRange" | "flag" | "resultDate" | "confidence" | "confirmed" | "confirmedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["labResult"]>
 export type LabResultInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   report?: boolean | Prisma.ReportDefaultArgs<ExtArgs>
+  auditLogs?: boolean | Prisma.LabResult$auditLogsArgs<ExtArgs>
+  _count?: boolean | Prisma.LabResultCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LabResultIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   report?: boolean | Prisma.ReportDefaultArgs<ExtArgs>
@@ -979,6 +1144,7 @@ export type $LabResultPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   name: "LabResult"
   objects: {
     report: Prisma.$ReportPayload<ExtArgs>
+    auditLogs: Prisma.$AuditLogRoleAccessPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1394,6 +1560,7 @@ readonly fields: LabResultFieldRefs;
 export interface Prisma__LabResultClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   report<T extends Prisma.ReportDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ReportDefaultArgs<ExtArgs>>): Prisma.Prisma__ReportClient<runtime.Types.Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  auditLogs<T extends Prisma.LabResult$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LabResult$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogRoleAccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1839,6 +2006,30 @@ export type LabResultDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Limit how many LabResults to delete.
    */
   limit?: number
+}
+
+/**
+ * LabResult.auditLogs
+ */
+export type LabResult$auditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AuditLogRoleAccess
+   */
+  select?: Prisma.AuditLogRoleAccessSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AuditLogRoleAccess
+   */
+  omit?: Prisma.AuditLogRoleAccessOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AuditLogRoleAccessInclude<ExtArgs> | null
+  where?: Prisma.AuditLogRoleAccessWhereInput
+  orderBy?: Prisma.AuditLogRoleAccessOrderByWithRelationInput | Prisma.AuditLogRoleAccessOrderByWithRelationInput[]
+  cursor?: Prisma.AuditLogRoleAccessWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AuditLogRoleAccessScalarFieldEnum | Prisma.AuditLogRoleAccessScalarFieldEnum[]
 }
 
 /**

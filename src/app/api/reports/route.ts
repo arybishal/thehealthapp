@@ -5,6 +5,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { parseReportText } from "@/lib/parser";
+import { detectLanguage } from "@/lib/language";
+import { logAudit } from "@/lib/audit";
 
 export const runtime = "nodejs";
 export const maxDuration = 120;
@@ -41,10 +43,7 @@ export async function POST(request: Request) {
     const parsedText = (formData.get("parsedText") as string) || "";
     const resultsRaw = formData.get("results") as string | null;
     const patientId = (formData.get("patientId") as string) || "";
-
-    if (!file) {
-      return NextResponse.json({ error: "No file provided" }, { status: 400 });
-    }
+    const force = formData.get("force") === "true";
 
     // Validate the patient belongs to this user
     const patient = await prisma.patient.findFirst({
@@ -52,48 +51,75 @@ export async function POST(request: Request) {
       select: { id: true },
     });
     if (!patient) {
-      return NextResponse.json(
-        { error: "Patient not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "Patient not found" }, { status: 404 });
     }
 
-    const validTypes = ["application/pdf", "image/jpeg", "image/png"];
-    if (!validTypes.includes(file.type)) {
-      return NextResponse.json({ error: "Invalid file type" }, { status: 400 });
+    const dateVal = reportDate && !isNaN(Date.parse(reportDate))
+      ? new Date(reportDate)
+      : null;
+
+    const isManual = !file;
+    let storedName = "manual";
+    let originalFileName = "Manual entry";
+    let originalFileType = "manual";
+    let originalFileSize = 0;
+
+    if (!isManual) {
+      const validTypes = ["application/pdf", "image/jpeg", "image/png"];
+      if (!validTypes.includes(file!.type)) {
+        return NextResponse.json({ error: "Invalid file type" }, { status: 400 });
+      }
+      if (file!.size > 20 * 1024 * 1024) {
+        return NextResponse.json({ error: "File too large" }, { status: 400 });
+      }
+      const uploadsDir = path.join(process.cwd(), "uploads");
+      await mkdir(uploadsDir, { recursive: true });
+      const extension = file!.name.split(".").pop() || "bin";
+      storedName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${extension}`;
+      const buffer = Buffer.from(await file!.arrayBuffer());
+      await writeFile(path.join(uploadsDir, storedName), buffer);
+      originalFileName = file!.name;
+      originalFileType = file!.type;
+      originalFileSize = file!.size;
     }
-    if (file.size > 20 * 1024 * 1024) {
-      return NextResponse.json({ error: "File too large" }, { status: 400 });
+
+    // Duplicate detection
+    if (force !== true) {
+      const existing = await prisma.report.findFirst({
+        where: {
+          patientId: patient.id,
+          title: title.trim(),
+          reportDate: dateVal,
+        },
+        select: { id: true, title: true, reportDate: true, laboratoryName: true },
+        orderBy: { createdAt: "desc" },
+      });
+      if (existing) {
+        return NextResponse.json(
+          {
+            error: "Possible duplicate report",
+            duplicate: {
+              id: existing.id,
+              title: existing.title,
+              reportDate: existing.reportDate?.toISOString() ?? null,
+              laboratoryName: existing.laboratoryName,
+            },
+          },
+          { status: 409 }
+        );
+      }
     }
 
-    // Store the uploaded file
-    const uploadsDir = path.join(process.cwd(), "uploads");
-    await mkdir(uploadsDir, { recursive: true });
+    const language = parsedText ? detectLanguage(parsedText) : "en";
 
-    const extension = file.name.split(".").pop() || "bin";
-    const storedName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${extension}`;
-    const buffer = Buffer.from(await file.arrayBuffer());
-    await writeFile(path.join(uploadsDir, storedName), buffer);
-
-    const dateVal =
-      reportDate && !isNaN(Date.parse(reportDate))
-        ? new Date(reportDate)
-        : null;
-
-    // Use the user-reviewed results if provided, else re-parse.
     let reviewed: ReviewedResult[] = [];
     if (resultsRaw) {
-      try {
-        reviewed = JSON.parse(resultsRaw) as ReviewedResult[];
-      } catch {
-        reviewed = [];
-      }
+      try { reviewed = JSON.parse(resultsRaw) as ReviewedResult[]; } catch { reviewed = []; }
     }
     if (reviewed.length === 0) {
       reviewed = parseReportText(parsedText).results;
     }
 
-    // Create the report with results (all user-confirmed on save)
     const report = await prisma.report.create({
       data: {
         userId: session.user.id,
@@ -104,10 +130,13 @@ export async function POST(request: Request) {
         reportDate: dateVal,
         patientName: patientName?.trim() || null,
         reportNumber: reportNumber?.trim() || null,
-        fileName: file.name,
+        fileName: originalFileName,
         filePath: storedName,
-        fileType: file.type,
-        fileSize: file.size,
+        fileType: originalFileType,
+        fileSize: originalFileSize,
+        language,
+        parsedText: parsedText || null,
+        processingStatus: isManual ? "manual" : "confirmed",
         results: {
           create: reviewed.map((r) => ({
             canonicalName: r.canonicalName,
@@ -128,6 +157,14 @@ export async function POST(request: Request) {
         },
       },
       include: { results: true },
+    });
+
+    await logAudit({
+      userId: session.user.id,
+      patientId: patient.id,
+      reportId: report.id,
+      action: "report.uploaded",
+      detail: `${isManual ? "Manual" : "File"}: ${originalFileName} (${reviewed.length} results)`,
     });
 
     return NextResponse.json(report, { status: 201 });

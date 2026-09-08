@@ -13,6 +13,10 @@ import {
 import Link from "next/link";
 import { StatusBadge } from "@/components/status";
 import { useEffect, useState } from "react";
+import { buildResultInsight } from "@/lib/insights";
+import type { InsightResultInput, InsightSeriesInput } from "@/lib/insights";
+import { Card, CardContent } from "@/components/ui/card";
+import { Lightbulb } from "lucide-react";
 
 function useTokenColor(variable: string, fallback: string): string {
   const [color, setColor] = useState(fallback);
@@ -62,6 +66,38 @@ export function BiomarkerDetail({
   const refLow = data.find((d) => d.refLow !== null)?.refLow ?? null;
   const refHigh = data.find((d) => d.refHigh !== null)?.refHigh ?? null;
 
+  // AI insight for the latest result compared to the previous one
+  const latestPoint = sorted[sorted.length - 1];
+  const previousPoint = sorted.length >= 2 ? sorted[sorted.length - 2] : null;
+  const currentInput: InsightResultInput | null = latestPoint
+    ? {
+        canonicalName,
+        originalValue: String(latestPoint.value),
+        originalUnit: latestPoint.unit,
+        normalizedValue: latestPoint.value,
+        referenceLow: latestPoint.refLow,
+        referenceHigh: latestPoint.refHigh,
+        flag: latestPoint.refHigh !== null && latestPoint.value > latestPoint.refHigh
+          ? "H"
+          : latestPoint.refLow !== null && latestPoint.value < latestPoint.refLow
+          ? "L"
+          : null,
+        resultDate: new Date(latestPoint.date),
+      }
+    : null;
+  const prevInput: InsightSeriesInput | null = previousPoint
+    ? {
+        canonicalName,
+        originalValue: String(previousPoint.value),
+        originalUnit: previousPoint.unit,
+        normalizedValue: previousPoint.value,
+        referenceLow: previousPoint.refLow,
+        referenceHigh: previousPoint.refHigh,
+        resultDate: new Date(previousPoint.date),
+      }
+    : null;
+  const insight = currentInput ? buildResultInsight(currentInput, prevInput) : null;
+
   const trendsHref = patientId
     ? `/patients/${patientId}/trends`
     : "/trends";
@@ -96,6 +132,24 @@ export function BiomarkerDetail({
           <p className="font-semibold mb-1">About this test</p>
           <p>{description}</p>
         </div>
+      )}
+
+      {insight && insight.points.length > 0 && (
+        <Card className="bg-info-light/50 border-info/15">
+          <CardContent className="p-4 space-y-2">
+            <div className="flex items-center gap-2 text-info font-semibold text-sm">
+              <Lightbulb className="h-4 w-4" />
+              AI Interpretation
+            </div>
+            {insight.points.map((point, i) => (
+              <p key={i} className="text-sm text-muted-foreground">{point}</p>
+            ))}
+            {insight.questions.map((q, i) => (
+              <p key={i} className="text-sm text-primary/80 italic">{q}</p>
+            ))}
+            <p className="text-xs text-muted-foreground italic mt-2">{insight.disclaimer}</p>
+          </CardContent>
+        </Card>
       )}
 
       <div className="bg-card border border-border rounded-xl p-5 shadow-[0_1px_3px_rgba(24,39,75,0.04)]">

@@ -17,6 +17,7 @@ const PUBLIC_PATHS = [
   "/medica",
   "/privacy",
   "/terms",
+  "/s",
 ];
 
 export function AppShellClient({

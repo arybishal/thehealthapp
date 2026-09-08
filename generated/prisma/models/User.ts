@@ -218,6 +218,10 @@ export type UserWhereInput = {
   patients?: Prisma.PatientListRelationFilter
   reports?: Prisma.ReportListRelationFilter
   measurements?: Prisma.HealthMeasurementListRelationFilter
+  reminders?: Prisma.ReminderListRelationFilter
+  shareLinks?: Prisma.ShareLinkListRelationFilter
+  exports?: Prisma.ExportLogListRelationFilter
+  auditLogs?: Prisma.AuditLogRoleAccessListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -234,6 +238,10 @@ export type UserOrderByWithRelationInput = {
   patients?: Prisma.PatientOrderByRelationAggregateInput
   reports?: Prisma.ReportOrderByRelationAggregateInput
   measurements?: Prisma.HealthMeasurementOrderByRelationAggregateInput
+  reminders?: Prisma.ReminderOrderByRelationAggregateInput
+  shareLinks?: Prisma.ShareLinkOrderByRelationAggregateInput
+  exports?: Prisma.ExportLogOrderByRelationAggregateInput
+  auditLogs?: Prisma.AuditLogRoleAccessOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -253,6 +261,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   patients?: Prisma.PatientListRelationFilter
   reports?: Prisma.ReportListRelationFilter
   measurements?: Prisma.HealthMeasurementListRelationFilter
+  reminders?: Prisma.ReminderListRelationFilter
+  shareLinks?: Prisma.ShareLinkListRelationFilter
+  exports?: Prisma.ExportLogListRelationFilter
+  auditLogs?: Prisma.AuditLogRoleAccessListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -299,6 +311,10 @@ export type UserCreateInput = {
   patients?: Prisma.PatientCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportCreateNestedManyWithoutUserInput
   measurements?: Prisma.HealthMeasurementCreateNestedManyWithoutUserInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
+  shareLinks?: Prisma.ShareLinkCreateNestedManyWithoutUserInput
+  exports?: Prisma.ExportLogCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogRoleAccessCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -315,6 +331,10 @@ export type UserUncheckedCreateInput = {
   patients?: Prisma.PatientUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
   measurements?: Prisma.HealthMeasurementUncheckedCreateNestedManyWithoutUserInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
+  shareLinks?: Prisma.ShareLinkUncheckedCreateNestedManyWithoutUserInput
+  exports?: Prisma.ExportLogUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -331,6 +351,10 @@ export type UserUpdateInput = {
   patients?: Prisma.PatientUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
   measurements?: Prisma.HealthMeasurementUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
+  shareLinks?: Prisma.ShareLinkUpdateManyWithoutUserNestedInput
+  exports?: Prisma.ExportLogUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -347,6 +371,10 @@ export type UserUncheckedUpdateInput = {
   patients?: Prisma.PatientUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
   measurements?: Prisma.HealthMeasurementUncheckedUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
+  shareLinks?: Prisma.ShareLinkUncheckedUpdateManyWithoutUserNestedInput
+  exports?: Prisma.ExportLogUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -426,6 +454,11 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
@@ -498,6 +531,64 @@ export type UserUpdateOneRequiredWithoutMeasurementsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMeasurementsInput, Prisma.UserUpdateWithoutMeasurementsInput>, Prisma.UserUncheckedUpdateWithoutMeasurementsInput>
 }
 
+export type UserCreateNestedOneWithoutRemindersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRemindersInput, Prisma.UserUncheckedCreateWithoutRemindersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRemindersInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutRemindersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRemindersInput, Prisma.UserUncheckedCreateWithoutRemindersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRemindersInput
+  upsert?: Prisma.UserUpsertWithoutRemindersInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRemindersInput, Prisma.UserUpdateWithoutRemindersInput>, Prisma.UserUncheckedUpdateWithoutRemindersInput>
+}
+
+export type UserCreateNestedOneWithoutShareLinksInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutShareLinksInput, Prisma.UserUncheckedCreateWithoutShareLinksInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutShareLinksInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutShareLinksNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutShareLinksInput, Prisma.UserUncheckedCreateWithoutShareLinksInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutShareLinksInput
+  upsert?: Prisma.UserUpsertWithoutShareLinksInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutShareLinksInput, Prisma.UserUpdateWithoutShareLinksInput>, Prisma.UserUncheckedUpdateWithoutShareLinksInput>
+}
+
+export type UserCreateNestedOneWithoutExportsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutExportsInput, Prisma.UserUncheckedCreateWithoutExportsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutExportsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutExportsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutExportsInput, Prisma.UserUncheckedCreateWithoutExportsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutExportsInput
+  upsert?: Prisma.UserUpsertWithoutExportsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutExportsInput, Prisma.UserUpdateWithoutExportsInput>, Prisma.UserUncheckedUpdateWithoutExportsInput>
+}
+
+export type UserCreateNestedOneWithoutAuditLogsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAuditLogsInput, Prisma.UserUncheckedCreateWithoutAuditLogsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuditLogsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutAuditLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAuditLogsInput, Prisma.UserUncheckedCreateWithoutAuditLogsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuditLogsInput
+  upsert?: Prisma.UserUpsertWithoutAuditLogsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAuditLogsInput, Prisma.UserUpdateWithoutAuditLogsInput>, Prisma.UserUncheckedUpdateWithoutAuditLogsInput>
+}
+
 export type UserCreateWithoutProfileInput = {
   id?: string
   email: string
@@ -511,6 +602,10 @@ export type UserCreateWithoutProfileInput = {
   patients?: Prisma.PatientCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportCreateNestedManyWithoutUserInput
   measurements?: Prisma.HealthMeasurementCreateNestedManyWithoutUserInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
+  shareLinks?: Prisma.ShareLinkCreateNestedManyWithoutUserInput
+  exports?: Prisma.ExportLogCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogRoleAccessCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProfileInput = {
@@ -526,6 +621,10 @@ export type UserUncheckedCreateWithoutProfileInput = {
   patients?: Prisma.PatientUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
   measurements?: Prisma.HealthMeasurementUncheckedCreateNestedManyWithoutUserInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
+  shareLinks?: Prisma.ShareLinkUncheckedCreateNestedManyWithoutUserInput
+  exports?: Prisma.ExportLogUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProfileInput = {
@@ -557,6 +656,10 @@ export type UserUpdateWithoutProfileInput = {
   patients?: Prisma.PatientUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
   measurements?: Prisma.HealthMeasurementUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
+  shareLinks?: Prisma.ShareLinkUpdateManyWithoutUserNestedInput
+  exports?: Prisma.ExportLogUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProfileInput = {
@@ -572,6 +675,10 @@ export type UserUncheckedUpdateWithoutProfileInput = {
   patients?: Prisma.PatientUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
   measurements?: Prisma.HealthMeasurementUncheckedUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
+  shareLinks?: Prisma.ShareLinkUncheckedUpdateManyWithoutUserNestedInput
+  exports?: Prisma.ExportLogUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPatientsInput = {
@@ -587,6 +694,10 @@ export type UserCreateWithoutPatientsInput = {
   profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
   reports?: Prisma.ReportCreateNestedManyWithoutUserInput
   measurements?: Prisma.HealthMeasurementCreateNestedManyWithoutUserInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
+  shareLinks?: Prisma.ShareLinkCreateNestedManyWithoutUserInput
+  exports?: Prisma.ExportLogCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogRoleAccessCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPatientsInput = {
@@ -602,6 +713,10 @@ export type UserUncheckedCreateWithoutPatientsInput = {
   profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
   measurements?: Prisma.HealthMeasurementUncheckedCreateNestedManyWithoutUserInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
+  shareLinks?: Prisma.ShareLinkUncheckedCreateNestedManyWithoutUserInput
+  exports?: Prisma.ExportLogUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPatientsInput = {
@@ -633,6 +748,10 @@ export type UserUpdateWithoutPatientsInput = {
   profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
   reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
   measurements?: Prisma.HealthMeasurementUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
+  shareLinks?: Prisma.ShareLinkUpdateManyWithoutUserNestedInput
+  exports?: Prisma.ExportLogUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPatientsInput = {
@@ -648,6 +767,10 @@ export type UserUncheckedUpdateWithoutPatientsInput = {
   profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
   measurements?: Prisma.HealthMeasurementUncheckedUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
+  shareLinks?: Prisma.ShareLinkUncheckedUpdateManyWithoutUserNestedInput
+  exports?: Prisma.ExportLogUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReportsInput = {
@@ -663,6 +786,10 @@ export type UserCreateWithoutReportsInput = {
   profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
   patients?: Prisma.PatientCreateNestedManyWithoutUserInput
   measurements?: Prisma.HealthMeasurementCreateNestedManyWithoutUserInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
+  shareLinks?: Prisma.ShareLinkCreateNestedManyWithoutUserInput
+  exports?: Prisma.ExportLogCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogRoleAccessCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReportsInput = {
@@ -678,6 +805,10 @@ export type UserUncheckedCreateWithoutReportsInput = {
   profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
   patients?: Prisma.PatientUncheckedCreateNestedManyWithoutUserInput
   measurements?: Prisma.HealthMeasurementUncheckedCreateNestedManyWithoutUserInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
+  shareLinks?: Prisma.ShareLinkUncheckedCreateNestedManyWithoutUserInput
+  exports?: Prisma.ExportLogUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReportsInput = {
@@ -709,6 +840,10 @@ export type UserUpdateWithoutReportsInput = {
   profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
   patients?: Prisma.PatientUpdateManyWithoutUserNestedInput
   measurements?: Prisma.HealthMeasurementUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
+  shareLinks?: Prisma.ShareLinkUpdateManyWithoutUserNestedInput
+  exports?: Prisma.ExportLogUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportsInput = {
@@ -724,6 +859,10 @@ export type UserUncheckedUpdateWithoutReportsInput = {
   profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
   patients?: Prisma.PatientUncheckedUpdateManyWithoutUserNestedInput
   measurements?: Prisma.HealthMeasurementUncheckedUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
+  shareLinks?: Prisma.ShareLinkUncheckedUpdateManyWithoutUserNestedInput
+  exports?: Prisma.ExportLogUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMeasurementsInput = {
@@ -739,6 +878,10 @@ export type UserCreateWithoutMeasurementsInput = {
   profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
   patients?: Prisma.PatientCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
+  shareLinks?: Prisma.ShareLinkCreateNestedManyWithoutUserInput
+  exports?: Prisma.ExportLogCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogRoleAccessCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMeasurementsInput = {
@@ -754,6 +897,10 @@ export type UserUncheckedCreateWithoutMeasurementsInput = {
   profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
   patients?: Prisma.PatientUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
+  shareLinks?: Prisma.ShareLinkUncheckedCreateNestedManyWithoutUserInput
+  exports?: Prisma.ExportLogUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMeasurementsInput = {
@@ -785,6 +932,10 @@ export type UserUpdateWithoutMeasurementsInput = {
   profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
   patients?: Prisma.PatientUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
+  shareLinks?: Prisma.ShareLinkUpdateManyWithoutUserNestedInput
+  exports?: Prisma.ExportLogUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMeasurementsInput = {
@@ -800,6 +951,378 @@ export type UserUncheckedUpdateWithoutMeasurementsInput = {
   profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
   patients?: Prisma.PatientUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
+  shareLinks?: Prisma.ShareLinkUncheckedUpdateManyWithoutUserNestedInput
+  exports?: Prisma.ExportLogUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutRemindersInput = {
+  id?: string
+  email: string
+  password: string
+  name: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resetToken?: string | null
+  resetTokenExpiry?: Date | string | null
+  profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  patients?: Prisma.PatientCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  measurements?: Prisma.HealthMeasurementCreateNestedManyWithoutUserInput
+  shareLinks?: Prisma.ShareLinkCreateNestedManyWithoutUserInput
+  exports?: Prisma.ExportLogCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogRoleAccessCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutRemindersInput = {
+  id?: string
+  email: string
+  password: string
+  name: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resetToken?: string | null
+  resetTokenExpiry?: Date | string | null
+  profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  patients?: Prisma.PatientUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  measurements?: Prisma.HealthMeasurementUncheckedCreateNestedManyWithoutUserInput
+  shareLinks?: Prisma.ShareLinkUncheckedCreateNestedManyWithoutUserInput
+  exports?: Prisma.ExportLogUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutRemindersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRemindersInput, Prisma.UserUncheckedCreateWithoutRemindersInput>
+}
+
+export type UserUpsertWithoutRemindersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRemindersInput, Prisma.UserUncheckedUpdateWithoutRemindersInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRemindersInput, Prisma.UserUncheckedCreateWithoutRemindersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRemindersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRemindersInput, Prisma.UserUncheckedUpdateWithoutRemindersInput>
+}
+
+export type UserUpdateWithoutRemindersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetTokenExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  patients?: Prisma.PatientUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  measurements?: Prisma.HealthMeasurementUpdateManyWithoutUserNestedInput
+  shareLinks?: Prisma.ShareLinkUpdateManyWithoutUserNestedInput
+  exports?: Prisma.ExportLogUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRemindersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetTokenExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
+  patients?: Prisma.PatientUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  measurements?: Prisma.HealthMeasurementUncheckedUpdateManyWithoutUserNestedInput
+  shareLinks?: Prisma.ShareLinkUncheckedUpdateManyWithoutUserNestedInput
+  exports?: Prisma.ExportLogUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutShareLinksInput = {
+  id?: string
+  email: string
+  password: string
+  name: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resetToken?: string | null
+  resetTokenExpiry?: Date | string | null
+  profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  patients?: Prisma.PatientCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  measurements?: Prisma.HealthMeasurementCreateNestedManyWithoutUserInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
+  exports?: Prisma.ExportLogCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogRoleAccessCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutShareLinksInput = {
+  id?: string
+  email: string
+  password: string
+  name: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resetToken?: string | null
+  resetTokenExpiry?: Date | string | null
+  profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  patients?: Prisma.PatientUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  measurements?: Prisma.HealthMeasurementUncheckedCreateNestedManyWithoutUserInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
+  exports?: Prisma.ExportLogUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutShareLinksInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutShareLinksInput, Prisma.UserUncheckedCreateWithoutShareLinksInput>
+}
+
+export type UserUpsertWithoutShareLinksInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutShareLinksInput, Prisma.UserUncheckedUpdateWithoutShareLinksInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutShareLinksInput, Prisma.UserUncheckedCreateWithoutShareLinksInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutShareLinksInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutShareLinksInput, Prisma.UserUncheckedUpdateWithoutShareLinksInput>
+}
+
+export type UserUpdateWithoutShareLinksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetTokenExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  patients?: Prisma.PatientUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  measurements?: Prisma.HealthMeasurementUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
+  exports?: Prisma.ExportLogUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutShareLinksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetTokenExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
+  patients?: Prisma.PatientUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  measurements?: Prisma.HealthMeasurementUncheckedUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
+  exports?: Prisma.ExportLogUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutExportsInput = {
+  id?: string
+  email: string
+  password: string
+  name: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resetToken?: string | null
+  resetTokenExpiry?: Date | string | null
+  profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  patients?: Prisma.PatientCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  measurements?: Prisma.HealthMeasurementCreateNestedManyWithoutUserInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
+  shareLinks?: Prisma.ShareLinkCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogRoleAccessCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutExportsInput = {
+  id?: string
+  email: string
+  password: string
+  name: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resetToken?: string | null
+  resetTokenExpiry?: Date | string | null
+  profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  patients?: Prisma.PatientUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  measurements?: Prisma.HealthMeasurementUncheckedCreateNestedManyWithoutUserInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
+  shareLinks?: Prisma.ShareLinkUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutExportsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutExportsInput, Prisma.UserUncheckedCreateWithoutExportsInput>
+}
+
+export type UserUpsertWithoutExportsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutExportsInput, Prisma.UserUncheckedUpdateWithoutExportsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutExportsInput, Prisma.UserUncheckedCreateWithoutExportsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutExportsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutExportsInput, Prisma.UserUncheckedUpdateWithoutExportsInput>
+}
+
+export type UserUpdateWithoutExportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetTokenExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  patients?: Prisma.PatientUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  measurements?: Prisma.HealthMeasurementUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
+  shareLinks?: Prisma.ShareLinkUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutExportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetTokenExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
+  patients?: Prisma.PatientUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  measurements?: Prisma.HealthMeasurementUncheckedUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
+  shareLinks?: Prisma.ShareLinkUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogRoleAccessUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutAuditLogsInput = {
+  id?: string
+  email: string
+  password: string
+  name: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resetToken?: string | null
+  resetTokenExpiry?: Date | string | null
+  profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  patients?: Prisma.PatientCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  measurements?: Prisma.HealthMeasurementCreateNestedManyWithoutUserInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
+  shareLinks?: Prisma.ShareLinkCreateNestedManyWithoutUserInput
+  exports?: Prisma.ExportLogCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAuditLogsInput = {
+  id?: string
+  email: string
+  password: string
+  name: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resetToken?: string | null
+  resetTokenExpiry?: Date | string | null
+  profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  patients?: Prisma.PatientUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  measurements?: Prisma.HealthMeasurementUncheckedCreateNestedManyWithoutUserInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
+  shareLinks?: Prisma.ShareLinkUncheckedCreateNestedManyWithoutUserInput
+  exports?: Prisma.ExportLogUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAuditLogsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAuditLogsInput, Prisma.UserUncheckedCreateWithoutAuditLogsInput>
+}
+
+export type UserUpsertWithoutAuditLogsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAuditLogsInput, Prisma.UserUncheckedUpdateWithoutAuditLogsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAuditLogsInput, Prisma.UserUncheckedCreateWithoutAuditLogsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAuditLogsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAuditLogsInput, Prisma.UserUncheckedUpdateWithoutAuditLogsInput>
+}
+
+export type UserUpdateWithoutAuditLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetTokenExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  patients?: Prisma.PatientUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  measurements?: Prisma.HealthMeasurementUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
+  shareLinks?: Prisma.ShareLinkUpdateManyWithoutUserNestedInput
+  exports?: Prisma.ExportLogUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAuditLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetTokenExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
+  patients?: Prisma.PatientUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  measurements?: Prisma.HealthMeasurementUncheckedUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
+  shareLinks?: Prisma.ShareLinkUncheckedUpdateManyWithoutUserNestedInput
+  exports?: Prisma.ExportLogUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -811,12 +1334,20 @@ export type UserCountOutputType = {
   patients: number
   reports: number
   measurements: number
+  reminders: number
+  shareLinks: number
+  exports: number
+  auditLogs: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   patients?: boolean | UserCountOutputTypeCountPatientsArgs
   reports?: boolean | UserCountOutputTypeCountReportsArgs
   measurements?: boolean | UserCountOutputTypeCountMeasurementsArgs
+  reminders?: boolean | UserCountOutputTypeCountRemindersArgs
+  shareLinks?: boolean | UserCountOutputTypeCountShareLinksArgs
+  exports?: boolean | UserCountOutputTypeCountExportsArgs
+  auditLogs?: boolean | UserCountOutputTypeCountAuditLogsArgs
 }
 
 /**
@@ -850,6 +1381,34 @@ export type UserCountOutputTypeCountMeasurementsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.HealthMeasurementWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRemindersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReminderWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountShareLinksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ShareLinkWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountExportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExportLogWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAuditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AuditLogRoleAccessWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -865,6 +1424,10 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   patients?: boolean | Prisma.User$patientsArgs<ExtArgs>
   reports?: boolean | Prisma.User$reportsArgs<ExtArgs>
   measurements?: boolean | Prisma.User$measurementsArgs<ExtArgs>
+  reminders?: boolean | Prisma.User$remindersArgs<ExtArgs>
+  shareLinks?: boolean | Prisma.User$shareLinksArgs<ExtArgs>
+  exports?: boolean | Prisma.User$exportsArgs<ExtArgs>
+  auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -910,6 +1473,10 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   patients?: boolean | Prisma.User$patientsArgs<ExtArgs>
   reports?: boolean | Prisma.User$reportsArgs<ExtArgs>
   measurements?: boolean | Prisma.User$measurementsArgs<ExtArgs>
+  reminders?: boolean | Prisma.User$remindersArgs<ExtArgs>
+  shareLinks?: boolean | Prisma.User$shareLinksArgs<ExtArgs>
+  exports?: boolean | Prisma.User$exportsArgs<ExtArgs>
+  auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -922,6 +1489,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     patients: Prisma.$PatientPayload<ExtArgs>[]
     reports: Prisma.$ReportPayload<ExtArgs>[]
     measurements: Prisma.$HealthMeasurementPayload<ExtArgs>[]
+    reminders: Prisma.$ReminderPayload<ExtArgs>[]
+    shareLinks: Prisma.$ShareLinkPayload<ExtArgs>[]
+    exports: Prisma.$ExportLogPayload<ExtArgs>[]
+    auditLogs: Prisma.$AuditLogRoleAccessPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1331,6 +1902,10 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   patients<T extends Prisma.User$patientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$patientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PatientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reports<T extends Prisma.User$reportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   measurements<T extends Prisma.User$measurementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$measurementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HealthMeasurementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reminders<T extends Prisma.User$remindersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$remindersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  shareLinks<T extends Prisma.User$shareLinksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$shareLinksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShareLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  exports<T extends Prisma.User$exportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$exportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExportLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  auditLogs<T extends Prisma.User$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogRoleAccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1850,6 +2425,102 @@ export type User$measurementsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.HealthMeasurementScalarFieldEnum | Prisma.HealthMeasurementScalarFieldEnum[]
+}
+
+/**
+ * User.reminders
+ */
+export type User$remindersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Reminder
+   */
+  select?: Prisma.ReminderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Reminder
+   */
+  omit?: Prisma.ReminderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReminderInclude<ExtArgs> | null
+  where?: Prisma.ReminderWhereInput
+  orderBy?: Prisma.ReminderOrderByWithRelationInput | Prisma.ReminderOrderByWithRelationInput[]
+  cursor?: Prisma.ReminderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReminderScalarFieldEnum | Prisma.ReminderScalarFieldEnum[]
+}
+
+/**
+ * User.shareLinks
+ */
+export type User$shareLinksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ShareLink
+   */
+  select?: Prisma.ShareLinkSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ShareLink
+   */
+  omit?: Prisma.ShareLinkOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ShareLinkInclude<ExtArgs> | null
+  where?: Prisma.ShareLinkWhereInput
+  orderBy?: Prisma.ShareLinkOrderByWithRelationInput | Prisma.ShareLinkOrderByWithRelationInput[]
+  cursor?: Prisma.ShareLinkWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ShareLinkScalarFieldEnum | Prisma.ShareLinkScalarFieldEnum[]
+}
+
+/**
+ * User.exports
+ */
+export type User$exportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ExportLog
+   */
+  select?: Prisma.ExportLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ExportLog
+   */
+  omit?: Prisma.ExportLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExportLogInclude<ExtArgs> | null
+  where?: Prisma.ExportLogWhereInput
+  orderBy?: Prisma.ExportLogOrderByWithRelationInput | Prisma.ExportLogOrderByWithRelationInput[]
+  cursor?: Prisma.ExportLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExportLogScalarFieldEnum | Prisma.ExportLogScalarFieldEnum[]
+}
+
+/**
+ * User.auditLogs
+ */
+export type User$auditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AuditLogRoleAccess
+   */
+  select?: Prisma.AuditLogRoleAccessSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AuditLogRoleAccess
+   */
+  omit?: Prisma.AuditLogRoleAccessOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AuditLogRoleAccessInclude<ExtArgs> | null
+  where?: Prisma.AuditLogRoleAccessWhereInput
+  orderBy?: Prisma.AuditLogRoleAccessOrderByWithRelationInput | Prisma.AuditLogRoleAccessOrderByWithRelationInput[]
+  cursor?: Prisma.AuditLogRoleAccessWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AuditLogRoleAccessScalarFieldEnum | Prisma.AuditLogRoleAccessScalarFieldEnum[]
 }
 
 /**

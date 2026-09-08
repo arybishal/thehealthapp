@@ -23,6 +23,10 @@ model User {
   patients     Patient[]
   reports      Report[]
   measurements HealthMeasurement[]
+  reminders    Reminder[]
+  shareLinks   ShareLink[]
+  exports      ExportLog[]
+  auditLogs    AuditLogRoleAccess[]
 }
 
 model Profile {
@@ -63,16 +67,21 @@ model Patient {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
-  reports      Report[]
-  measurements HealthMeasurement[]
+  reports          Report[]
+  measurements     HealthMeasurement[]
+  referenceRanges  ReferenceRange[]
+  reminders        Reminder[]
+  shareLinks       ShareLink[]
+  exports          ExportLog[]
+  auditLogs        AuditLogRoleAccess[]
 }
 
 model Report {
   id             String     @id @default(cuid())
   userId         String
   user           User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-patientId      String
-  patient        Patient   @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  patientId      String
+  patient        Patient    @relation(fields: [patientId], references: [id], onDelete: Cascade)
   title          String
   reportType     String?
   laboratoryName String?
@@ -86,10 +95,15 @@ patientId      String
   fileType       String
   fileSize       Int
   pageCount      Int?
+  language       String     @default("en")
+  parsedText     String?
+  processingStatus String  @default("confirmed")
+  processingError  String?
   createdAt      DateTime   @default(now())
   updatedAt      DateTime   @updatedAt
 
-  results LabResult[]
+  results   LabResult[]
+  auditLogs AuditLogRoleAccess[]
 }
 
 model LabResult {
@@ -112,6 +126,10 @@ model LabResult {
   confirmedAt      DateTime?
   createdAt        DateTime  @default(now())
   updatedAt        DateTime  @updatedAt
+
+  auditLogs AuditLogRoleAccess[]
+
+  @@index([reportId, canonicalName])
 }
 
 model HealthMeasurement {
@@ -125,5 +143,108 @@ model HealthMeasurement {
   unit      String?
   note      String?
   date      DateTime @default(now())
+  category  String   @default("vitals")
+  source    String   @default("manual")
+  deviceName String?
   createdAt DateTime @default(now())
+
+  @@index([patientId, type])
+}
+
+model ReferenceRange {
+  id            String    @id @default(cuid())
+  patientId     String
+  patient       Patient   @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  biomarker     String
+  lower         Float?
+  upper         Float?
+  unit          String?
+  source        String    @default("standard")
+  sourceDetail  String?
+  gender        String?
+  ageMin        Int?
+  ageMax        Int?
+  effectiveFrom DateTime?
+  effectiveTo   DateTime?
+  notes         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([patientId, biomarker])
+}
+
+model Reminder {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  patientId  String
+  patient    Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  testName   String
+  date       DateTime
+  recurrence String   @default("none")
+  notes      String?
+  status     String   @default("active")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([patientId, status])
+}
+
+model ShareLink {
+  id             String    @id @default(cuid())
+  userId         String
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  patientId      String
+  patient        Patient   @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  token          String    @unique
+  label          String?
+  includeReports  Boolean  @default(true)
+  includeResults  Boolean  @default(true)
+  includeVitals   Boolean  @default(false)
+  includeDetails  Boolean  @default(false)
+  includeTimeline Boolean  @default(false)
+  includeInsights Boolean  @default(false)
+  expiresAt      DateTime?
+  revoked        Boolean   @default(false)
+  createdAt      DateTime  @default(now())
+  lastAccessedAt DateTime?
+  accessCount    Int       @default(0)
+
+  auditLogs AuditLogRoleAccess[]
+
+  @@index([patientId])
+  @@index([revoked])
+}
+
+model ExportLog {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  patientId String
+  patient   Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  format    String
+  scope     String   @default("full")
+  createdAt DateTime @default(now())
+}
+
+model AuditLogRoleAccess {
+  id        String    @id @default(cuid())
+  userId    String?
+  user      User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  patientId String?
+  patient   Patient?  @relation(fields: [patientId], references: [id], onDelete: SetNull)
+  reportId  String?
+  report    Report?   @relation(fields: [reportId], references: [id], onDelete: SetNull)
+  resultId  String?
+  result    LabResult? @relation(fields: [resultId], references: [id], onDelete: SetNull)
+  shareId   String?
+  share     ShareLink? @relation(fields: [shareId], references: [id], onDelete: SetNull)
+  action    String
+  detail    String?
+  ip        String?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+  @@index([patientId])
+  @@index([action])
 }

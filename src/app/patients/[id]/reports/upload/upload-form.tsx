@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useState, useTransition } from "react";
+import { useRef, useState, useTransition, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { AlertTriangle, FileUp, Loader2 } from "lucide-react";
+import { AlertTriangle, FileUp, Loader2, Pen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -71,12 +71,16 @@ export function UploadReportForm({
   const [results, setResults] = useState<ExtractableResult[]>([]);
   const [reportTitle, setReportTitle] = useState("");
   const [reportType, setReportType] = useState("");
+  const [duplicateInfo, setDuplicateInfo] = useState<{ id: string; title: string; reportDate: string | null; laboratoryName: string | null } | null>(null);
+  const [isDragOver, setIsDragOver] = useState(false);
+  const [isManualEntry, setIsManualEntry] = useState(false);
 
   function handleFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
 
     setError(null);
+    setDuplicateInfo(null);
     const valid = ["application/pdf", "image/jpeg", "image/png"].includes(file.type);
     if (!valid) {
       setError("Please upload a PDF, JPG, JPEG, or PNG file.");
@@ -89,6 +93,20 @@ export function UploadReportForm({
     setSelectedFile(file);
     setReportTitle(file.name.replace(/\.[^.]+$/, ""));
   }
+
+  const onDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+    const file = e.dataTransfer.files?.[0];
+    if (!file) return;
+    setError(null);
+    setDuplicateInfo(null);
+    const valid = ["application/pdf", "image/jpeg", "image/png"].includes(file.type);
+    if (!valid) { setError("Please upload a PDF, JPG, JPEG, or PNG file."); return; }
+    if (file.size > 20 * 1024 * 1024) { setError("File is too large (max 20MB)."); return; }
+    setSelectedFile(file);
+    setReportTitle(file.name.replace(/\.[^.]+$/, ""));
+  }, []);
 
   async function processReport(file: File): Promise<ExtractionResult> {
     const formData = new FormData();
@@ -139,27 +157,32 @@ export function UploadReportForm({
     setResults((prev) => prev.filter((_, idx) => idx !== i));
   }
 
-  function handleSave() {
-    if (!selectedFile || !extraction) return;
+  function handleSave(force = false) {
+    const isManual = isManualEntry && !selectedFile;
+    if (!isManual && (!selectedFile || !extraction)) return;
 
     setIsProcessing(true);
     const formData = new FormData();
-    formData.append("file", selectedFile);
-    formData.append("title", reportTitle || selectedFile.name.replace(/\.[^.]+$/, ""));
-    formData.append("reportType", reportType || extraction.reportType || "general");
-    formData.append("laboratoryName", extraction.laboratoryName || "");
-    formData.append("reportDate", extraction.reportDate || "");
+    if (selectedFile) formData.append("file", selectedFile);
+    formData.append("title", reportTitle || (selectedFile?.name.replace(/\.[^.]+$/, "") ?? "Manual entry"));
+    formData.append("reportType", reportType || extraction?.reportType || "general");
+    formData.append("laboratoryName", extraction?.laboratoryName || "");
+    formData.append("reportDate", extraction?.reportDate || "");
     formData.append("patientName", patientName);
-    formData.append("reportNumber", extraction.reportNumber || "");
-    formData.append("parsedText", extraction.parsedText);
+    formData.append("reportNumber", extraction?.reportNumber || "");
+    formData.append("parsedText", extraction?.parsedText || "");
     formData.append("results", JSON.stringify(results));
     formData.append("patientId", patientId);
+    if (force) formData.append("force", "true");
 
-    fetch("/api/reports", {
-      method: "POST",
-      body: formData,
-    })
+    fetch("/api/reports", { method: "POST", body: formData })
       .then(async (res) => {
+        if (res.status === 409) {
+          const data = await res.json();
+          setDuplicateInfo(data.duplicate);
+          setIsProcessing(false);
+          return null;
+        }
         if (!res.ok) {
           const err = await res.json().catch(() => ({ error: "Save failed" }));
           throw new Error(err.error || "Save failed");
@@ -167,14 +190,9 @@ export function UploadReportForm({
         return res.json();
       })
       .then((data) => {
-        router.push(`/patients/${patientId}/reports/${data.id}`);
+        if (data) router.push(`/patients/${patientId}/reports/${data.id}`);
       })
-      .catch((err: Error) => {
-        setError(err.message);
-      })
-      .finally(() => {
-        setIsProcessing(false);
-      });
+      .catch((err: Error) => { setError(err.message); setIsProcessing(false); });
   }
 
   return (
@@ -203,7 +221,14 @@ export function UploadReportForm({
             onChange={handleFileSelect}
             className="hidden"
           />
-          <div className="flex flex-col items-center gap-1 rounded-xl border-2 border-dashed border-border bg-muted/30 p-10 text-center">
+          <div
+            className={`flex flex-col items-center gap-1 rounded-xl border-2 border-dashed p-10 text-center transition-colors ${
+              isDragOver ? "border-primary bg-primary-light/40" : "border-border bg-muted/30"
+            }`}
+            onDragOver={(e) => { e.preventDefault(); setIsDragOver(true); }}
+            onDragLeave={() => setIsDragOver(false)}
+            onDrop={onDrop}
+          >
             <FileUp className="h-10 w-10 text-muted-foreground" />
             <p className="mt-3 font-medium text-foreground">
               Drag and drop or choose a report
@@ -212,19 +237,21 @@ export function UploadReportForm({
               PDF, JPG, or PNG up to 20MB
             </p>
             <div className="mt-4 flex flex-wrap justify-center gap-2">
-              <Button
-                variant="default"
-                onClick={() => fileInputRef.current?.click()}
-                type="button"
-              >
+              <Button variant="default" onClick={() => fileInputRef.current?.click()} type="button">
                 Choose file
               </Button>
               <Button
                 variant="outline"
-                onClick={() => fileInputRef.current?.click()}
+                onClick={() => {
+                  setIsManualEntry(true);
+                  setExtraction({ parsedText: "", laboratoryName: null, reportDate: null, patientName: patientName, reportNumber: null, reportType: null, results: [], pageCount: undefined });
+                  setResults([]);
+                  setReportTitle("");
+                }}
                 type="button"
               >
-                Take photo
+                <Pen className="h-4 w-4" />
+                Enter manually
               </Button>
             </div>
           </div>
@@ -255,7 +282,33 @@ export function UploadReportForm({
             </div>
           )}
 
-          {error && (
+          {duplicateInfo && (
+            <div className="rounded-xl border border-warning/40 bg-warning-light p-4 space-y-3">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="h-5 w-5 text-warning shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-medium text-warning">Possible duplicate detected</p>
+                  <p className="text-sm text-muted-foreground mt-0.5">
+                    A report with a similar title and date already exists
+                    {duplicateInfo.laboratoryName ? ` from ${duplicateInfo.laboratoryName}` : ""}.
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <Button size="sm" variant="outline" onClick={() => setDuplicateInfo(null)}>
+                  Keep Existing
+                </Button>
+                <Button size="sm" onClick={() => handleSave(true)}>
+                  Upload Anyway
+                </Button>
+                <Button size="sm" variant="ghost" onClick={() => { setDuplicateInfo(null); setError(null); }}>
+                  Review & Edit
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {error && !duplicateInfo && (
             <div className="flex items-start gap-3 rounded-lg border border-danger/30 bg-danger-light p-3 text-sm text-danger">
               <AlertTriangle className="h-5 w-5 shrink-0 mt-0.5" />
               <div>
@@ -408,7 +461,7 @@ export function UploadReportForm({
               </div>
 
               <div className="flex gap-3">
-                <Button onClick={handleSave} disabled={isProcessing}>
+                <Button onClick={() => handleSave(false)} disabled={isProcessing}>
                   {isProcessing ? "Saving..." : "Confirm & Save Report"}
                 </Button>
                 <Button variant="outline" onClick={() => setExtraction(null)}>

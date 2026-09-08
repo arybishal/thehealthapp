@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { StatusBadge } from "@/components/status";
 import { findBiomarkerByName } from "@/lib/biomarkers";
 import { formatNumber } from "@/lib/patients";
+import { ExportButtons } from "@/components/export-buttons";
 
 type Params = Promise<{ id: string }>;
 
@@ -90,13 +91,16 @@ export default async function PatientResultsPage({
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-xl md:text-2xl font-bold tracking-tight">
-          Lab Results
-        </h1>
-        <p className="text-sm text-muted-foreground mt-0.5">
-          Laboratory results recorded for this patient.
-        </p>
+      <div className="flex items-center justify-between gap-4">
+        <div>
+          <h1 className="text-xl md:text-2xl font-bold tracking-tight">
+            Lab Results
+          </h1>
+          <p className="text-sm text-muted-foreground mt-0.5">
+            Laboratory results recorded for this patient.
+          </p>
+        </div>
+        <ExportButtons patientId={id} />
       </div>
 
       {biomarkers.length === 0 ? (

@@ -4,12 +4,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Activity,
+  Bell,
   CalendarDays,
   FileText,
   FlaskConical,
   Gauge,
   LayoutDashboard,
+  Link as LinkIcon,
   Printer,
+  Ruler,
   Settings2,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -29,6 +32,9 @@ function buildNav(patientId: string): PatientNavTab[] {
     { href: `${base}/vitals`, label: "Vitals", icon: Gauge },
     { href: `${base}/trends`, label: "Trends", icon: Activity },
     { href: `${base}/timeline`, label: "Timeline", icon: CalendarDays },
+    { href: `${base}/reminders`, label: "Reminders", icon: Bell },
+    { href: `${base}/ranges`, label: "Ranges", icon: Ruler },
+    { href: `${base}/share`, label: "Share", icon: LinkIcon },
     { href: `${base}/details`, label: "Medical Details", icon: Settings2 },
     { href: `${base}/summary`, label: "Patient Summary", icon: Printer },
   ];

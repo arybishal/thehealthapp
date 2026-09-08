@@ -43,6 +43,9 @@ export type HealthMeasurementMinAggregateOutputType = {
   unit: string | null
   note: string | null
   date: Date | null
+  category: string | null
+  source: string | null
+  deviceName: string | null
   createdAt: Date | null
 }
 
@@ -55,6 +58,9 @@ export type HealthMeasurementMaxAggregateOutputType = {
   unit: string | null
   note: string | null
   date: Date | null
+  category: string | null
+  source: string | null
+  deviceName: string | null
   createdAt: Date | null
 }
 
@@ -67,6 +73,9 @@ export type HealthMeasurementCountAggregateOutputType = {
   unit: number
   note: number
   date: number
+  category: number
+  source: number
+  deviceName: number
   createdAt: number
   _all: number
 }
@@ -89,6 +98,9 @@ export type HealthMeasurementMinAggregateInputType = {
   unit?: true
   note?: true
   date?: true
+  category?: true
+  source?: true
+  deviceName?: true
   createdAt?: true
 }
 
@@ -101,6 +113,9 @@ export type HealthMeasurementMaxAggregateInputType = {
   unit?: true
   note?: true
   date?: true
+  category?: true
+  source?: true
+  deviceName?: true
   createdAt?: true
 }
 
@@ -113,6 +128,9 @@ export type HealthMeasurementCountAggregateInputType = {
   unit?: true
   note?: true
   date?: true
+  category?: true
+  source?: true
+  deviceName?: true
   createdAt?: true
   _all?: true
 }
@@ -212,6 +230,9 @@ export type HealthMeasurementGroupByOutputType = {
   unit: string | null
   note: string | null
   date: Date
+  category: string
+  source: string
+  deviceName: string | null
   createdAt: Date
   _count: HealthMeasurementCountAggregateOutputType | null
   _avg: HealthMeasurementAvgAggregateOutputType | null
@@ -247,6 +268,9 @@ export type HealthMeasurementWhereInput = {
   unit?: Prisma.StringNullableFilter<"HealthMeasurement"> | string | null
   note?: Prisma.StringNullableFilter<"HealthMeasurement"> | string | null
   date?: Prisma.DateTimeFilter<"HealthMeasurement"> | Date | string
+  category?: Prisma.StringFilter<"HealthMeasurement"> | string
+  source?: Prisma.StringFilter<"HealthMeasurement"> | string
+  deviceName?: Prisma.StringNullableFilter<"HealthMeasurement"> | string | null
   createdAt?: Prisma.DateTimeFilter<"HealthMeasurement"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   patient?: Prisma.XOR<Prisma.PatientScalarRelationFilter, Prisma.PatientWhereInput>
@@ -261,6 +285,9 @@ export type HealthMeasurementOrderByWithRelationInput = {
   unit?: Prisma.SortOrderInput | Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
   date?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  deviceName?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   patient?: Prisma.PatientOrderByWithRelationInput
@@ -278,6 +305,9 @@ export type HealthMeasurementWhereUniqueInput = Prisma.AtLeast<{
   unit?: Prisma.StringNullableFilter<"HealthMeasurement"> | string | null
   note?: Prisma.StringNullableFilter<"HealthMeasurement"> | string | null
   date?: Prisma.DateTimeFilter<"HealthMeasurement"> | Date | string
+  category?: Prisma.StringFilter<"HealthMeasurement"> | string
+  source?: Prisma.StringFilter<"HealthMeasurement"> | string
+  deviceName?: Prisma.StringNullableFilter<"HealthMeasurement"> | string | null
   createdAt?: Prisma.DateTimeFilter<"HealthMeasurement"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   patient?: Prisma.XOR<Prisma.PatientScalarRelationFilter, Prisma.PatientWhereInput>
@@ -292,6 +322,9 @@ export type HealthMeasurementOrderByWithAggregationInput = {
   unit?: Prisma.SortOrderInput | Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
   date?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  deviceName?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.HealthMeasurementCountOrderByAggregateInput
   _avg?: Prisma.HealthMeasurementAvgOrderByAggregateInput
@@ -312,6 +345,9 @@ export type HealthMeasurementScalarWhereWithAggregatesInput = {
   unit?: Prisma.StringNullableWithAggregatesFilter<"HealthMeasurement"> | string | null
   note?: Prisma.StringNullableWithAggregatesFilter<"HealthMeasurement"> | string | null
   date?: Prisma.DateTimeWithAggregatesFilter<"HealthMeasurement"> | Date | string
+  category?: Prisma.StringWithAggregatesFilter<"HealthMeasurement"> | string
+  source?: Prisma.StringWithAggregatesFilter<"HealthMeasurement"> | string
+  deviceName?: Prisma.StringNullableWithAggregatesFilter<"HealthMeasurement"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"HealthMeasurement"> | Date | string
 }
 
@@ -322,6 +358,9 @@ export type HealthMeasurementCreateInput = {
   unit?: string | null
   note?: string | null
   date?: Date | string
+  category?: string
+  source?: string
+  deviceName?: string | null
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutMeasurementsInput
   patient: Prisma.PatientCreateNestedOneWithoutMeasurementsInput
@@ -336,6 +375,9 @@ export type HealthMeasurementUncheckedCreateInput = {
   unit?: string | null
   note?: string | null
   date?: Date | string
+  category?: string
+  source?: string
+  deviceName?: string | null
   createdAt?: Date | string
 }
 
@@ -346,6 +388,9 @@ export type HealthMeasurementUpdateInput = {
   unit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutMeasurementsNestedInput
   patient?: Prisma.PatientUpdateOneRequiredWithoutMeasurementsNestedInput
@@ -360,6 +405,9 @@ export type HealthMeasurementUncheckedUpdateInput = {
   unit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -372,6 +420,9 @@ export type HealthMeasurementCreateManyInput = {
   unit?: string | null
   note?: string | null
   date?: Date | string
+  category?: string
+  source?: string
+  deviceName?: string | null
   createdAt?: Date | string
 }
 
@@ -382,6 +433,9 @@ export type HealthMeasurementUpdateManyMutationInput = {
   unit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -394,6 +448,9 @@ export type HealthMeasurementUncheckedUpdateManyInput = {
   unit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -416,6 +473,9 @@ export type HealthMeasurementCountOrderByAggregateInput = {
   unit?: Prisma.SortOrder
   note?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  deviceName?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -432,6 +492,9 @@ export type HealthMeasurementMaxOrderByAggregateInput = {
   unit?: Prisma.SortOrder
   note?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  deviceName?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -444,6 +507,9 @@ export type HealthMeasurementMinOrderByAggregateInput = {
   unit?: Prisma.SortOrder
   note?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  deviceName?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -550,6 +616,9 @@ export type HealthMeasurementCreateWithoutUserInput = {
   unit?: string | null
   note?: string | null
   date?: Date | string
+  category?: string
+  source?: string
+  deviceName?: string | null
   createdAt?: Date | string
   patient: Prisma.PatientCreateNestedOneWithoutMeasurementsInput
 }
@@ -562,6 +631,9 @@ export type HealthMeasurementUncheckedCreateWithoutUserInput = {
   unit?: string | null
   note?: string | null
   date?: Date | string
+  category?: string
+  source?: string
+  deviceName?: string | null
   createdAt?: Date | string
 }
 
@@ -603,6 +675,9 @@ export type HealthMeasurementScalarWhereInput = {
   unit?: Prisma.StringNullableFilter<"HealthMeasurement"> | string | null
   note?: Prisma.StringNullableFilter<"HealthMeasurement"> | string | null
   date?: Prisma.DateTimeFilter<"HealthMeasurement"> | Date | string
+  category?: Prisma.StringFilter<"HealthMeasurement"> | string
+  source?: Prisma.StringFilter<"HealthMeasurement"> | string
+  deviceName?: Prisma.StringNullableFilter<"HealthMeasurement"> | string | null
   createdAt?: Prisma.DateTimeFilter<"HealthMeasurement"> | Date | string
 }
 
@@ -613,6 +688,9 @@ export type HealthMeasurementCreateWithoutPatientInput = {
   unit?: string | null
   note?: string | null
   date?: Date | string
+  category?: string
+  source?: string
+  deviceName?: string | null
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutMeasurementsInput
 }
@@ -625,6 +703,9 @@ export type HealthMeasurementUncheckedCreateWithoutPatientInput = {
   unit?: string | null
   note?: string | null
   date?: Date | string
+  category?: string
+  source?: string
+  deviceName?: string | null
   createdAt?: Date | string
 }
 
@@ -662,6 +743,9 @@ export type HealthMeasurementCreateManyUserInput = {
   unit?: string | null
   note?: string | null
   date?: Date | string
+  category?: string
+  source?: string
+  deviceName?: string | null
   createdAt?: Date | string
 }
 
@@ -672,6 +756,9 @@ export type HealthMeasurementUpdateWithoutUserInput = {
   unit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   patient?: Prisma.PatientUpdateOneRequiredWithoutMeasurementsNestedInput
 }
@@ -684,6 +771,9 @@ export type HealthMeasurementUncheckedUpdateWithoutUserInput = {
   unit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -695,6 +785,9 @@ export type HealthMeasurementUncheckedUpdateManyWithoutUserInput = {
   unit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -706,6 +799,9 @@ export type HealthMeasurementCreateManyPatientInput = {
   unit?: string | null
   note?: string | null
   date?: Date | string
+  category?: string
+  source?: string
+  deviceName?: string | null
   createdAt?: Date | string
 }
 
@@ -716,6 +812,9 @@ export type HealthMeasurementUpdateWithoutPatientInput = {
   unit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutMeasurementsNestedInput
 }
@@ -728,6 +827,9 @@ export type HealthMeasurementUncheckedUpdateWithoutPatientInput = {
   unit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -739,6 +841,9 @@ export type HealthMeasurementUncheckedUpdateManyWithoutPatientInput = {
   unit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -753,6 +858,9 @@ export type HealthMeasurementSelect<ExtArgs extends runtime.Types.Extensions.Int
   unit?: boolean
   note?: boolean
   date?: boolean
+  category?: boolean
+  source?: boolean
+  deviceName?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   patient?: boolean | Prisma.PatientDefaultArgs<ExtArgs>
@@ -767,6 +875,9 @@ export type HealthMeasurementSelectCreateManyAndReturn<ExtArgs extends runtime.T
   unit?: boolean
   note?: boolean
   date?: boolean
+  category?: boolean
+  source?: boolean
+  deviceName?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   patient?: boolean | Prisma.PatientDefaultArgs<ExtArgs>
@@ -781,6 +892,9 @@ export type HealthMeasurementSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   unit?: boolean
   note?: boolean
   date?: boolean
+  category?: boolean
+  source?: boolean
+  deviceName?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   patient?: boolean | Prisma.PatientDefaultArgs<ExtArgs>
@@ -795,10 +909,13 @@ export type HealthMeasurementSelectScalar = {
   unit?: boolean
   note?: boolean
   date?: boolean
+  category?: boolean
+  source?: boolean
+  deviceName?: boolean
   createdAt?: boolean
 }
 
-export type HealthMeasurementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "patientId" | "type" | "value" | "unit" | "note" | "date" | "createdAt", ExtArgs["result"]["healthMeasurement"]>
+export type HealthMeasurementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "patientId" | "type" | "value" | "unit" | "note" | "date" | "category" | "source" | "deviceName" | "createdAt", ExtArgs["result"]["healthMeasurement"]>
 export type HealthMeasurementInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   patient?: boolean | Prisma.PatientDefaultArgs<ExtArgs>
@@ -827,6 +944,9 @@ export type $HealthMeasurementPayload<ExtArgs extends runtime.Types.Extensions.I
     unit: string | null
     note: string | null
     date: Date
+    category: string
+    source: string
+    deviceName: string | null
     createdAt: Date
   }, ExtArgs["result"]["healthMeasurement"]>
   composites: {}
@@ -1261,6 +1381,9 @@ export interface HealthMeasurementFieldRefs {
   readonly unit: Prisma.FieldRef<"HealthMeasurement", 'String'>
   readonly note: Prisma.FieldRef<"HealthMeasurement", 'String'>
   readonly date: Prisma.FieldRef<"HealthMeasurement", 'DateTime'>
+  readonly category: Prisma.FieldRef<"HealthMeasurement", 'String'>
+  readonly source: Prisma.FieldRef<"HealthMeasurement", 'String'>
+  readonly deviceName: Prisma.FieldRef<"HealthMeasurement", 'String'>
   readonly createdAt: Prisma.FieldRef<"HealthMeasurement", 'DateTime'>
 }
     

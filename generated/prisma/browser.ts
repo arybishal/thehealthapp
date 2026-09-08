@@ -47,3 +47,28 @@ export type LabResult = Prisma.LabResultModel
  * 
  */
 export type HealthMeasurement = Prisma.HealthMeasurementModel
+/**
+ * Model ReferenceRange
+ * 
+ */
+export type ReferenceRange = Prisma.ReferenceRangeModel
+/**
+ * Model Reminder
+ * 
+ */
+export type Reminder = Prisma.ReminderModel
+/**
+ * Model ShareLink
+ * 
+ */
+export type ShareLink = Prisma.ShareLinkModel
+/**
+ * Model ExportLog
+ * 
+ */
+export type ExportLog = Prisma.ExportLogModel
+/**
+ * Model AuditLogRoleAccess
+ * 
+ */
+export type AuditLogRoleAccess = Prisma.AuditLogRoleAccessModel

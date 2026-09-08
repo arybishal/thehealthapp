@@ -56,7 +56,12 @@ export const ModelName = {
   Patient: 'Patient',
   Report: 'Report',
   LabResult: 'LabResult',
-  HealthMeasurement: 'HealthMeasurement'
+  HealthMeasurement: 'HealthMeasurement',
+  ReferenceRange: 'ReferenceRange',
+  Reminder: 'Reminder',
+  ShareLink: 'ShareLink',
+  ExportLog: 'ExportLog',
+  AuditLogRoleAccess: 'AuditLogRoleAccess'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -150,6 +155,10 @@ export const ReportScalarFieldEnum = {
   fileType: 'fileType',
   fileSize: 'fileSize',
   pageCount: 'pageCount',
+  language: 'language',
+  parsedText: 'parsedText',
+  processingStatus: 'processingStatus',
+  processingError: 'processingError',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -190,10 +199,101 @@ export const HealthMeasurementScalarFieldEnum = {
   unit: 'unit',
   note: 'note',
   date: 'date',
+  category: 'category',
+  source: 'source',
+  deviceName: 'deviceName',
   createdAt: 'createdAt'
 } as const
 
 export type HealthMeasurementScalarFieldEnum = (typeof HealthMeasurementScalarFieldEnum)[keyof typeof HealthMeasurementScalarFieldEnum]
+
+
+export const ReferenceRangeScalarFieldEnum = {
+  id: 'id',
+  patientId: 'patientId',
+  biomarker: 'biomarker',
+  lower: 'lower',
+  upper: 'upper',
+  unit: 'unit',
+  source: 'source',
+  sourceDetail: 'sourceDetail',
+  gender: 'gender',
+  ageMin: 'ageMin',
+  ageMax: 'ageMax',
+  effectiveFrom: 'effectiveFrom',
+  effectiveTo: 'effectiveTo',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReferenceRangeScalarFieldEnum = (typeof ReferenceRangeScalarFieldEnum)[keyof typeof ReferenceRangeScalarFieldEnum]
+
+
+export const ReminderScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  patientId: 'patientId',
+  testName: 'testName',
+  date: 'date',
+  recurrence: 'recurrence',
+  notes: 'notes',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReminderScalarFieldEnum = (typeof ReminderScalarFieldEnum)[keyof typeof ReminderScalarFieldEnum]
+
+
+export const ShareLinkScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  patientId: 'patientId',
+  token: 'token',
+  label: 'label',
+  includeReports: 'includeReports',
+  includeResults: 'includeResults',
+  includeVitals: 'includeVitals',
+  includeDetails: 'includeDetails',
+  includeTimeline: 'includeTimeline',
+  includeInsights: 'includeInsights',
+  expiresAt: 'expiresAt',
+  revoked: 'revoked',
+  createdAt: 'createdAt',
+  lastAccessedAt: 'lastAccessedAt',
+  accessCount: 'accessCount'
+} as const
+
+export type ShareLinkScalarFieldEnum = (typeof ShareLinkScalarFieldEnum)[keyof typeof ShareLinkScalarFieldEnum]
+
+
+export const ExportLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  patientId: 'patientId',
+  format: 'format',
+  scope: 'scope',
+  createdAt: 'createdAt'
+} as const
+
+export type ExportLogScalarFieldEnum = (typeof ExportLogScalarFieldEnum)[keyof typeof ExportLogScalarFieldEnum]
+
+
+export const AuditLogRoleAccessScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  patientId: 'patientId',
+  reportId: 'reportId',
+  resultId: 'resultId',
+  shareId: 'shareId',
+  action: 'action',
+  detail: 'detail',
+  ip: 'ip',
+  createdAt: 'createdAt'
+} as const
+
+export type AuditLogRoleAccessScalarFieldEnum = (typeof AuditLogRoleAccessScalarFieldEnum)[keyof typeof AuditLogRoleAccessScalarFieldEnum]
 
 
 export const SortOrder = {
