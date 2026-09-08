@@ -3,7 +3,15 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
-import { Pencil } from "lucide-react";
+import {
+  HeartPulse,
+  Pencil,
+  Phone,
+  Ruler,
+  StickyNote,
+  User,
+} from "lucide-react";
+import type { ComponentType } from "react";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { calcAge, calcBMI, genderLabel } from "@/lib/patients";
@@ -14,17 +22,24 @@ export const dynamic = "force-dynamic";
 
 function Section({
   title,
+  icon: Icon,
   editHref,
   children,
 }: {
   title: string;
+  icon: ComponentType<{ className?: string }>;
   editHref: string;
   children: React.ReactNode;
 }) {
   return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle className="text-base font-semibold">{title}</CardTitle>
+    <Card className="border-border rounded-xl bg-card shadow-[0_1px_3px_rgba(24,39,75,0.04)]">
+      <CardHeader className="flex flex-row items-center gap-3">
+        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary-light text-primary">
+          <Icon className="h-4 w-4" />
+        </div>
+        <CardTitle className="flex-1 text-base font-semibold">
+          {title}
+        </CardTitle>
         <Link
           href={editHref}
           className={`${buttonVariants({ variant: "ghost", size: "sm" })} text-muted-foreground`}
@@ -46,9 +61,9 @@ function FieldRow({
   value: string | number | null | undefined;
 }) {
   return (
-    <div className="py-2 flex items-start justify-between gap-4 border-b border-border/60 last:border-0">
+    <div className="flex items-start justify-between gap-4 py-2.5 border-b border-border last:border-0">
       <span className="text-sm text-muted-foreground">{label}</span>
-      <span className="text-sm font-medium text-right break-words">
+      <span className="text-sm font-medium text-foreground text-right break-words">
         {value || "—"}
       </span>
     </div>
@@ -97,7 +112,7 @@ export default async function PatientDetailsPage({
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-6">
-          <Section title="Personal Information" editHref={`${editHref}#personal`}>
+          <Section title="Personal Information" icon={User} editHref={`${editHref}#personal`}>
             <FieldRow label="Full Name" value={patient.name} />
             <FieldRow label="Date of Birth" value={dobFormatted} />
             <FieldRow label="Age" value={age != null ? `${age} years` : null} />
@@ -105,7 +120,7 @@ export default async function PatientDetailsPage({
             <FieldRow label="Blood Group" value={patient.bloodGroup} />
           </Section>
 
-          <Section title="Contact Details" editHref={`${editHref}#contact`}>
+          <Section title="Contact Details" icon={Phone} editHref={`${editHref}#contact`}>
             <FieldRow label="Phone" value={patient.phone} />
             <FieldRow label="Email" value={patient.email} />
             <FieldRow label="Address" value={patient.address} />
@@ -114,13 +129,13 @@ export default async function PatientDetailsPage({
         </div>
 
         <div className="space-y-6">
-          <Section title="Physical Details" editHref={`${editHref}#physical`}>
+          <Section title="Physical Details" icon={Ruler} editHref={`${editHref}#physical`}>
             <FieldRow label="Height" value={patient.height ? `${patient.height} cm` : null} />
             <FieldRow label="Weight" value={patient.weight ? `${patient.weight} kg` : null} />
             <FieldRow label="BMI" value={bmi != null ? String(bmi) : null} />
           </Section>
 
-          <Section title="Medical Details" editHref={`${editHref}#medical`}>
+          <Section title="Medical Details" icon={HeartPulse} editHref={`${editHref}#medical`}>
             <FieldRow label="Allergies" value={patient.allergies} />
             <FieldRow label="Medical Conditions" value={patient.conditions} />
             <FieldRow label="Medications" value={patient.medications} />
@@ -128,7 +143,7 @@ export default async function PatientDetailsPage({
             <FieldRow label="Family History" value={patient.familyHistory} />
           </Section>
 
-          <Section title="Notes" editHref={`${editHref}#notes`}>
+          <Section title="Notes" icon={StickyNote} editHref={`${editHref}#notes`}>
             <p className="text-sm text-foreground/80 whitespace-pre-wrap">
               {patient.notes || "No notes."}
             </p>

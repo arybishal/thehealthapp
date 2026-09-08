@@ -62,26 +62,26 @@ export function TrendsPanel({
 
   return (
     <div className="space-y-6">
-      {/* Filters */}
-      <div className="flex flex-wrap gap-2">
-        {FILTER_OPTIONS.map((f) => (
-          <button
-            key={f.value}
-            onClick={() => setFilter(f.value)}
-            className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
-              filter === f.value
-                ? "bg-primary text-primary-foreground"
-                : "bg-muted text-muted-foreground hover:bg-muted/80"
-            }`}
-          >
-            {f.label}
-          </button>
-        ))}
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex flex-wrap gap-1.5">
+          {FILTER_OPTIONS.map((f) => (
+            <button
+              key={f.value}
+              onClick={() => setFilter(f.value)}
+              className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+                filter === f.value
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-muted text-muted-foreground hover:bg-muted/80"
+              }`}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
+        <p className="text-xs text-muted-foreground shrink-0">
+          {visible.length} {visible.length === 1 ? "biomarker" : "biomarkers"}
+        </p>
       </div>
-
-      <p className="text-sm text-muted-foreground">
-        {visible.length} {visible.length === 1 ? "biomarker" : "biomarkers"}
-      </p>
 
       {visible.length === 0 ? (
         <Card className="py-14 text-center">

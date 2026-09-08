@@ -9,13 +9,16 @@ const publicPaths = [
   "/demo",
   "/forgot-password",
   "/reset-password",
+  "/medica",
+  "/privacy",
+  "/terms",
   "/api/auth",
 ];
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  if (publicPaths.some((p) => pathname.startsWith(p))) {
+  if (pathname === "/" || publicPaths.some((p) => pathname.startsWith(p))) {
     return NextResponse.next();
   }
 

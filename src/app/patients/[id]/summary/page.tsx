@@ -109,7 +109,7 @@ export default async function PatientSummaryPage({
         <PrintButton />
       </div>
 
-      <div className="bg-card border border-border rounded-xl p-6">
+      <div className="bg-card border border-border rounded-xl p-6 md:p-8">
         {/* Header */}
         <div className="flex items-start justify-between border-b border-border pb-4">
           <div>
@@ -149,7 +149,7 @@ export default async function PatientSummaryPage({
         {/* Identity */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 py-4">
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
+            <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-3">
               Contact
             </h3>
             <dl className="space-y-1 text-sm">
@@ -172,7 +172,7 @@ export default async function PatientSummaryPage({
             </dl>
           </div>
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
+            <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-3">
               Physical
             </h3>
             <dl className="space-y-1 text-sm">
@@ -193,8 +193,8 @@ export default async function PatientSummaryPage({
         </div>
 
         {/* Medical overview */}
-        <div className="border-t border-border py-4">
-          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
+        <div className="border-t border-border py-5">
+          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-3">
             Medical Overview
           </h3>
           <dl className="space-y-1 text-sm">
@@ -222,8 +222,8 @@ export default async function PatientSummaryPage({
         </div>
 
         {/* Latest results */}
-        <div className="border-t border-border py-4">
-          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
+        <div className="border-t border-border py-5">
+          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-3">
             Latest Laboratory Results
           </h3>
           {latestResults.length === 0 ? (
@@ -287,8 +287,8 @@ export default async function PatientSummaryPage({
         </div>
 
         {/* Recent measurements */}
-        <div className="border-t border-border py-4">
-          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
+        <div className="border-t border-border py-5">
+          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-3">
             Recent Measurements
           </h3>
           {measurements.length === 0 ? (
@@ -322,8 +322,8 @@ export default async function PatientSummaryPage({
         </div>
 
         {/* Report history */}
-        <div className="border-t border-border py-4">
-          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
+        <div className="border-t border-border py-5">
+          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-3">
             Report History
           </h3>
           {reports.length === 0 ? (

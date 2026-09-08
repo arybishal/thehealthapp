@@ -17,7 +17,7 @@ const sections = [
     title: "Appearance",
     description: "Manage theme and display preferences.",
     icon: Moon,
-    iconClass: "bg-violet-100 text-violet-700",
+    iconClass: "bg-primary-light text-primary",
   },
   {
     title: "Privacy & Data",

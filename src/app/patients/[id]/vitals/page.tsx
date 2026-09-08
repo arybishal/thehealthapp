@@ -59,7 +59,7 @@ export default async function PatientVitalsPage({
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl md:text-2xl font-bold">Vitals & Measurements</h1>
+        <h1 className="text-xl md:text-2xl font-bold tracking-tight">Vitals & Measurements</h1>
         <p className="text-sm text-muted-foreground mt-0.5">
           Recorded health measurements for this patient.
         </p>
@@ -68,13 +68,16 @@ export default async function PatientVitalsPage({
       {physicalRows.length > 0 && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Current Physical Details</CardTitle>
+            <CardTitle className="text-base font-semibold">Current Physical Details</CardTitle>
           </CardHeader>
-          <CardContent className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <CardContent className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {physicalRows.map((r) => (
-              <div key={r.label}>
+              <div
+                key={r.label}
+                className="rounded-xl bg-primary-light/50 px-4 py-3 flex flex-col gap-1"
+              >
                 <p className="text-xs text-muted-foreground">{r.label}</p>
-                <p className="font-semibold text-lg">{r.value}</p>
+                <p className="text-2xl font-bold text-foreground">{r.value}</p>
               </div>
             ))}
           </CardContent>
@@ -83,7 +86,7 @@ export default async function PatientVitalsPage({
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Quick Add</CardTitle>
+          <CardTitle className="text-base font-semibold">Quick Add</CardTitle>
         </CardHeader>
         <CardContent>
           <QuickAdd patientId={id} />
@@ -92,7 +95,7 @@ export default async function PatientVitalsPage({
 
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="text-base">Add Measurement</CardTitle>
+          <CardTitle className="text-base font-semibold">Add Measurement</CardTitle>
           <span className="text-xs text-muted-foreground">
             Full record with any measurement type
           </span>
@@ -120,7 +123,7 @@ export default async function PatientVitalsPage({
           return (
             <Card key={type}>
               <CardHeader>
-                <CardTitle className="text-base flex items-center gap-2">
+                <CardTitle className="text-base font-semibold flex items-center gap-2">
                   <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-secondary/15 text-secondary">
                     <Icon className="h-4 w-4" />
                   </span>
@@ -131,11 +134,11 @@ export default async function PatientVitalsPage({
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-0">
-                <div className="divide-y">
+                <div className="divide-y divide-border">
                   {list.map((m) => (
                     <div
                       key={m.id}
-                      className="flex items-center justify-between gap-3 px-4 py-3"
+                      className="flex items-center justify-between gap-3 px-4 py-3 hover:bg-muted/50 transition-colors duration-200"
                     >
                       <div className="min-w-0">
                         <p className="text-sm font-medium">
@@ -151,7 +154,7 @@ export default async function PatientVitalsPage({
                           </p>
                         )}
                       </div>
-                      <p className="font-semibold shrink-0">
+                      <p className="font-bold shrink-0">
                         {m.value} <span className="text-sm font-normal text-muted-foreground">{m.unit}</span>
                       </p>
                     </div>

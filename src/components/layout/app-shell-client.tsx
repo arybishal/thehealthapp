@@ -14,6 +14,9 @@ const PUBLIC_PATHS = [
   "/demo",
   "/forgot-password",
   "/reset-password",
+  "/medica",
+  "/privacy",
+  "/terms",
 ];
 
 export function AppShellClient({

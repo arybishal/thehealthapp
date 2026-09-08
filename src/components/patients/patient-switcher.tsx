@@ -27,13 +27,17 @@ export function PatientAvatar({
   size = "sm",
 }: {
   name: string;
-  size?: "sm" | "md";
+  size?: "sm" | "md" | "lg";
 }) {
+  const box =
+    size === "lg"
+      ? "w-12 h-12 text-base rounded-xl"
+      : size === "md"
+        ? "w-10 h-10 text-sm rounded-lg"
+        : "w-8 h-8 text-xs rounded-lg";
   return (
     <span
-      className={`${
-        size === "md" ? "w-9 h-9 text-sm" : "w-7 h-7 text-xs"
-      } rounded-full bg-primary-light text-primary flex items-center justify-center font-semibold shrink-0`}
+      className={`${box} bg-primary-light text-primary flex items-center justify-center font-bold shrink-0 ring-1 ring-primary/10`}
     >
       {getInitials(name)}
     </span>
@@ -66,12 +70,12 @@ export function PatientSwitcher({
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex items-center gap-2 rounded-lg border border-border bg-background px-2.5 py-1.5 text-sm font-medium hover:bg-muted hover:text-foreground transition-colors min-w-0 max-w-full">
+      <DropdownMenuTrigger className="group flex items-center gap-2.5 w-full rounded-lg border border-border bg-card px-2.5 py-2 text-sm font-medium hover:bg-muted hover:text-foreground hover:border-primary/30 transition-colors min-w-0 max-w-full shadow-[0_1px_2px_rgba(24,39,75,0.04)]">
         <PatientAvatar name={current?.name ?? "All patients"} />
-        <span className="truncate">
+        <span className="truncate flex-1 text-left">
           {current ? current.name : "All patients"}
         </span>
-        <ChevronDown className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
+        <ChevronDown className="w-3.5 h-3.5 text-muted-foreground shrink-0 transition-transform group-data-[state=open]:rotate-180" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="w-64">
         {!compact && (

@@ -84,14 +84,16 @@ export function TrendCard({ canonicalName, displayName, category, data, referenc
     : `/biomarkers/${encodeURIComponent(canonicalName)}`;
 
   return (
-    <Card>
+    <Card className="hover:-translate-y-px transition-all duration-200">
       <CardHeader>
         <div className="flex items-center justify-between">
-          <div>
+          <div className="flex items-center gap-2.5">
+            <div className="rounded-full bg-primary-light px-2.5 py-0.5 text-xs font-semibold text-primary">
+              {category}
+            </div>
             <CardTitle className="text-base">{displayName}</CardTitle>
-            <p className="text-xs text-muted-foreground">{category}</p>
           </div>
-          <span className="text-sm font-medium">
+          <span className="text-xs text-muted-foreground">
             {data.length} {data.length === 1 ? "result" : "results"}
           </span>
         </div>
@@ -100,7 +102,7 @@ export function TrendCard({ canonicalName, displayName, category, data, referenc
         {data.length === 1 ? (
           <div className="text-center py-6">
             <p className="text-3xl font-bold">
-              {data[0].value} <span className="text-sm font-normal">{unit}</span>
+              {data[0].value} <span className="text-sm font-normal text-muted-foreground">{unit}</span>
             </p>
             <p className="text-sm text-muted-foreground mt-1">{data[0].displayDate}</p>
             <p className="mt-4 text-xs text-muted-foreground">
@@ -111,21 +113,25 @@ export function TrendCard({ canonicalName, displayName, category, data, referenc
           <>
             <div className="flex items-start justify-between gap-4 mb-4">
               <div>
-                <p className="text-sm text-muted-foreground">Latest</p>
+                <p className="text-xs text-muted-foreground">Latest</p>
                 <p className="text-2xl font-bold">
                   {latest != null ? latest : "—"}{" "}
-                  <span className="text-sm font-normal">{unit}</span>
+                  <span className="text-sm font-normal text-muted-foreground">{unit}</span>
                 </p>
-                <p className="text-sm text-muted-foreground mt-1">
+                <p className="text-xs text-muted-foreground mt-1">
                   Previous: {previous != null ? `${previous} ${unit}` : "—"}
                 </p>
               </div>
               <div className="text-right">
-                <p className="text-sm text-muted-foreground">Change</p>
+                <p className="text-xs text-muted-foreground">Change</p>
                 <p
                   className={`text-lg font-semibold ${
                     change === null
                       ? "text-muted-foreground"
+                      : change > 0
+                      ? "text-danger"
+                      : change < 0
+                      ? "text-success"
                       : "text-info"
                   }`}
                 >
@@ -141,7 +147,7 @@ export function TrendCard({ canonicalName, displayName, category, data, referenc
             <div className="h-48">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={sorted}>
-                  <CartesianGrid strokeDasharray="3 3" stroke={border} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="oklch(0.93 0.005 260)" />
                   <XAxis
                     dataKey="displayDate"
                     tick={{ fontSize: 11 }}
@@ -162,17 +168,19 @@ export function TrendCard({ canonicalName, displayName, category, data, referenc
                   {referenceRange.high !== null && (
                     <ReferenceArea
                       y1={referenceRange.high}
-                      y2={referenceRange.high === null ? referenceRange.high : referenceRange.high * 2}
-                      fill={danger}
-                      fillOpacity={0.05}
+                      y2={referenceRange.high * 2}
+                      fill="oklch(0.95 0.04 25)"
+                      fillOpacity={0.5}
+                      stroke="none"
                     />
                   )}
                   {referenceRange.low !== null && referenceRange.high !== null && (
                     <ReferenceArea
                       y1={referenceRange.low}
                       y2={referenceRange.high}
-                      fill={success}
-                      fillOpacity={0.06}
+                      fill="oklch(0.97 0.005 260)"
+                      fillOpacity={1}
+                      stroke="none"
                     />
                   )}
                   {referenceRange.high !== null && (
@@ -200,13 +208,10 @@ export function TrendCard({ canonicalName, displayName, category, data, referenc
                   <Line
                     type="monotone"
                     dataKey="value"
-                    stroke={primary}
+                    stroke="#0d7c8a"
                     strokeWidth={2}
-                    dot={{
-                      r: 4,
-                      fill: primary,
-                      strokeWidth: 2,
-                    }}
+                    dot={false}
+                    activeDot={{ r: 5, fill: "#0d7c8a", stroke: "#fff", strokeWidth: 2 }}
                   />
                 </LineChart>
               </ResponsiveContainer>

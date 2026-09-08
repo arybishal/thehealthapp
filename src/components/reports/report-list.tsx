@@ -65,7 +65,7 @@ const TYPE_CONFIG: Record<
   cbc: {
     label: "Blood Tests",
     icon: TestTube2,
-    boxClass: "bg-primary-light/60 text-primary",
+    boxClass: "bg-primary-light text-primary",
   },
   lipid: {
     label: "Lipid Profile",
@@ -85,7 +85,7 @@ const TYPE_CONFIG: Record<
   vitamin: {
     label: "Vitamin",
     icon: Sun,
-    boxClass: "bg-violet-100 text-violet-700",
+    boxClass: "bg-info-light text-info",
   },
   kidney: {
     label: "Kidney",
@@ -312,10 +312,10 @@ export function ReportList({ reports, patientId }: ReportListProps) {
           <button
             key={d.value}
             onClick={() => setDateFilter(d.value)}
-            className={`rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
+            className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
               dateFilter === d.value
-                ? "bg-primary/10 text-primary"
-                : "text-muted-foreground hover:text-foreground"
+                ? "bg-primary text-primary-foreground"
+                : "bg-muted text-muted-foreground hover:bg-muted/80"
             }`}
           >
             {d.label}
@@ -350,7 +350,7 @@ export function ReportList({ reports, patientId }: ReportListProps) {
 
       {/* Desktop table */}
       {filtered.length > 0 && (
-        <div className="hidden md:block border rounded-xl overflow-hidden">
+        <div className="hidden md:block border rounded-xl overflow-hidden bg-card shadow-[0_1px_3px_rgba(24,39,75,0.04)]">
           {/* Header */}
           <div className="grid grid-cols-[1fr_120px_1fr_90px_100px_50px] gap-3 bg-muted/50 px-4 py-2.5 text-xs font-medium text-muted-foreground border-b">
             <span>Report</span>
@@ -415,7 +415,10 @@ export function ReportList({ reports, patientId }: ReportListProps) {
             const tc = getTypeConfig(report.reportType);
             const Icon = tc.icon;
             return (
-              <Card key={report.id} className="p-4">
+              <Card
+                key={report.id}
+                className="p-4 shadow-[0_1px_3px_rgba(24,39,75,0.04)] transition-all duration-200 hover:-translate-y-px hover:shadow-[0_8px_24px_-12px_rgba(24,39,75,0.12)]"
+              >
                 <div className="flex items-start gap-3">
                   <div
                     className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${tc.boxClass}`}
@@ -466,7 +469,7 @@ export function ReportList({ reports, patientId }: ReportListProps) {
       {/* Empty state */}
       {filtered.length === 0 && (
         <Card className="py-16 text-center">
-          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-light/60 text-primary">
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-light text-primary">
             <FileText className="h-7 w-7" />
           </div>
           <p className="mt-4 font-semibold">

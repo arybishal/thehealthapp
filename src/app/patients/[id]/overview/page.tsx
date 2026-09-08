@@ -128,7 +128,8 @@ function StatCard({
   boxClass: string;
 }) {
   return (
-    <Card className="p-5 transition-shadow hover:shadow-md" size="sm">
+    <Card className="p-5 transition-shadow hover:shadow-md relative overflow-hidden" size="sm">
+      <div className="h-1 w-full bg-gradient-to-r from-primary/60 to-transparent absolute top-0 left-0" />
       <div className="flex items-center gap-4">
         <div
           className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${boxClass}`}
@@ -136,7 +137,7 @@ function StatCard({
           <Icon className="h-5 w-5" />
         </div>
         <div>
-          <p className="text-3xl font-bold">{value}</p>
+          <p className="text-3xl font-bold tracking-tight">{value}</p>
           <p className="text-sm font-medium mt-0.5">{label}</p>
         </div>
       </div>
@@ -216,7 +217,7 @@ export default async function PatientOverviewPage({
             value={totalReports}
             label="Medical Reports"
             sub="Uploaded lab reports in this patient's history"
-            boxClass="bg-primary-light/60 text-primary"
+            boxClass="bg-primary-light text-primary"
           />
         </Link>
         <Link href={`/patients/${id}/results`}>
@@ -234,7 +235,7 @@ export default async function PatientOverviewPage({
             value={uniqueBiomarkers.length}
             label="Tracked Biomarkers"
             sub="Distinct biomarkers monitored over time"
-            boxClass="bg-violet-100 text-violet-700"
+            boxClass="bg-info-light text-info"
           />
         </Link>
       </div>
@@ -242,20 +243,19 @@ export default async function PatientOverviewPage({
       {/* Latest Report + Latest Results */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <h2 className="text-lg font-semibold mb-3">Latest Report</h2>
+          <h2 className="text-base font-semibold mb-3">Latest Report</h2>
           {latestReport && fileUrl ? (
-            <Card className="relative overflow-hidden border-primary/20 bg-gradient-to-br from-primary-light/50 to-card">
-              <div className="absolute inset-y-0 left-0 w-1 bg-primary" />
+            <Card className="relative overflow-hidden bg-gradient-to-br from-primary to-primary-hover text-white">
               <CardContent className="p-5">
                 <div className="flex items-center gap-4 min-w-0">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm">
-                    <FileText className="h-6 w-6" />
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/15 backdrop-blur">
+                    <FileText className="h-6 w-6 text-white" />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-lg font-semibold truncate">
+                    <p className="text-lg font-semibold truncate text-white">
                       {latestReport.title}
                     </p>
-                    <p className="text-sm text-muted-foreground truncate">
+                    <p className="text-sm text-primary-foreground/80 truncate">
                       {latestReport.laboratoryName || "Unknown lab"} •{" "}
                       {latestReport.reportDate
                         ? longDate(latestReport.reportDate)
@@ -263,12 +263,12 @@ export default async function PatientOverviewPage({
                     </p>
                   </div>
                 </div>
-                <p className="mt-3 text-sm text-muted-foreground">
+                <p className="mt-3 text-sm text-primary-foreground/80">
                   {latestReport.results.length} results extracted
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   <Link href={`/patients/${id}/reports/${latestReport.id}`}>
-                    <Button size="sm">
+                    <Button size="sm" className="bg-white text-primary hover:bg-white/90">
                       <FileText />
                       View Report
                     </Button>
@@ -277,7 +277,7 @@ export default async function PatientOverviewPage({
                     href={fileUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={buttonVariants({ variant: "outline", size: "sm" })}
+                    className={buttonVariants({ variant: "outline", size: "sm", className: "border-white/30 text-white hover:bg-white/10" })}
                   >
                     <ExternalLink />
                     View Original
@@ -288,7 +288,7 @@ export default async function PatientOverviewPage({
           ) : (
             <Card className="border-dashed">
               <CardContent className="py-10 text-center">
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-light/60 text-primary">
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-light text-primary">
                   <FileText className="h-7 w-7" />
                 </div>
                 <p className="mt-4 font-semibold">No medical reports yet</p>
@@ -313,7 +313,7 @@ export default async function PatientOverviewPage({
         {/* Latest Results */}
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className="text-lg font-semibold">
+            <CardTitle className="text-base font-semibold">
               Latest Results
             </CardTitle>
             <Link
@@ -349,7 +349,7 @@ export default async function PatientOverviewPage({
                     <Link
                       key={name}
                       href={`/patients/${id}/results/${encodeURIComponent(name)}`}
-                      className="group flex items-center justify-between gap-4 px-4 py-3 transition-colors hover:bg-muted/50"
+                      className="group flex items-center justify-between gap-4 px-4 py-3 transition-colors hover:bg-muted"
                     >
                       <div className="min-w-0">
                         <div className="flex items-center gap-2">
@@ -436,7 +436,7 @@ export default async function PatientOverviewPage({
                   return (
                     <div
                       key={m.id}
-                      className="flex items-center justify-between gap-3 rounded-lg border p-3 transition-shadow hover:shadow-sm"
+                      className="flex items-center justify-between gap-3 rounded-lg border bg-card p-3 transition-shadow hover:shadow-sm"
                     >
                       <div className="flex items-center gap-3 min-w-0">
                         <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-secondary/15 text-secondary">
@@ -484,9 +484,9 @@ export default async function PatientOverviewPage({
               <Link
                 key={report.id}
                 href={`/patients/${id}/reports/${report.id}`}
-                className="group flex items-center gap-3 rounded-lg border p-3 transition-all hover:bg-muted/50 hover:shadow-sm"
+                className="group flex items-center gap-3 rounded-lg border bg-card p-3 transition-all hover:border-primary/30 hover:shadow-sm"
               >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-light/60 text-primary">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-light text-primary">
                   <FileText className="h-4 w-4" />
                 </div>
                 <div className="min-w-0 flex-1">
