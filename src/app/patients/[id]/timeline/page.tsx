@@ -123,8 +123,8 @@ export default async function PatientTimelinePage({
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">Health Timeline</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
+        <h1 className="text-2xl font-bold leading-[1.25] tracking-[-0.01em]">Health Timeline</h1>
+        <p className="mt-2 text-[13px] leading-[1.45] text-muted-foreground">
           Your recorded health history, organized in one timeline.
         </p>
       </div>
@@ -166,7 +166,7 @@ export default async function PatientTimelinePage({
                 <div className="mt-5 space-y-6">
                   {sortedMonths.map((month) => (
                     <div key={month}>
-                      <h3 className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                      <h3 className="mb-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                         {month}
                       </h3>
                       <div className="space-y-2">
@@ -188,11 +188,11 @@ export default async function PatientTimelinePage({
 
                             <div className="min-w-0 flex-1">
                               <div className="flex items-baseline gap-2">
-                                <p className="truncate text-sm font-medium">
+                                <p className="truncate text-[13px] font-medium text-muted-foreground">
                                   {event.title}
                                 </p>
                                 {event.value != null && (
-                                  <p className="truncate text-base font-semibold">
+                                  <p className="truncate text-lg font-semibold tracking-tight">
                                     {event.value}
                                     {event.unit && (
                                       <span className="ml-1 text-xs font-normal text-muted-foreground">
@@ -202,7 +202,7 @@ export default async function PatientTimelinePage({
                                   </p>
                                 )}
                               </div>
-                              <p className="mt-0.5 truncate text-xs text-muted-foreground">
+                              <p className="mt-0.5 truncate text-xs leading-[1.4] text-text-muted">
                                 {event.description}
                               </p>
                             </div>
@@ -215,7 +215,7 @@ export default async function PatientTimelinePage({
                               >
                                 {event.meta}
                               </p>
-                              <p className="mt-0.5 text-xs text-muted-foreground">
+                              <p className="mt-0.5 text-xs font-medium text-text-muted">
                                 {event.date.toLocaleDateString("en-US", {
                                   month: "short",
                                   day: "numeric",

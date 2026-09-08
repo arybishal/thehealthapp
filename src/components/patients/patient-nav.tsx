@@ -86,10 +86,10 @@ export function PatientNav({
   const activeItem = items.find((item) => isActive(item.href));
 
   const tabClass = (active: boolean) =>
-    `inline-flex shrink-0 items-center whitespace-nowrap border-b-2 px-3 py-2.5 text-sm font-medium transition-colors ${
+    `inline-flex shrink-0 items-center whitespace-nowrap border-b-2 px-3 py-2.5 text-[13px] transition-colors ${
       active
-        ? "border-primary text-primary"
-        : "border-transparent text-muted-foreground hover:border-border/60 hover:text-foreground"
+        ? "border-primary text-primary font-semibold"
+        : "border-transparent text-muted-foreground font-medium hover:border-border/60 hover:text-foreground"
     }`;
 
   return (
@@ -114,10 +114,10 @@ export function PatientNav({
         <DropdownMenu>
           <DropdownMenuTrigger
             aria-label="More patient sections"
-            className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap border-b-2 px-3 py-2.5 text-sm font-medium transition-colors ${
+            className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap border-b-2 px-3 py-2.5 text-[13px] transition-colors ${
               more.some((item) => isActive(item.href))
-                ? "border-primary text-primary"
-                : "border-transparent text-muted-foreground hover:border-border/60 hover:text-foreground"
+                ? "border-primary text-primary font-semibold"
+                : "border-transparent text-muted-foreground font-medium hover:border-border/60 hover:text-foreground"
             }`}
           >
             More

@@ -37,7 +37,7 @@ export function NavigationItem({
   return (
     <Link
       href={item.href}
-      className={`group relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors duration-200 ${
+      className={`group relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-[13px] font-medium transition-colors duration-200 ${
         active
           ? "bg-primary-light text-primary font-semibold"
           : "text-muted-foreground hover:bg-muted hover:text-foreground"

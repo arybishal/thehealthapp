@@ -47,10 +47,10 @@ export default async function PatientLayout({
           <div className="flex min-w-0 items-center gap-4">
             <PatientAvatar name={patient.name} size="lg" />
             <div className="min-w-0">
-              <h1 className="truncate text-xl font-bold tracking-tight md:text-2xl">
+              <h1 className="truncate text-2xl font-bold leading-[1.2] tracking-[-0.015em]">
                 {patient.name}
               </h1>
-              <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
+              <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] font-medium leading-[1.45] text-muted-foreground">
                 <span className="truncate">
                   {meta.length > 0 ? meta.join(" · ") : "No details yet"}
                 </span>

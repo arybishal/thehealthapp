@@ -34,7 +34,7 @@ export function Topbar({
 
   return (
     <header className="h-14 shrink-0 border-b border-border bg-card flex items-center gap-4 px-6 print-hidden">
-      <div className="flex-1 min-w-0 flex items-center gap-2 text-sm">
+      <div className="flex-1 min-w-0 flex items-center gap-2 text-[13px] font-medium">
         {breadcrumbs.map((crumb, i) => (
           <span key={i} className="flex items-center gap-2">
             {i > 0 && <span className="text-muted-foreground/40">/</span>}

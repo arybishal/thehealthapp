@@ -46,8 +46,8 @@ export default async function AdminDashboardPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl md:text-2xl font-bold">Admin Dashboard</h1>
-        <p className="text-sm text-muted-foreground mt-0.5">
+        <h1 className="text-2xl font-bold leading-[1.25] tracking-[-0.01em]">Admin Dashboard</h1>
+        <p className="mt-1 text-[13px] leading-[1.45] text-muted-foreground">
           Platform-wide overview.
         </p>
       </div>
@@ -55,8 +55,8 @@ export default async function AdminDashboardPage() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((s) => (
           <Card key={s.label} className="p-5">
-            <p className="text-3xl font-bold">{s.value}</p>
-            <p className="text-sm text-muted-foreground mt-0.5">{s.label}</p>
+            <p className="text-2xl font-bold leading-[1.2] tracking-[-0.01em]">{s.value}</p>
+            <p className="mt-1 text-xs font-medium text-muted-foreground">{s.label}</p>
           </Card>
         ))}
       </div>
