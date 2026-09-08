@@ -5,9 +5,11 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import {
   Activity,
+  ArrowRight,
   Droplets,
   FileText,
   FlaskConical,
+  ShieldCheck,
   TrendingUp,
 } from "lucide-react";
 import { Area, AreaChart, ResponsiveContainer } from "recharts";
@@ -154,14 +156,14 @@ function ProductPreview() {
             <AreaChart data={TREND} margin={{ top: 4, right: 0, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="hero-trend" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#0d7c8a" stopOpacity={0.35} />
-                  <stop offset="100%" stopColor="#0d7c8a" stopOpacity={0} />
+                  <stop offset="0%" stopColor="#2C9AD1" stopOpacity={0.35} />
+                  <stop offset="100%" stopColor="#2C9AD1" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <Area
                 type="monotone"
                 dataKey="v"
-                stroke="#0d7c8a"
+                stroke="#2C9AD1"
                 strokeWidth={2}
                 fill="url(#hero-trend)"
                 animationDuration={900}
@@ -173,6 +175,12 @@ function ProductPreview() {
     </div>
   );
 }
+
+const TRUST_POINTS = [
+  { icon: ShieldCheck, label: "Private by design" },
+  { icon: Activity, label: "Reference-range flags" },
+  { icon: TrendingUp, label: "Trends over time" },
+];
 
 export function LandingHero() {
   const router = useRouter();
@@ -188,58 +196,94 @@ export function LandingHero() {
   }
 
   return (
-    <section className="relative overflow-hidden">
-      {/* soft background accents */}
+    <section className="relative overflow-hidden bg-[#0f1a26]">
+      {/* glow accents */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-32 right-[-10%] h-96 w-96 rounded-full bg-secondary/10 blur-3xl" />
-        <div className="absolute left-[-8%] top-40 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute -top-40 right-[-12%] h-[34rem] w-[34rem] rounded-full bg-[#2c9ad1]/25 blur-3xl" />
+        <div className="absolute -left-24 top-1/3 h-96 w-96 rounded-full bg-[#122436] blur-3xl" />
+        <div className="absolute bottom-[-30%] left-1/3 h-96 w-96 rounded-full bg-[#2fae6b]/10 blur-3xl" />
       </div>
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.15]"
+        style={{
+          backgroundImage:
+            "radial-gradient(rgba(255,255,255,0.6) 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+          maskImage:
+            "radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%)",
+        }}
+      />
 
-      <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-6 pb-16 pt-14 md:pt-20 lg:grid-cols-2">
+      <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-6 pb-20 pt-14 md:pt-20 lg:grid-cols-2 lg:gap-10">
         {/* Copy */}
-        <div className="animate-fade-in">
-          <p className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-primary shadow-sm">
-            <Droplets className="h-3.5 w-3.5" />
+        <div>
+          <p className="inline-flex items-center gap-2 rounded-pill border border-white/15 bg-white/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-white/80 backdrop-blur">
+            <Droplets className="h-3.5 w-3.5 text-[#2c9ad1]" />
             Personal Health Records, Simplified
           </p>
-          <h1 className="mt-6 text-[40px] font-bold leading-[1.08] tracking-tight md:text-6xl">
+          <h1 className="mt-6 text-[40px] font-bold leading-[1.08] tracking-tight text-white md:text-6xl">
             Every Blood Test.{" "}
-            <span className="text-primary">One Clear Health History.</span>
+            <span className="bg-gradient-to-r from-[#6ec3f0] to-[#2fae6b] bg-clip-text text-transparent">
+              One Clear Health History.
+            </span>
           </h1>
-          <p className="mt-5 max-w-xl text-base text-muted-foreground md:text-[17px]">
+          <p className="mt-5 max-w-xl text-base text-white/70 md:text-[17px]">
             Keep your blood reports, laboratory results, biomarkers, vitals, and
-            medical history organized in one place.
+            medical history organized in one place. Built by The8Pattern.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link
               href="/register"
-              className="flex items-center justify-center rounded-lg bg-primary px-6 py-3.5 text-[15px] font-semibold text-white shadow-[0_2px_10px_-2px_rgba(37,99,235,0.5)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-hover hover:shadow-[0_10px_24px_-6px_rgba(37,99,235,0.55)]"
+              className="group flex items-center justify-center gap-2 rounded-pill bg-white px-7 py-3.5 text-[15px] font-bold text-[#0f1a26] shadow-[0_10px_30px_-6px_rgba(44,154,209,0.5)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_36px_-8px_rgba(44,154,209,0.6)]"
             >
               Get Started Free
-            </Link>
-            <Link
-              href="/login"
-              className="flex items-center justify-center rounded-lg border border-border bg-white px-6 py-3.5 text-[15px] font-semibold text-foreground transition-colors duration-200 hover:bg-muted"
-            >
-              Log In
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
             <button
               onClick={exploreDemo}
-              className="flex items-center justify-center rounded-lg border border-dashed border-primary/40 bg-white px-6 py-3.5 text-[15px] font-semibold text-primary transition-colors duration-200 hover:border-primary hover:bg-primary-light/40"
+              className="flex items-center justify-center gap-2 rounded-pill border border-white/25 bg-white/10 px-7 py-3.5 text-[15px] font-semibold text-white backdrop-blur transition-colors duration-200 hover:bg-white/20 hover:border-white/40"
             >
               Explore Demo
+              <Activity className="h-4 w-4 text-[#2c9ad1]" />
             </button>
           </div>
-          <p className="mt-5 text-sm text-muted-foreground">
-            Free to use. Built to help you keep your health history organized.
-          </p>
+
+          <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2">
+            {TRUST_POINTS.map((p) => (
+              <span
+                key={p.label}
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-white/60"
+              >
+                <p.icon className="h-4 w-4 text-[#2c9ad1]" />
+                {p.label}
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* Product preview */}
-        <div className="animate-fade-in relative mx-auto w-full max-w-md lg:max-w-none">
-          <div className="animate-float">
+        <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+          <div className="animate-float rounded-[24px] border border-white/15 bg-white/60 p-3 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.6)] backdrop-blur-xl">
             <ProductPreview />
+          </div>
+
+          {/* floating stat chips */}
+          <div className="absolute -left-4 top-16 hidden rounded-2xl border border-white/20 bg-white/10 px-4 py-3 text-white shadow-lg backdrop-blur-md md:block">
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-white/60">
+              HbA1c
+            </p>
+            <p className="text-lg font-bold">5.7%</p>
+            <p className="text-[11px] font-medium text-emerald-300">
+              ▼ In range
+            </p>
+          </div>
+          <div className="absolute -right-3 bottom-20 hidden rounded-2xl border border-white/20 bg-white/10 px-4 py-3 text-white shadow-lg backdrop-blur-md md:block">
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-white/60">
+              Vitamin D
+            </p>
+            <p className="text-lg font-bold">28 ng/mL</p>
+            <p className="text-[11px] font-medium text-amber-300">▲ Low</p>
           </div>
         </div>
       </div>

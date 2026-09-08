@@ -1,8 +1,10 @@
 ﻿"use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { register } from "@/lib/actions";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,6 +19,8 @@ import {
 } from "@/components/ui/card";
 
 export default function RegisterPage() {
+  const router = useRouter();
+  const [demoPending, setDemoPending] = useState(false);
   const [state, formAction, pending] = useActionState(
     async (_prev: { error?: string } | null, formData: FormData) => {
       const result = await register(formData);
@@ -24,6 +28,18 @@ export default function RegisterPage() {
     },
     null as { error?: string } | null
   );
+
+  async function exploreDemo() {
+    setDemoPending(true);
+    const result = await signIn("credentials", {
+      email: "demo@thebloodtracker.com",
+      password: "demo1234",
+      redirect: false,
+      callbackUrl: "/admin",
+    });
+    setDemoPending(false);
+    if (!result?.error) router.push(result?.url ?? "/admin");
+  }
 
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-gray-50 px-4">
@@ -76,8 +92,17 @@ export default function RegisterPage() {
               />
             </div>
           </CardContent>
-          <CardFooter className="flex flex-col gap-4">
-            <Button type="submit" className="w-full" disabled={pending}>
+          <CardFooter className="flex flex-col gap-3">
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full"
+              disabled={pending || demoPending}
+              onClick={exploreDemo}
+            >
+              {demoPending ? "Opening demo..." : "Explore Demo"}
+            </Button>
+            <Button type="submit" className="w-full" disabled={pending || demoPending}>
               {pending ? "Creating account..." : "Create Account"}
             </Button>
             <p className="text-sm text-muted-foreground">

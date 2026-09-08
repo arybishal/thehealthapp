@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
 import { Droplets, Menu, X } from "lucide-react";
 
 const LINKS = [
@@ -34,17 +32,6 @@ export function Logo() {
 export function LandingNavbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const router = useRouter();
-
-  async function exploreDemo() {
-    const result = await signIn("credentials", {
-      email: "demo@thebloodtracker.com",
-      password: "demo1234",
-      redirect: false,
-      callbackUrl: "/admin",
-    });
-    if (!result?.error) router.push(result?.url ?? "/admin");
-  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -78,23 +65,11 @@ export function LandingNavbar() {
           </nav>
 
           <div className="hidden items-center gap-2 lg:flex">
-            <button
-              onClick={exploreDemo}
-              className="rounded-pill border border-dashed border-primary/40 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:border-primary hover:bg-primary-light/40"
-            >
-              Explore Demo
-            </button>
             <Link
               href="/login"
               className="rounded-pill border border-border bg-white px-4 py-2 text-sm font-semibold transition-colors hover:bg-muted"
             >
               Log In
-            </Link>
-            <Link
-              href="/register"
-              className="rounded-pill bg-primary px-4 py-2 text-sm font-semibold text-white shadow-[0_2px_8px_-2px_rgba(37,99,235,0.5)] transition-all duration-200 hover:-translate-y-px hover:bg-primary-hover hover:shadow-[0_6px_16px_-4px_rgba(37,99,235,0.5)]"
-            >
-              Get Started Free
             </Link>
           </div>
 
@@ -122,29 +97,13 @@ export function LandingNavbar() {
                 </a>
               ))}
             </nav>
-            <div className="mt-4 grid grid-cols-2 gap-2">
-              <button
-                onClick={() => {
-                  setOpen(false);
-                  exploreDemo();
-                }}
-                className="flex items-center justify-center rounded-pill border border-dashed border-primary/40 bg-white px-4 py-2.5 text-sm font-semibold text-primary"
-              >
-                Explore Demo
-              </button>
+            <div className="mt-4">
               <Link
                 href="/login"
                 onClick={() => setOpen(false)}
                 className="flex items-center justify-center rounded-pill border border-border bg-white px-4 py-2.5 text-sm font-semibold transition-colors hover:bg-muted"
               >
                 Log In
-              </Link>
-              <Link
-                href="/register"
-                onClick={() => setOpen(false)}
-                className="col-span-2 flex items-center justify-center rounded-pill bg-primary px-4 py-2.5 text-sm font-semibold text-white"
-              >
-                Get Started Free
               </Link>
             </div>
           </div>

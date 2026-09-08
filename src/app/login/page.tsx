@@ -50,6 +50,28 @@ export default function LoginPage() {
     router.refresh();
   }
 
+  async function exploreDemo() {
+    setPending(true);
+    setError(null);
+
+    const result = await signIn("credentials", {
+      email: "demo@thebloodtracker.com",
+      password: "demo1234",
+      redirect: false,
+      callbackUrl: "/admin",
+    });
+
+    setPending(false);
+
+    if (result?.error) {
+      setError("Demo account is temporarily unavailable.");
+      return;
+    }
+
+    router.push(result?.url ?? "/admin");
+    router.refresh();
+  }
+
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <Link
@@ -113,7 +135,16 @@ export default function LoginPage() {
               </Link>
             </div>
           </CardContent>
-          <CardFooter className="flex flex-col gap-4">
+          <CardFooter className="flex flex-col gap-3">
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full"
+              disabled={pending}
+              onClick={exploreDemo}
+            >
+              Explore Demo
+            </Button>
             <Button type="submit" className="w-full" disabled={pending}>
               {pending ? "Signing in..." : "Sign In"}
             </Button>
