@@ -96,7 +96,7 @@ export function AboutSection() {
     "Timeline",
   ];
   return (
-    <section className="py-20 md:py-28">
+    <section className="bg-background py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading
           eyebrow="What is The Health Trackey?"
@@ -271,7 +271,7 @@ export function Features() {
     },
   ];
   return (
-    <section id="features" className="scroll-mt-24 py-20 md:py-28">
+    <section id="features" className="scroll-mt-24 bg-background py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading
           eyebrow="Features"
@@ -414,7 +414,7 @@ export function WhySection() {
   return (
     <section
       id="why-thebloodtracker"
-      className="scroll-mt-24 py-20 md:py-28"
+      className="scroll-mt-24 bg-background py-20 md:py-28"
     >
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading
@@ -511,7 +511,7 @@ export function PrivacySection() {
 /* ── Free ─────────────────────────────────────────────── */
 export function FreeSection() {
   return (
-    <section className="py-12">
+    <section className="bg-background py-12">
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col items-center justify-between gap-5 rounded-2xl border border-border bg-white px-8 py-7 md:flex-row">
           <div className="flex items-center gap-4">
@@ -541,7 +541,7 @@ export function FreeSection() {
 /* ── Final CTA ────────────────────────────────────────── */
 export function FinalCtaSection() {
   return (
-    <section className="py-20 md:py-28">
+    <section className="bg-background py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <div className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-[#0a6470] to-[#0d7c8a] px-8 py-16 text-center text-white md:py-20">
           <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
