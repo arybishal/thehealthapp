@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { DemoGate } from "@/components/demo/demo-provider";
 import { calcAge, getInitials } from "@/lib/patients";
 
 export const dynamic = "force-dynamic";
@@ -62,10 +63,12 @@ export default async function PatientsListPage() {
             Manage health records for each patient.
           </p>
         </div>
-        <Link href="/patients/new" className={buttonVariants({ size: "lg" })}>
-          <Plus />
-          Add Patient
-        </Link>
+        <DemoGate>
+          <Link href="/patients/new" className={buttonVariants({ size: "lg" })}>
+            <Plus />
+            Add Patient
+          </Link>
+        </DemoGate>
       </div>
 
       {patients.length === 0 ? (
@@ -77,12 +80,14 @@ export default async function PatientsListPage() {
           <p className="mt-1 text-sm text-muted-foreground max-w-md mx-auto px-4">
             Create a patient profile to start organizing their health records.
           </p>
-          <Link href="/patients/new" className="mt-5 inline-block">
-            <Button>
-              <Plus />
-              Add Patient
-            </Button>
-          </Link>
+          <DemoGate>
+            <Link href="/patients/new" className="mt-5 inline-block">
+              <Button>
+                <Plus />
+                Add Patient
+              </Button>
+            </Link>
+          </DemoGate>
         </Card>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -103,6 +108,7 @@ export default async function PatientsListPage() {
                         {age != null ? `${age} years` : "—"}
                         {p.gender ? ` · ${p.gender}` : ""}
                         {p.bloodGroup ? ` · ${p.bloodGroup}` : ""}
+                        {p.relationship ? ` · ${p.relationship}` : ""}
                       </p>
                     </div>
                   </div>

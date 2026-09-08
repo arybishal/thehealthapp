@@ -25,6 +25,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatusBadge, flagToTone, flagToLabel } from "@/components/status";
 import { QuickAdd } from "@/components/dashboard/quick-add";
+import { DemoGate } from "@/components/demo/demo-provider";
 
 type Params = Promise<{ id: string }>;
 
@@ -407,6 +408,7 @@ export default async function PatientOverviewPage({
 
       {/* Quick Add + Recent Vitals */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <DemoGate>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle className="text-base">Quick Add</CardTitle>
@@ -418,6 +420,7 @@ export default async function PatientOverviewPage({
             </p>
           </CardContent>
         </Card>
+      </DemoGate>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">

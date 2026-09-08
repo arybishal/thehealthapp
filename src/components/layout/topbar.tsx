@@ -7,6 +7,7 @@ import { Icon } from "./icons";
 import { getBreadcrumbs } from "./nav-config";
 import { UserAvatar } from "./user-menu";
 import { PatientSwitcher } from "@/components/patients/patient-switcher";
+import { DemoChip } from "@/components/demo/demo-provider";
 import type { ShellUser, ShellPatient } from "./types";
 
 export function Topbar({
@@ -71,6 +72,7 @@ export function Topbar({
         </div>
       </form>
 
+      <DemoChip />
       <UserAvatar user={user} href="/profile" size="md" />
     </header>
   );

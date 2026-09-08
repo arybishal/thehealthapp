@@ -7,6 +7,7 @@ import { prisma } from "@/lib/prisma";
 import { parseReportText } from "@/lib/parser";
 import { detectLanguage } from "@/lib/language";
 import { logAudit } from "@/lib/audit";
+import { isDemoEmail, DEMO_MESSAGE } from "@/lib/demo";
 
 export const runtime = "nodejs";
 export const maxDuration = 120;
@@ -29,6 +30,9 @@ export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
   if (!session?.user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  if (isDemoEmail(session.user.email)) {
+    return NextResponse.json({ error: DEMO_MESSAGE }, { status: 403 });
   }
 
   try {
@@ -179,6 +183,9 @@ export async function PATCH(request: Request) {
   if (!session?.user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
+  if (isDemoEmail(session.user.email)) {
+    return NextResponse.json({ error: DEMO_MESSAGE }, { status: 403 });
+  }
 
   try {
     const { id, title } = await request.json();
@@ -209,6 +216,9 @@ export async function DELETE(request: Request) {
   const session = await getServerSession(authOptions);
   if (!session?.user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  if (isDemoEmail(session.user.email)) {
+    return NextResponse.json({ error: DEMO_MESSAGE }, { status: 403 });
   }
 
   try {

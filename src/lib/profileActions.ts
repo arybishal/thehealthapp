@@ -3,11 +3,13 @@
 import { prisma } from "./prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./auth";
+import { isDemoEmail } from "./demo";
 import { revalidatePath } from "next/cache";
 
 export async function saveProfile(formData: FormData) {
   const session = await getServerSession(authOptions);
   if (!session?.user) return;
+  if (isDemoEmail(session.user.email)) return;
 
   const dob = formData.get("dob") as string;
   const gender = formData.get("gender") as string;

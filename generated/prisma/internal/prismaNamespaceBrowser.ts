@@ -115,6 +115,7 @@ export const PatientScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   name: 'name',
+  relationship: 'relationship',
   dob: 'dob',
   gender: 'gender',
   bloodGroup: 'bloodGroup',

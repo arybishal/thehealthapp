@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import { PatientForm } from "@/components/patients/patient-form";
+import { DemoNotice } from "@/components/demo/demo-provider";
 
 type Params = Promise<{ id: string }>;
 
@@ -30,7 +31,9 @@ export default async function PatientEditPage({
           Update {patient.name}&apos;s profile.
         </p>
       </div>
-      <PatientForm patient={patient} />
+      <DemoNotice>
+        <PatientForm patient={patient} />
+      </DemoNotice>
     </div>
   );
 }

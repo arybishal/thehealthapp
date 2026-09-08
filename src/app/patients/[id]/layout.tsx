@@ -7,6 +7,7 @@ import { Pencil, Plus } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { PatientNav } from "@/components/patients/patient-nav";
 import { PatientAvatar } from "@/components/patients/patient-switcher";
+import { DemoGate } from "@/components/demo/demo-provider";
 import { calcAge, genderLabel } from "@/lib/patients";
 
 type Params = Promise<{ id: string }>;
@@ -36,6 +37,7 @@ export default async function PatientLayout({
     age != null ? `${age} yrs` : null,
     genderLabel(patient.gender),
     patient.bloodGroup,
+    patient.relationship ?? null,
   ].filter(Boolean);
 
   return (
@@ -67,22 +69,24 @@ export default async function PatientLayout({
               </div>
             </div>
           </div>
-          <div className="flex gap-2">
-            <Link
-              href={`/patients/${patient.id}/reports/upload`}
-              className={buttonVariants({ size: "sm" })}
-            >
-              <Plus />
-              Upload Report
-            </Link>
-            <Link
-              href={`/patients/${patient.id}/edit`}
-              className={buttonVariants({ variant: "outline", size: "sm" })}
-            >
-              <Pencil />
-              Edit
-            </Link>
-          </div>
+          <DemoGate>
+            <div className="flex gap-2">
+              <Link
+                href={`/patients/${patient.id}/reports/upload`}
+                className={buttonVariants({ size: "sm" })}
+              >
+                <Plus />
+                Upload Report
+              </Link>
+              <Link
+                href={`/patients/${patient.id}/edit`}
+                className={buttonVariants({ variant: "outline", size: "sm" })}
+              >
+                <Pencil />
+                Edit
+              </Link>
+            </div>
+          </DemoGate>
         </div>
       </div>
 

@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link as LinkIcon, Copy, Loader2, Shield, Trash2 } from "lucide-react";
+import { useDemo } from "@/components/demo/demo-provider";
 
 interface ShareLink {
   id: string;
@@ -36,6 +37,7 @@ export function ShareLinksManager({
   initialLinks: ShareLink[];
 }) {
   const router = useRouter();
+  const { isDemo } = useDemo();
   const [showForm, setShowForm] = useState(false);
   const [label, setLabel] = useState("");
   const [expiresInDays, setExpiresInDays] = useState("");
@@ -103,7 +105,7 @@ export function ShareLinksManager({
         <p className="text-sm text-muted-foreground">
           Create secure share links to let doctors or family view this patient&apos;s health data.
         </p>
-        {!showForm && (
+        {!showForm && !isDemo && (
           <Button onClick={() => setShowForm(true)}>
             <LinkIcon className="h-4 w-4" /> Create Share Link
           </Button>
@@ -128,7 +130,7 @@ export function ShareLinksManager({
         </Card>
       )}
 
-      {showForm && (
+      {showForm && !isDemo && (
         <Card>
           <CardContent className="p-5 space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -193,9 +195,11 @@ export function ShareLinksManager({
                   <Button size="sm" variant="ghost" onClick={() => copyLink(url)}>
                     <Copy className="h-4 w-4" />
                   </Button>
-                  <Button size="sm" variant="ghost" onClick={() => revokeLink(link.id)}>
-                    <Trash2 className="h-4 w-4 text-danger" />
-                  </Button>
+                  {!isDemo && (
+                    <Button size="sm" variant="ghost" onClick={() => revokeLink(link.id)}>
+                      <Trash2 className="h-4 w-4 text-danger" />
+                    </Button>
+                  )}
                 </div>
               </Card>
             );

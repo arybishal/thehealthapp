@@ -6,6 +6,7 @@ import { randomBytes } from "crypto";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { isDemoEmail, DEMO_MESSAGE } from "@/lib/demo";
 
 export async function register(formData: FormData) {
   const name = formData.get("name") as string;
@@ -46,6 +47,8 @@ export async function getCurrentUser() {
 }
 
 export async function requestPasswordReset(email: string) {
+  if (isDemoEmail(email)) return { error: DEMO_MESSAGE };
+
   const user = await prisma.user.findUnique({ where: { email } });
   if (!user) return { error: "No account found with that email" };
 
@@ -64,6 +67,8 @@ export async function requestPasswordReset(email: string) {
 }
 
 export async function resetPassword(email: string, token: string, password: string) {
+  if (isDemoEmail(email)) return { error: DEMO_MESSAGE };
+
   const user = await prisma.user.findUnique({
     where: { email },
   });

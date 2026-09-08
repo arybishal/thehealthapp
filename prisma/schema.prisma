@@ -48,6 +48,7 @@ model Patient {
   userId          String
   user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   name            String
+  relationship    String?
   dob             DateTime?
   gender          String?
   bloodGroup      String?

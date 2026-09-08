@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { Card } from "@/components/ui/card";
 import { AUDIT_EVENTS } from "@/lib/audit";
+import { isDemoEmail } from "@/lib/demo";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
@@ -114,6 +115,11 @@ export default async function AdminDashboardPage() {
                     {u.role === "master_admin" && (
                       <span className="text-xs px-2 py-0.5 rounded-md bg-warning-light text-warning border border-warning/30 font-medium">
                         Admin
+                      </span>
+                    )}
+                    {isDemoEmail(u.email) && (
+                      <span className="text-xs px-2 py-0.5 rounded-md bg-primary-light text-primary border border-primary/20 font-medium">
+                        Demo
                       </span>
                     )}
                     <span className="text-xs text-muted-foreground">

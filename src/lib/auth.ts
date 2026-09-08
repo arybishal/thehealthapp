@@ -92,6 +92,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id;
         token.role = user.role;
+        token.email = user.email;
       }
       return token;
     },
@@ -99,6 +100,7 @@ export const authOptions: NextAuthOptions = {
       if (session.user && token.id) {
         session.user.id = token.id as string;
         session.user.role = token.role as string | undefined;
+        session.user.email = token.email as string | undefined;
       }
       return session;
     },

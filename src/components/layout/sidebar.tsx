@@ -5,6 +5,7 @@ import { MAIN_NAV, SECONDARY_NAV, ADMIN_NAV } from "./nav-config";
 import { NavigationItem } from "./navigation-item";
 import { UserMenu } from "./user-menu";
 import { PatientSwitcher } from "@/components/patients/patient-switcher";
+import { DemoGate } from "@/components/demo/demo-provider";
 import type { ShellUser, ShellPatient } from "./types";
 import { Icon } from "./icons";
 
@@ -38,13 +39,15 @@ export function Sidebar({
           </p>
           <PatientSwitcher patients={patients} compact />
         </div>
-        <Link
-          href="/patients/new"
-          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors mt-1"
-        >
-          <Icon name="plus" className="w-4 h-4" />
-          Add Patient
-        </Link>
+        <DemoGate>
+          <Link
+            href="/patients/new"
+            className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors mt-1"
+          >
+            <Icon name="plus" className="w-4 h-4" />
+            Add Patient
+          </Link>
+        </DemoGate>
         <div className="border-t border-border my-3" />
         {isAdmin && (
           <>

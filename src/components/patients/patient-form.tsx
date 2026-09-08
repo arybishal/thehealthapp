@@ -73,6 +73,33 @@ export function PatientForm({ patient }: { patient?: Patient }) {
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
+            <Label htmlFor="relationship">Relationship</Label>
+            <select
+              id="relationship"
+              name="relationship"
+              defaultValue={patient?.relationship ?? ""}
+              className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+            >
+              <option value="">Select</option>
+              {[
+                "Self",
+                "Father",
+                "Mother",
+                "Sister",
+                "Brother",
+                "Spouse",
+                "Son",
+                "Daughter",
+                "Grandparent",
+                "Other",
+              ].map((r) => (
+                <option key={r} value={r}>
+                  {r}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="space-y-2">
             <Label htmlFor="dob">Date of Birth</Label>
             <Input
               id="dob"
@@ -81,6 +108,8 @@ export function PatientForm({ patient }: { patient?: Patient }) {
               defaultValue={convertDateToInput(patient?.dob)}
             />
           </div>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label htmlFor="gender">Gender</Label>
             <select

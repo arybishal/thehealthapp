@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Trash2, CalendarDays, Loader2 } from "lucide-react";
+import { useDemo } from "@/components/demo/demo-provider";
 
 interface Reminder {
   id: string;
@@ -34,6 +35,7 @@ export function RemindersPanel({
   initialReminders: Reminder[];
 }) {
   const router = useRouter();
+  const { isDemo } = useDemo();
   const [showForm, setShowForm] = useState(false);
   const [testName, setTestName] = useState("");
   const [date, setDate] = useState("");
@@ -107,14 +109,14 @@ export function RemindersPanel({
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div />
-        {!showForm && (
+        {!showForm && !isDemo && (
           <Button onClick={() => setShowForm(true)}>
             <Plus className="h-4 w-4" /> New Reminder
           </Button>
         )}
       </div>
 
-      {showForm && (
+      {showForm && !isDemo && (
         <Card>
           <CardContent className="p-5 space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -186,12 +188,16 @@ export function RemindersPanel({
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <Button size="sm" variant="outline" onClick={() => completeReminder(r)}>
-                  Done
-                </Button>
-                <Button size="sm" variant="ghost" onClick={() => updateStatus(r.id, "cancelled")}>
-                  <Trash2 className="h-4 w-4 text-danger" />
-                </Button>
+                {!isDemo && (
+                  <Button size="sm" variant="outline" onClick={() => completeReminder(r)}>
+                    Done
+                  </Button>
+                )}
+                {!isDemo && (
+                  <Button size="sm" variant="ghost" onClick={() => updateStatus(r.id, "cancelled")}>
+                    <Trash2 className="h-4 w-4 text-danger" />
+                  </Button>
+                )}
               </div>
             </Card>
           ))}

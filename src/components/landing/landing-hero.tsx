@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import {
   Activity,
   Droplets,
@@ -173,6 +175,18 @@ function ProductPreview() {
 }
 
 export function LandingHero() {
+  const router = useRouter();
+
+  async function exploreDemo() {
+    const result = await signIn("credentials", {
+      email: "demo@thebloodtracker.com",
+      password: "demo1234",
+      redirect: false,
+      callbackUrl: "/patients",
+    });
+    if (!result?.error) router.push(result?.url ?? "/patients");
+  }
+
   return (
     <section className="relative overflow-hidden">
       {/* soft background accents */}
@@ -210,6 +224,12 @@ export function LandingHero() {
             >
               Log In
             </Link>
+            <button
+              onClick={exploreDemo}
+              className="flex items-center justify-center rounded-lg border border-dashed border-primary/40 bg-white px-6 py-3.5 text-[15px] font-semibold text-primary transition-colors duration-200 hover:border-primary hover:bg-primary-light/40"
+            >
+              Explore Demo
+            </button>
           </div>
           <p className="mt-5 text-sm text-muted-foreground">
             Free to use. Built to help you keep your health history organized.

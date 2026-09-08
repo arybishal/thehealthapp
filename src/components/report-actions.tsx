@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { useDemo } from "@/components/demo/demo-provider";
 
 export function ConfirmButton({
   resultId,
@@ -11,7 +12,10 @@ export function ConfirmButton({
   confirmed: boolean;
 }) {
   const router = useRouter();
+  const { isDemo } = useDemo();
   const [isPending, startTransition] = useTransition();
+
+  if (isDemo) return null;
 
   function toggle() {
     startTransition(async () => {
@@ -47,7 +51,10 @@ export function DeleteReportButton({
   redirectTo?: string;
 }) {
   const router = useRouter();
+  const { isDemo } = useDemo();
   const [isPending, startTransition] = useTransition();
+
+  if (isDemo) return null;
 
   function remove() {
     if (!confirm("Delete this report and all its results?")) return;

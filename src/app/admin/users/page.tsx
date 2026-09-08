@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { Card } from "@/components/ui/card";
+import { isDemoEmail } from "@/lib/demo";
 
 export const dynamic = "force-dynamic";
 
@@ -35,7 +36,14 @@ export default async function AdminUsersPage() {
             {users.map((u) => (
               <tr key={u.id}>
                 <td className="py-3 px-4">
-                  <p className="font-medium">{u.name || "Unnamed"}</p>
+                  <p className="font-medium flex items-center gap-2">
+                    {u.name || "Unnamed"}
+                    {isDemoEmail(u.email) && (
+                      <span className="text-xs px-2 py-0.5 rounded-md border font-semibold bg-primary-light text-primary border-primary/20">
+                        Demo
+                      </span>
+                    )}
+                  </p>
                   <p className="text-xs text-muted-foreground">{u.email}</p>
                 </td>
                 <td className="py-3 px-4">

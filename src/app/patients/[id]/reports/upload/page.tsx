@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import { UploadReportForm } from "./upload-form";
+import { DemoNotice } from "@/components/demo/demo-provider";
 
 type Params = Promise<{ id: string }>;
 
@@ -23,5 +24,9 @@ export default async function PatientUploadPage({
   });
   if (!patient) notFound();
 
-  return <UploadReportForm patientId={patient.id} patientName={patient.name} />;
+  return (
+    <DemoNotice>
+      <UploadReportForm patientId={patient.id} patientName={patient.name} />
+    </DemoNotice>
+  );
 }

@@ -11,10 +11,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { getInitials } from "@/lib/patients";
+import { useDemo } from "@/components/demo/demo-provider";
 
 export interface SwitcherPatient {
   id: string;
   name: string;
+  relationship?: string | null;
 }
 
 export function getPatientIdFromPath(pathname: string): string | null {
@@ -53,10 +55,11 @@ export function PatientSwitcher({
 }) {
   const pathname = usePathname();
   const router = useRouter();
+  const { isDemo } = useDemo();
   const currentId = getPatientIdFromPath(pathname);
   const current = patients.find((p) => p.id === currentId) ?? null;
 
-  if (patients.length === 0) {
+  if (patients.length === 0 && !isDemo) {
     return (
       <Link
         href="/patients/new"
@@ -98,14 +101,23 @@ export function PatientSwitcher({
             onClick={() => router.push(`/patients/${p.id}/overview`)}
           >
             <PatientAvatar name={p.name} />
-            {p.name}
+            <span>
+              <span className="block">{p.name}</span>
+              {p.relationship && (
+                <span className="block text-xs text-muted-foreground">
+                  {p.relationship}
+                </span>
+              )}
+            </span>
           </DropdownMenuItem>
         ))}
         <DropdownMenuSeparator />
-        <DropdownMenuItem render={<Link href="/patients/new" />}>
-          <Plus />
-          Add Patient
-        </DropdownMenuItem>
+        {!isDemo && (
+          <DropdownMenuItem render={<Link href="/patients/new" />}>
+            <Plus />
+            Add Patient
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

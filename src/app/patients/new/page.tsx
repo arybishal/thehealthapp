@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { PatientForm } from "@/components/patients/patient-form";
+import { DemoNotice } from "@/components/demo/demo-provider";
 
 export const dynamic = "force-dynamic";
 
@@ -17,7 +18,9 @@ export default async function NewPatientPage() {
           Create a profile to start managing a patient&apos;s health records.
         </p>
       </div>
-      <PatientForm />
+      <DemoNotice>
+        <PatientForm />
+      </DemoNotice>
     </div>
   );
 }

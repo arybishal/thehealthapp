@@ -2,6 +2,7 @@
 
 import { prisma } from "./prisma";
 import { requireUser } from "./session";
+import { isDemoEmail, demoBlockedError } from "./demo";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -26,6 +27,7 @@ function date(formData: FormData, key: string): Date | null {
 
 export async function createPatient(formData: FormData) {
   const user = await requireUser();
+  if (isDemoEmail(user.email)) return demoBlockedError;
 
   const name = text(formData, "name");
   if (!name) return { error: "Full name is required" };
@@ -34,6 +36,7 @@ export async function createPatient(formData: FormData) {
     data: {
       userId: user.id,
       name,
+      relationship: text(formData, "relationship"),
       dob: date(formData, "dob"),
       gender: text(formData, "gender"),
       bloodGroup: text(formData, "bloodGroup"),
@@ -58,6 +61,7 @@ export async function createPatient(formData: FormData) {
 
 export async function updatePatient(patientId: string, formData: FormData) {
   const user = await requireUser();
+  if (isDemoEmail(user.email)) return demoBlockedError;
 
   const existing = await prisma.patient.findFirst({
     where: { id: patientId, userId: user.id },
@@ -71,6 +75,7 @@ export async function updatePatient(patientId: string, formData: FormData) {
     where: { id: patientId },
     data: {
       name,
+      relationship: text(formData, "relationship"),
       dob: date(formData, "dob"),
       gender: text(formData, "gender"),
       bloodGroup: text(formData, "bloodGroup"),
@@ -95,6 +100,7 @@ export async function updatePatient(patientId: string, formData: FormData) {
 
 export async function deletePatient(patientId: string) {
   const user = await requireUser();
+  if (isDemoEmail(user.email)) return demoBlockedError;
 
   const existing = await prisma.patient.findFirst({
     where: { id: patientId, userId: user.id },
@@ -110,6 +116,7 @@ export async function deletePatient(patientId: string) {
 
 export async function addMeasurement(patientId: string, formData: FormData) {
   const user = await requireUser();
+  if (isDemoEmail(user.email)) return demoBlockedError;
 
   const patient = await prisma.patient.findFirst({
     where: { id: patientId, userId: user.id },

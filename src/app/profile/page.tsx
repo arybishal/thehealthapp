@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { saveProfile } from "@/lib/profileActions";
+import { DemoNotice } from "@/components/demo/demo-provider";
 
 export default async function ProfilePage() {
   const session = await getServerSession(authOptions);
@@ -29,10 +30,11 @@ export default async function ProfilePage() {
       </div>
 
       <div className="max-w-2xl">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg font-semibold">Basic Information</CardTitle>
-          </CardHeader>
+        <DemoNotice>
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg font-semibold">Basic Information</CardTitle>
+            </CardHeader>
           <CardContent>
             <form action={saveProfile} className="space-y-4">
               <div>
@@ -114,7 +116,8 @@ export default async function ProfilePage() {
               <Button type="submit">Save Profile</Button>
             </form>
           </CardContent>
-        </Card>
+          </Card>
+        </DemoNotice>
       </div>
     </div>
   );

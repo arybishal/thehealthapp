@@ -8,6 +8,7 @@ import { MAIN_NAV, SECONDARY_NAV, ADMIN_NAV } from "./nav-config";
 import { NavigationItem } from "./navigation-item";
 import { Icon } from "./icons";
 import { PatientSwitcher } from "@/components/patients/patient-switcher";
+import { DemoChip } from "@/components/demo/demo-provider";
 import type { ShellUser, ShellPatient } from "./types";
 
 export function MobileHeader({
@@ -35,6 +36,7 @@ export function MobileHeader({
         </Link>
 
         <div className="flex items-center gap-2 min-w-0">
+          <DemoChip />
           {isPatientPage && <PatientSwitcher patients={patients} compact />}
           <button
             onClick={() => setDrawerOpen(true)}

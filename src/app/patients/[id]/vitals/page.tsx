@@ -8,6 +8,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { QuickAdd } from "@/components/dashboard/quick-add";
 import { AddMeasurementForm } from "./add-measurement-form";
+import { DemoGate } from "@/components/demo/demo-provider";
 import { calcBMI } from "@/lib/patients";
 
 type Params = Promise<{ id: string }>;
@@ -84,26 +85,28 @@ export default async function PatientVitalsPage({
         </Card>
       )}
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base font-semibold">Quick Add</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <QuickAdd patientId={id} />
-        </CardContent>
-      </Card>
+      <DemoGate>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base font-semibold">Quick Add</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <QuickAdd patientId={id} />
+          </CardContent>
+        </Card>
 
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="text-base font-semibold">Add Measurement</CardTitle>
-          <span className="text-xs text-muted-foreground">
-            Full record with any measurement type
-          </span>
-        </CardHeader>
-        <CardContent>
-          <AddMeasurementForm patientId={id} />
-        </CardContent>
-      </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between">
+            <CardTitle className="text-base font-semibold">Add Measurement</CardTitle>
+            <span className="text-xs text-muted-foreground">
+              Full record with any measurement type
+            </span>
+          </CardHeader>
+          <CardContent>
+            <AddMeasurementForm patientId={id} />
+          </CardContent>
+        </Card>
+      </DemoGate>
 
       {measurements.length === 0 ? (
         <Card className="py-16 text-center">

@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { addMeasurement } from "@/lib/patientActions";
+import { useDemo } from "@/components/demo/demo-provider";
 
 const OPTIONS = [
   { key: "weight", label: "Weight", unit: "kg", icon: Scale, placeholder: "74" },
@@ -56,9 +57,12 @@ const OPTIONS = [
 type Option = (typeof OPTIONS)[number];
 
 export function QuickAdd({ patientId }: { patientId?: string }) {
+  const { isDemo } = useDemo();
   const [active, setActive] = useState<Option | null>(null);
   const [open, setOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
+
+  if (isDemo) return null;
 
   function pick(option: Option) {
     setActive(option);
