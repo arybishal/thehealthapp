@@ -91,6 +91,7 @@ export function PatientNav({
   const [capsule, setCapsule] = useState<{ left: number; width: number } | null>(
     null
   );
+  const capsuleRef = useRef(capsule);
 
   const measure = useCallback(() => {
     const container = containerRef.current;
@@ -101,14 +102,17 @@ export function PatientNav({
     let el: HTMLElement | null = null;
     if (activeIdx >= 0) el = tabRefs.current[activeIdx];
     else if (activeItem) el = tabRefs.current[primary.length];
-    if (!el) {
-      setCapsule(null);
+    const next =
+      !el ? null
+      : { left: el.offsetLeft - container.offsetLeft, width: el.offsetWidth };
+    const prev = capsuleRef.current;
+    if (
+      next === prev ||
+      (next && prev && next.left === prev.left && next.width === prev.width)
+    )
       return;
-    }
-    setCapsule({
-      left: el.offsetLeft - container.offsetLeft,
-      width: el.offsetWidth,
-    });
+    capsuleRef.current = next;
+    setCapsule(next);
   }, [activeItem, primary]);
 
   useEffect(() => {
