@@ -40,7 +40,7 @@ const FLOATING_ICONS = [
 
 export function LandingPage() {
   return (
-    <div className="relative min-h-screen scroll-smooth bg-[#0f1a26] text-foreground antialiased">
+    <div className="relative min-h-screen scroll-smooth bg-[#0E7583] text-foreground antialiased">
       <div aria-hidden className="pointer-events-none fixed inset-0 overflow-hidden">
         <div className="absolute -top-32 left-1/4 h-80 w-80 rounded-full bg-[#2c9ad1]/20 blur-3xl" />
         <div className="absolute right-0 top-1/3 h-72 w-72 rounded-full bg-[#2fae6b]/10 blur-3xl" />

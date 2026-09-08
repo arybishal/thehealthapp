@@ -196,18 +196,18 @@ export function LandingHero() {
   }
 
   return (
-    <section className="relative overflow-hidden bg-[#0f1a26]">
+    <section className="relative overflow-hidden bg-[#0E7583]">
       {/* glow accents */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 right-[-12%] h-[34rem] w-[34rem] rounded-full bg-[#2c9ad1]/25 blur-3xl" />
-        <div className="absolute -left-24 top-1/3 h-96 w-96 rounded-full bg-[#122436] blur-3xl" />
-        <div className="absolute bottom-[-30%] left-1/3 h-96 w-96 rounded-full bg-[#2fae6b]/10 blur-3xl" />
+        <div className="absolute -top-40 right-[-12%] h-[34rem] w-[34rem] rounded-full bg-white/15 blur-3xl" />
+        <div className="absolute -left-24 top-1/3 h-96 w-96 rounded-full bg-black/10 blur-3xl" />
+        <div className="absolute bottom-[-30%] left-1/3 h-96 w-96 rounded-full bg-[#2fae6b]/15 blur-3xl" />
       </div>
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.15]"
+        className="pointer-events-none absolute inset-0 opacity-[0.12]"
         style={{
           backgroundImage:
-            "radial-gradient(rgba(255,255,255,0.6) 1px, transparent 1px)",
+            "radial-gradient(rgba(255,255,255,0.7) 1px, transparent 1px)",
           backgroundSize: "28px 28px",
           maskImage:
             "radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%)",
@@ -235,7 +235,7 @@ export function LandingHero() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link
               href="/register"
-              className="group flex items-center justify-center gap-2 rounded-pill bg-white px-7 py-3.5 text-[15px] font-bold text-[#0f1a26] shadow-[0_10px_30px_-6px_rgba(44,154,209,0.5)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_36px_-8px_rgba(44,154,209,0.6)]"
+              className="group flex items-center justify-center gap-2 rounded-pill bg-white px-7 py-3.5 text-[15px] font-bold text-[#0E7583] shadow-[0_10px_30px_-6px_rgba(44,154,209,0.5)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_36px_-8px_rgba(44,154,209,0.6)]"
             >
               Get Started Free
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
