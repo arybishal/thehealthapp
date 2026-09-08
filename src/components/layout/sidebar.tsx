@@ -24,8 +24,13 @@ export function Sidebar({
         <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-[0_2px_6px_-2px_rgba(37,41,161,0.4)]">
           <Icon name="patients" className="w-4 h-4" />
         </span>
-        <Link href="/patients" className="text-[0.95rem] font-extrabold tracking-tight text-foreground">
-          TheBloodTracker
+        <Link href="/patients" className="leading-tight">
+          <span className="block text-[0.95rem] font-extrabold tracking-tight text-foreground">
+            The Health Trackey
+          </span>
+          <span className="block text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+            by The8Pattern
+          </span>
         </Link>
       </div>
 

@@ -81,7 +81,7 @@ function ProductPreview() {
         <span className="h-2.5 w-2.5 rounded-full bg-[#3b7dd8]" />
         <span className="h-2.5 w-2.5 rounded-full bg-[#2f9e6b]" />
         <span className="ml-3 rounded-md bg-muted px-2 py-0.5 text-[11px] font-medium text-muted-foreground">
-          {`thebloodtracker.com/patients/bishal`}
+          {`thehealthtrackey.com/patients/bishal`}
         </span>
       </div>
 
@@ -182,9 +182,9 @@ export function LandingHero() {
       email: "demo@thebloodtracker.com",
       password: "demo1234",
       redirect: false,
-      callbackUrl: "/patients",
+      callbackUrl: "/admin",
     });
-    if (!result?.error) router.push(result?.url ?? "/patients");
+    if (!result?.error) router.push(result?.url ?? "/admin");
   }
 
   return (

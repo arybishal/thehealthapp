@@ -50,28 +50,6 @@ export default function LoginPage() {
     router.refresh();
   }
 
-  async function exploreDemo() {
-    setPending(true);
-    setError(null);
-
-    const result = await signIn("credentials", {
-      email: "demo@thebloodtracker.com",
-      password: "demo1234",
-      redirect: false,
-      callbackUrl: "/patients",
-    });
-
-    setPending(false);
-
-    if (result?.error) {
-      setError("Demo account is temporarily unavailable.");
-      return;
-    }
-
-    router.push(result?.url ?? "/patients");
-    router.refresh();
-  }
-
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <Link
@@ -83,7 +61,7 @@ export default function LoginPage() {
       </Link>
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">TheBloodTracker</CardTitle>
+          <CardTitle className="text-2xl font-bold">The Health Trackey</CardTitle>
           <CardDescription>Sign in to your health history</CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
@@ -138,15 +116,6 @@ export default function LoginPage() {
           <CardFooter className="flex flex-col gap-4">
             <Button type="submit" className="w-full" disabled={pending}>
               {pending ? "Signing in..." : "Sign In"}
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              className="w-full"
-              disabled={pending}
-              onClick={exploreDemo}
-            >
-              Explore Demo
             </Button>
             <p className="text-sm text-muted-foreground">
               Don&apos;t have an account?{" "}

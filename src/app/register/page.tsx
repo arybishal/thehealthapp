@@ -36,7 +36,7 @@ export default function RegisterPage() {
       </Link>
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">TheBloodTracker</CardTitle>
+          <CardTitle className="text-2xl font-bold">The Health Trackey</CardTitle>
           <CardDescription>Create your health history account</CardDescription>
         </CardHeader>
         <form action={formAction}>

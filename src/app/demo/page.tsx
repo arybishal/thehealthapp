@@ -36,7 +36,7 @@ export default function DemoPage() {
         {/* Header */}
         <header className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">TheBloodTracker</h1>
+            <h1 className="text-3xl font-bold">The Health Trackey</h1>
             <p className="text-muted-foreground">
               A live preview of how your health history comes together
             </p>
@@ -52,7 +52,7 @@ export default function DemoPage() {
             Upload a blood report. See your health history.
           </h2>
           <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
-            TheBloodTracker extracts your lab results from PDFs and images with
+            The Health Trackey extracts your lab results from PDFs and images with
             OCR, normalizes biomarker names and units, and charts them over time
             against clinical reference ranges.
           </p>

@@ -6,7 +6,7 @@ import { FileUp, LifeBuoy, MessageCircle, Search } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-export const metadata = { title: "Help & Support — TheBloodTracker" };
+export const metadata = { title: "Help & Support — The Health Trackey" };
 
 const articles = [
   {
@@ -44,7 +44,7 @@ export default async function HelpPage() {
       <div>
         <h1 className="text-xl md:text-2xl font-bold">Help & Support</h1>
         <p className="text-sm text-muted-foreground mt-0.5">
-          Get the most out of TheBloodTracker.
+          Get the most out of The Health Trackey.
         </p>
       </div>
 

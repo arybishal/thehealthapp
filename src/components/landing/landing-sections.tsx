@@ -79,7 +79,7 @@ export function TrustStrip() {
   );
 }
 
-/* ── What is TheBloodTracker ──────────────────────────── */
+/* ── What is The Health Trackey ──────────────────────────── */
 export function AboutSection() {
   const scattered = [
     "PDF",
@@ -99,9 +99,9 @@ export function AboutSection() {
     <section className="py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading
-          eyebrow="What is TheBloodTracker?"
+          eyebrow="What is The Health Trackey?"
           title="Your health records shouldn't live in scattered files."
-          body="Blood reports often end up across email attachments, hospital portals, messaging apps, paper documents, and folders. TheBloodTracker brings those records together so you can build a clear, organized health history over time."
+          body="Blood reports often end up across email attachments, hospital portals, messaging apps, paper documents, and folders. The Health Trackey brings those records together so you can build a clear, organized health history over time."
         />
 
         <div className="mt-16 grid items-center gap-10 lg:grid-cols-[1fr_auto_1fr]">
@@ -128,7 +128,7 @@ export function AboutSection() {
             </span>
             <span className="flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white shadow-md">
               <Droplets className="h-4 w-4" />
-              TheBloodTracker
+              The Health Trackey
             </span>
           </div>
 
@@ -392,7 +392,7 @@ export function FamilySection() {
   );
 }
 
-/* ── Why TheBloodTracker ──────────────────────────────── */
+/* ── Why The Health Trackey ──────────────────────────────── */
 export function WhySection() {
   const principles = [
     {
@@ -418,7 +418,7 @@ export function WhySection() {
     >
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading
-          eyebrow="Why TheBloodTracker"
+          eyebrow="Why The Health Trackey"
           title="Built around your health history."
         />
         <div className="mx-auto mt-16 grid max-w-4xl gap-6 md:grid-cols-3">
@@ -479,7 +479,7 @@ export function PrivacySection() {
         <SectionHeading
           eyebrow="Privacy"
           title="Your health information deserves privacy."
-          body="TheBloodTracker is designed around the idea that your health information should remain under your control."
+          body="The Health Trackey is designed around the idea that your health information should remain under your control."
         />
         <div className="mx-auto mt-14 grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((item) => (

@@ -11,8 +11,13 @@ export function LandingFooter() {
               <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white">
                 <Droplets className="h-5 w-5" />
               </span>
-              <span className="text-[17px] font-extrabold tracking-tight">
-                TheBloodTracker
+              <span className="leading-tight">
+                <span className="block text-[17px] font-extrabold tracking-tight">
+                  The Health Trackey
+                </span>
+                <span className="block text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                  by The8Pattern
+                </span>
               </span>
             </div>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
@@ -75,7 +80,7 @@ export function LandingFooter() {
         </div>
 
         <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 sm:flex-row">
-          <p className="text-sm text-muted-foreground">© 2026 TheBloodTracker</p>
+          <p className="text-sm text-muted-foreground">© 2026 The Health Trackey by The8Pattern</p>
           <p className="text-sm text-muted-foreground">Free health record organization for you and your family.</p>
         </div>
       </div>

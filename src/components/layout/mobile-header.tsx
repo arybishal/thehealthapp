@@ -31,8 +31,11 @@ export function MobileHeader({
   return (
     <>
       <header className="lg:hidden sticky top-0 z-40 h-14 flex items-center justify-between px-4 border-b border-white/50 bg-white/70 backdrop-blur-2xl shrink-0 print-hidden dark:bg-[#16212e]/70 dark:border-white/10">
-        <Link href="/patients" className="text-lg font-bold text-foreground">
-          TheBloodTracker
+        <Link href="/patients" className="leading-tight">
+          <span className="block text-lg font-bold text-foreground">The Health Trackey</span>
+          <span className="block text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+            by The8Pattern
+          </span>
         </Link>
 
         <div className="flex items-center gap-2 min-w-0">
@@ -59,10 +62,13 @@ export function MobileHeader({
             <div className="h-14 flex items-center justify-between px-5 border-b border-border shrink-0">
               <Link
                 href="/patients"
-                className="text-lg font-bold text-foreground"
+                className="text-lg font-bold text-foreground leading-tight"
                 onClick={() => setDrawerOpen(false)}
               >
-                TheBloodTracker
+                <span className="block">The Health Trackey</span>
+                <span className="block text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                  by The8Pattern
+                </span>
               </Link>
               <button
                 onClick={() => setDrawerOpen(false)}

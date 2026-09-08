@@ -4,15 +4,15 @@ import { authOptions } from "@/lib/auth";
 import { LandingPage } from "@/components/landing/landing-page";
 
 export const metadata = {
-  title: "TheBloodTracker | Every Blood Test. One Clear Health History.",
+  title: "The Health Trackey by The8Pattern | Every Blood Test. One Clear Health History.",
   description:
-    "TheBloodTracker helps you organize blood reports, laboratory results, biomarkers, vitals, and patient health history in one place.",
+    "The Health Trackey helps you organize blood reports, laboratory results, biomarkers, vitals, and patient health history in one place.",
   openGraph: {
-    title: "TheBloodTracker | Every Blood Test. One Clear Health History.",
+    title: "The Health Trackey by The8Pattern | Every Blood Test. One Clear Health History.",
     description:
       "Keep blood reports, laboratory results, biomarkers, vitals, and medical history organized in one place.",
     type: "website",
-    siteName: "TheBloodTracker",
+    siteName: "The Health Trackey by The8Pattern",
   },
 };
 

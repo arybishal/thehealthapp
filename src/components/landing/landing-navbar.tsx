@@ -9,18 +9,23 @@ import { Droplets, Menu, X } from "lucide-react";
 const LINKS = [
   { href: "#how-it-works", label: "How It Works" },
   { href: "#features", label: "Features" },
-  { href: "#why-thebloodtracker", label: "Why TheBloodTracker" },
+  { href: "#why-thebloodtracker", label: "Why Trackey" },
   { href: "#privacy", label: "Privacy" },
 ];
 
 export function Logo() {
   return (
-    <Link href="/" className="flex items-center gap-2.5" aria-label="TheBloodTracker home">
+    <Link href="/" className="flex items-center gap-2.5" aria-label="The Health Trackey home">
       <span className="flex h-9 w-9 items-center justify-center rounded-pill bg-primary text-white shadow-flat">
         <Droplets className="h-5 w-5" />
       </span>
-      <span className="text-[17px] font-extrabold tracking-tight">
-        TheBloodTracker
+      <span className="leading-tight">
+        <span className="block text-[17px] font-extrabold tracking-tight">
+          The Health Trackey
+        </span>
+        <span className="block text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+          by The8Pattern
+        </span>
       </span>
     </Link>
   );
@@ -36,9 +41,9 @@ export function LandingNavbar() {
       email: "demo@thebloodtracker.com",
       password: "demo1234",
       redirect: false,
-      callbackUrl: "/patients",
+      callbackUrl: "/admin",
     });
-    if (!result?.error) router.push(result?.url ?? "/patients");
+    if (!result?.error) router.push(result?.url ?? "/admin");
   }
 
   useEffect(() => {

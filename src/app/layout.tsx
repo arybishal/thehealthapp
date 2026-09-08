@@ -12,7 +12,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "TheBloodTracker",
+  title: "The Health Trackey by The8Pattern",
   description: "Your personal medical report and health history platform",
 };
 
