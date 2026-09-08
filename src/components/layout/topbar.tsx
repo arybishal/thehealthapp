@@ -67,7 +67,7 @@ export function Topbar({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search..."
-            className="w-full rounded-lg border border-border bg-background pl-8 pr-3 py-1.5 text-sm placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+            className="h-9 w-full rounded-lg border border-border bg-background pl-8 pr-3 text-sm placeholder:text-text-muted focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors"
           />
         </div>
       </form>

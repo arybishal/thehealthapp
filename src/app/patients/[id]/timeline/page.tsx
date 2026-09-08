@@ -3,23 +3,41 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
+import { CalendarDays, FileText, HeartPulse, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { CalendarDays, Upload } from "lucide-react";
 
 type Params = Promise<{ id: string }>;
 
 export const dynamic = "force-dynamic";
+
+const measurementMeta: Record<string, { label: string; accent: string }> = {
+  weight: { label: "Weight", accent: "bg-info-light text-info" },
+  height: { label: "Height", accent: "bg-info-light text-info" },
+  bmi: { label: "BMI", accent: "bg-info-light text-info" },
+  blood_pressure: { label: "Blood Pressure", accent: "bg-primary-light text-primary" },
+  heart_rate: { label: "Heart Rate", accent: "bg-primary-light text-primary" },
+  blood_sugar: { label: "Blood Glucose", accent: "bg-primary-light text-primary" },
+  temperature: { label: "Temperature", accent: "bg-secondary/15 text-secondary" },
+};
+
+const humanize = (s: string) =>
+  s.split("_").map((w) => w[0].toUpperCase() + w.slice(1)).join(" ");
 
 interface TimelineEvent {
   id: string;
   date: Date;
   kind: "report" | "measurement";
   title: string;
-  subtitle?: string;
+  value?: string;
+  unit?: string;
+  description: string;
   href: string;
   meta?: string;
+  accent: string;
 }
+
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 export default async function PatientTimelinePage({
   params,
@@ -49,26 +67,42 @@ export default async function PatientTimelinePage({
   ]);
 
   const events: TimelineEvent[] = [
-    ...reports.map((r) => ({
-      id: r.id,
-      date: r.reportDate || r.createdAt,
-      kind: "report" as const,
-      title: r.title,
-      subtitle: r.laboratoryName || "Unknown laboratory",
-      href: `/patients/${id}/reports/${r.id}`,
-      meta: `${r.results.length} ${r.results.length === 1 ? "result" : "results"}`,
-    })),
-    ...measurements.map((m) => ({
-      id: m.id,
-      date: m.date,
-      kind: "measurement" as const,
-      title: `${m.value} ${m.unit}`,
-      subtitle: `${m.type.split("_").map((w) => w[0].toUpperCase() + w.slice(1)).join(" ")} measurement`,
-      href: `/patients/${id}/vitals`,
-    })),
+    ...reports.map((r) => {
+      const outOfRange = r.results.some(
+        (res) =>
+          res.normalizedValue != null &&
+          ((res.referenceLow !== null && res.normalizedValue < res.referenceLow) ||
+            (res.referenceHigh !== null && res.normalizedValue > res.referenceHigh))
+      );
+      return {
+        id: r.id,
+        date: r.reportDate || r.createdAt,
+        kind: "report" as const,
+        title: r.title,
+        description: `${r.results.length} ${r.results.length === 1 ? "result" : "results"}`,
+        href: `/patients/${id}/reports/${r.id}`,
+        meta: outOfRange ? "Attention" : undefined,
+        accent: "bg-primary-light text-primary",
+      };
+    }),
+    ...measurements.map((m) => {
+      const meta = measurementMeta[m.type];
+      return {
+        id: m.id,
+        date: m.date,
+        kind: "measurement" as const,
+        title: meta?.label ?? humanize(m.type),
+        value: String(m.value),
+        unit: m.unit ?? undefined,
+        description: `${meta?.label ?? humanize(m.type)} measurement${
+          m.note ? ` — ${m.note}` : ""
+        }`,
+        href: `/patients/${id}/vitals`,
+        accent: meta?.accent ?? "bg-secondary/15 text-secondary",
+      };
+    }),
   ].sort((a, b) => b.date.getTime() - a.date.getTime());
 
-  // Group by year then month
   const grouped = new Map<string, Map<string, TimelineEvent[]>>();
   for (const event of events) {
     const year = event.date.toLocaleDateString("en-US", { year: "numeric" });
@@ -79,29 +113,31 @@ export default async function PatientTimelinePage({
     yearMap.get(month)!.push(event);
   }
 
-  const sortedYears = [...grouped.keys()].sort((a, b) => parseInt(b) - parseInt(a));
-  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const sortedYears = [...grouped.keys()].sort(
+    (a, b) => parseInt(b) - parseInt(a)
+  );
+
+  const metaTone = (meta: string | undefined) =>
+    meta === "Attention" ? "text-warning" : "text-muted-foreground";
 
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold">Health Timeline</h1>
-        <p className="text-muted-foreground">
-          Complete health history for this patient
+        <h1 className="text-2xl font-bold tracking-tight">Health Timeline</h1>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Your recorded health history, organized in one timeline.
         </p>
       </div>
 
       {events.length === 0 ? (
         <Card className="py-16 text-center">
-          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-light/60 text-primary">
-            <CalendarDays className="h-7 w-7" />
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-primary-light text-primary">
+            <CalendarDays className="h-6 w-6" />
           </div>
-          <p className="mt-4 font-semibold">
-            This patient&apos;s timeline starts with their first report
-          </p>
-          <p className="mt-1 text-sm text-muted-foreground max-w-md mx-auto px-4">
+          <p className="mt-4 font-semibold">No health history yet</p>
+          <p className="mx-auto mt-1 max-w-md px-4 text-sm text-muted-foreground">
             Upload a medical report and it will appear here, grouped by month
-            and year as their health history grows.
+            and year as the history grows.
           </p>
           <Link href={`/patients/${id}/reports/upload`} className="mt-5 inline-block">
             <Button>
@@ -111,21 +147,26 @@ export default async function PatientTimelinePage({
           </Link>
         </Card>
       ) : (
-        <div className="relative border-l-2 border-border pl-6 ml-3 space-y-8">
-          {sortedYears.map((year) => {
+        <div className="relative space-y-10 border-l border-border pl-8">
+          {sortedYears.map((year, i) => {
             const yearMap = grouped.get(year)!;
             const sortedMonths = [...yearMap.keys()].sort(
-              (a, b) => months.indexOf(b) - months.indexOf(a)
+              (a, b) => MONTHS.indexOf(b) - MONTHS.indexOf(a)
             );
 
             return (
               <div key={year} className="relative">
-                <div className="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-primary border-2 border-background" />
-                <h2 className="text-xl font-bold mb-4">{year}</h2>
-                <div className="space-y-4">
+                <span
+                  className={`absolute -left-[37px] top-1.5 h-3 w-3 rounded-full border-2 border-background bg-primary ${
+                    i === 0 ? "ring-4 ring-primary/15" : ""
+                  }`}
+                  aria-hidden
+                />
+                <h2 className="text-lg font-semibold tracking-tight">{year}</h2>
+                <div className="mt-5 space-y-6">
                   {sortedMonths.map((month) => (
                     <div key={month}>
-                      <h3 className="text-sm font-semibold text-muted-foreground mb-2 uppercase tracking-wide">
+                      <h3 className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                         {month}
                       </h3>
                       <div className="space-y-2">
@@ -133,26 +174,53 @@ export default async function PatientTimelinePage({
                           <Link
                             key={`${event.kind}-${event.id}`}
                             href={event.href}
-                            className="block p-4 rounded-xl border border-border bg-card hover:shadow-md transition-shadow"
+                            className="group flex items-center gap-3.5 rounded-lg border border-border bg-card p-3.5 transition-colors hover:border-primary/25 hover:bg-background"
                           >
-                            <div className="flex items-center justify-between">
-                              <div className="min-w-0">
-                                <p className="font-medium truncate">{event.title}</p>
-                                <p className="text-sm text-muted-foreground truncate">
-                                  {event.subtitle}
+                            <span
+                              className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${event.accent}`}
+                            >
+                              {event.kind === "report" ? (
+                                <FileText className="h-4 w-4" />
+                              ) : (
+                                <HeartPulse className="h-4 w-4" />
+                              )}
+                            </span>
+
+                            <div className="min-w-0 flex-1">
+                              <div className="flex items-baseline gap-2">
+                                <p className="truncate text-sm font-medium">
+                                  {event.title}
                                 </p>
-                              </div>
-                              <div className="text-right shrink-0">
-                                {event.meta && (
-                                  <p className="text-sm font-medium">{event.meta}</p>
+                                {event.value != null && (
+                                  <p className="truncate text-base font-semibold">
+                                    {event.value}
+                                    {event.unit && (
+                                      <span className="ml-1 text-xs font-normal text-muted-foreground">
+                                        {event.unit}
+                                      </span>
+                                    )}
+                                  </p>
                                 )}
-                                <p className="text-xs text-muted-foreground">
-                                  {event.date.toLocaleDateString("en-US", {
-                                    day: "numeric",
-                                    month: "short",
-                                  })}
-                                </p>
                               </div>
+                              <p className="mt-0.5 truncate text-xs text-muted-foreground">
+                                {event.description}
+                              </p>
+                            </div>
+
+                            <div className="shrink-0 text-right">
+                              <p
+                                className={`text-xs font-medium ${metaTone(
+                                  event.meta
+                                )}`}
+                              >
+                                {event.meta}
+                              </p>
+                              <p className="mt-0.5 text-xs text-muted-foreground">
+                                {event.date.toLocaleDateString("en-US", {
+                                  month: "short",
+                                  day: "numeric",
+                                })}
+                              </p>
                             </div>
                           </Link>
                         ))}

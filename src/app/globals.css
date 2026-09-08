@@ -184,6 +184,15 @@
   }
 }
 
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @keyframes float-y {
   0%, 100% {
     transform: translateY(0);

@@ -106,12 +106,11 @@ export function DemoChip() {
   return (
     <button
       onClick={openDemo}
-      aria-label="Learn about demo mode"
-      title="Read-only demo"
+      aria-label="This is a read-only demo"
+      title="This is a read-only demo account"
       className="inline-flex shrink-0 items-center gap-1 rounded-full bg-primary-light px-2.5 py-0.5 text-xs font-semibold text-primary ring-1 ring-primary/10 hover:bg-primary/10"
     >
-      <Info className="h-3.5 w-3.5" />
-      Demo
+      Demo · Read Only
     </button>
   );
 }

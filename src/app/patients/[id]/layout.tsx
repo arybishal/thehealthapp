@@ -34,56 +34,49 @@ export default async function PatientLayout({
 
   const age = calcAge(patient.dob);
   const meta = [
-    age != null ? `${age} yrs` : null,
-    genderLabel(patient.gender),
-    patient.bloodGroup,
     patient.relationship ?? null,
+    genderLabel(patient.gender),
+    age != null ? `${age} years` : null,
   ].filter(Boolean);
 
   return (
     <div className="space-y-6">
-      {/* Identity header — premium card */}
-      <div className="rounded-xl border bg-card shadow-[0_1px_3px_rgba(24,39,75,0.04)] hover:shadow-[0_8px_24px_-12px_rgba(24,39,75,0.12)] transition-shadow duration-200">
-        <div className="h-1 w-full bg-gradient-to-r from-primary/60 via-primary/20 to-transparent" />
+      {/* Identity header */}
+      <div className="rounded-xl border border-border bg-card">
         <div className="flex flex-wrap items-center justify-between gap-4 p-5">
-          <div className="flex items-center gap-4">
+          <div className="flex min-w-0 items-center gap-4">
             <PatientAvatar name={patient.name} size="lg" />
-            <div>
-              <h1 className="text-xl md:text-2xl font-bold tracking-tight">
+            <div className="min-w-0">
+              <h1 className="truncate text-xl font-bold tracking-tight md:text-2xl">
                 {patient.name}
               </h1>
-              <div className="flex flex-wrap items-center gap-1.5 mt-1.5">
-                {meta.map((m) => (
-                  <span
-                    key={m}
-                    className="rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium"
-                  >
-                    {m}
+              <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
+                <span className="truncate">
+                  {meta.length > 0 ? meta.join(" · ") : "No details yet"}
+                </span>
+                {patient.bloodGroup ? (
+                  <span className="inline-flex h-5 items-center rounded-md bg-primary-light px-1.5 text-xs font-semibold text-primary">
+                    {patient.bloodGroup}
                   </span>
-                ))}
-                {meta.length === 0 && (
-                  <span className="text-xs text-muted-foreground">
-                    No details yet
-                  </span>
-                )}
+                ) : null}
               </div>
             </div>
           </div>
           <DemoGate>
-            <div className="flex gap-2">
+            <div className="flex shrink-0 items-center gap-2">
+              <Link
+                href={`/patients/${patient.id}/edit`}
+                className={buttonVariants({ variant: "outline", size: "sm" })}
+              >
+                <Pencil />
+                Edit Patient
+              </Link>
               <Link
                 href={`/patients/${patient.id}/reports/upload`}
                 className={buttonVariants({ size: "sm" })}
               >
                 <Plus />
                 Upload Report
-              </Link>
-              <Link
-                href={`/patients/${patient.id}/edit`}
-                className={buttonVariants({ variant: "outline", size: "sm" })}
-              >
-                <Pencil />
-                Edit
               </Link>
             </div>
           </DemoGate>
